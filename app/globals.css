@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-	--background: hsl(0, 0%, 24%);
+	--background: hsl(0, 0%, 13%);
 	--foreground: #ededed;
-	--accent: #00ff85;
+	--accent: hsl(140 100% 47%);
 }
 
 @theme inline {
@@ -22,7 +22,7 @@ html {
 body {
 	background: transparent;
 	color: var(--foreground);
-	font-family: "Anton", sans-serif;
+	font-family: "Roboto", sans-serif;
 	cursor: none;
 	overflow-x: hidden;
 	min-height: 100vh;
@@ -74,7 +74,6 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: normal;
 	letter-spacing: 0.02em;
 }
 

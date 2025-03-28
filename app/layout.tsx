@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { Navbar } from "./components/layout/Navbar";
 import { BackgroundStars } from "./components/ui/BackgroundStars";
 import { Cursor } from "./components/ui/Cursor";
@@ -7,8 +7,8 @@ import { CursorContextProvider } from "./components/ui/Cursor/CursorContext";
 import { SmoothScroller } from "./components/ui/SmoothScroller";
 import "./globals.css";
 
-const anton = Anton({
-	weight: "400",
+const roboto = Roboto({
+	weight: ['100', '300', '400', '500', '700'],
 	subsets: ["latin"],
 	display: "swap",
 });
@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${anton.className} antialiased`}>
+			<body className={`${roboto.className} antialiased`}>
 				<BackgroundStars />
 				<CursorContextProvider>
 					<Cursor />

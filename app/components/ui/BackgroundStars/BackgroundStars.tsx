@@ -15,7 +15,7 @@ interface Star {
 	delay: number; // animation delay in seconds
 }
 
-export const BackgroundStars = ({ numberOfStars = 100 }) => {
+export const BackgroundStars = ({ numberOfStars = 15 }) => {
 	const [stars, setStars] = useState<Star[]>([]);
 
 	useEffect(() => {
