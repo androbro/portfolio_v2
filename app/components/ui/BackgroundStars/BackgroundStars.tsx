@@ -1,47 +1,59 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+interface StarProps {
+	delay: number;
+	index: number;
+}
+
+const Star = ({ delay, index }: StarProps) => {
+	const x = Math.random() * 100;
+	const size = 1 + Math.random() * 2;
+	const duration = 10 + Math.random() * 20;
+
+	return (
+		<motion.div
+			key={index}
+			className="absolute rounded-full bg-white"
+			style={{
+				width: `${size}px`,
+				height: `${size}px`,
+				left: `${x}%`,
+				top: "-5px",
+			}}
+			initial={{ opacity: 0 }}
+			animate={{
+				opacity: [0, 1, 1, 0],
+				y: ["0vh", "100vh"],
+			}}
+			transition={{
+				duration,
+				ease: "linear",
+				repeat: Number.POSITIVE_INFINITY,
+				delay,
+			}}
+		/>
+	);
+};
 
 export function BackgroundStars() {
-	const containerRef = useRef<HTMLDivElement>(null);
+	const [stars, setStars] = useState<number[]>([]);
 
 	useEffect(() => {
-		const container = containerRef.current;
-		if (!container) return;
-
-		// Create 50 stars with random positions and durations
-		for (let i = 0; i < 50; i++) {
-			const star = document.createElement("div");
-			star.classList.add("star");
-
-			// Random horizontal position
-			const posX = Math.random() * 100;
-			star.style.left = `${posX}%`;
-
-			// Random animation duration between 10 and 30 seconds
-			const duration = 10 + Math.random() * 20;
-			star.style.animationDuration = `${duration}s`;
-
-			// Random delay to stagger the stars
-			const delay = Math.random() * 30;
-			star.style.animationDelay = `${delay}s`;
-
-			container.appendChild(star);
-		}
-
-		return () => {
-			// Cleanup stars on unmount
-			while (container.firstChild) {
-				container.removeChild(container.firstChild);
-			}
-		};
+		// Create 50 stars
+		setStars(Array.from({ length: 50 }, (_, i) => i));
 	}, []);
 
 	return (
-		<div
-			ref={containerRef}
-			className="fixed inset-0 pointer-events-none overflow-hidden z-0"
+		<motion.div
+			className="fixed inset-0 pointer-events-none overflow-hidden z-0 bg-[hsl(0,0%,24%)]"
 			aria-hidden="true"
-		/>
+		>
+			{stars.map((_, i) => (
+				<Star key={i} index={i} delay={Math.random() * 10} />
+			))}
+		</motion.div>
 	);
 }
