@@ -36,7 +36,7 @@
 			},
 			"style": {
 				"recommended": true,
-				"noImplicitBoolean": "error",
+				"noImplicitBoolean": "off",
 				"noUnusedTemplateLiteral": "error"
 			},
 			"a11y": {
