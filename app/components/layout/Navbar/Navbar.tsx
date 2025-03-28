@@ -11,30 +11,12 @@ export function Navbar() {
 	};
 
 	return (
-		<header className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-sm">
-			<div className="container mx-auto px-4 py-4 flex justify-between items-center">
-				<div className="text-xl font-bold">Koen De Vulder</div>
-
-				{/* Desktop Menu */}
-				<nav className="hidden md:flex space-x-8">
-					<Link href="/#home" className="hover:text-gray-500 transition-colors">
-						Home
-					</Link>
-					<Link href="/#about" className="hover:text-gray-500 transition-colors">
-						About Me
-					</Link>
-					<Link href="/#experience" className="hover:text-gray-500 transition-colors">
-						Experience
-					</Link>
-					<Link href="/#projects" className="hover:text-gray-500 transition-colors">
-						Projects
-					</Link>
-				</nav>
-
-				{/* Mobile Menu Button */}
+		<header className="fixed w-full top-0 z-50 bg-transparent">
+			<div className="container mx-auto px-4 py-4 flex justify-end items-center">
+				{/* Hamburger Menu Button */}
 				<button
 					type="button"
-					className="md:hidden text-black"
+					className="text-white z-50"
 					onClick={toggleMobileMenu}
 					aria-label="Toggle menu"
 				>
@@ -75,40 +57,56 @@ export function Navbar() {
 				</button>
 			</div>
 
-			{/* Mobile Menu */}
+			{/* Full-screen Menu */}
 			{mobileMenuOpen && (
-				<nav className="md:hidden bg-white py-4 px-4">
-					<div className="flex flex-col space-y-4">
-						<Link
-							href="/#home"
-							className="block py-2 hover:text-gray-500 transition-colors"
-							onClick={() => setMobileMenuOpen(false)}
-						>
-							Home
-						</Link>
-						<Link
-							href="/#about"
-							className="block py-2 hover:text-gray-500 transition-colors"
-							onClick={() => setMobileMenuOpen(false)}
-						>
-							About Me
-						</Link>
-						<Link
-							href="/#experience"
-							className="block py-2 hover:text-gray-500 transition-colors"
-							onClick={() => setMobileMenuOpen(false)}
-						>
-							Experience
-						</Link>
-						<Link
-							href="/#projects"
-							className="block py-2 hover:text-gray-500 transition-colors"
-							onClick={() => setMobileMenuOpen(false)}
-						>
-							Projects
-						</Link>
-					</div>
-				</nav>
+				<div className="fixed inset-0 bg-black/95 backdrop-blur-md z-40 flex items-center justify-center">
+					<nav className="w-full max-w-md mx-auto">
+						<div className="flex flex-col space-y-8 text-center">
+							<Link
+								href="/#hero"
+								className="text-3xl text-white hover:text-accent transition-colors"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								Home
+							</Link>
+							<Link
+								href="/#about"
+								className="text-3xl text-white hover:text-accent transition-colors"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								About Me
+							</Link>
+							<Link
+								href="/#tech-stack"
+								className="text-3xl text-white hover:text-accent transition-colors"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								Tech Stack
+							</Link>
+							<Link
+								href="/#experience"
+								className="text-3xl text-white hover:text-accent transition-colors"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								Experience
+							</Link>
+							<Link
+								href="/#projects"
+								className="text-3xl text-white hover:text-accent transition-colors"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								Projects
+							</Link>
+							<Link
+								href="/#contact"
+								className="text-3xl text-white hover:text-accent transition-colors"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								Contact
+							</Link>
+						</div>
+					</nav>
+				</div>
 			)}
 		</header>
 	);
