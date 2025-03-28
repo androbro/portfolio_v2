@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 export function Contact() {
 	return (
 		<section id="contact" className="flex items-center justify-center py-20">
-			<div className="content-container">
+			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="flex items-center gap-4 mb-16">
 					<span className="text-accent text-5xl">*</span>
 					<motion.h2

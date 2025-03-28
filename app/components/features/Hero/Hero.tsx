@@ -33,7 +33,7 @@ export function Hero() {
 
 	return (
 		<section id="hero" className="min-h-screen flex items-center justify-center pt-20 relative">
-			<div className="content-container">
+			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="flex flex-col items-center md:items-start">
 					<h1 ref={headingRef} className="text-5xl md:text-7xl font-light mb-6">
 						<span className="text-accent">FRONTEND</span>

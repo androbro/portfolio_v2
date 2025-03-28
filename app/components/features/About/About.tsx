@@ -35,7 +35,7 @@ export function About() {
 
 	return (
 		<section ref={sectionRef} id="about" className="flex items-center justify-center py-20">
-			<div className="content-container">
+			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div ref={quoteRef}>
 					<h3 className="text-4xl md:text-6xl font-light leading-tight mb-22">
 						I create meaningful digital experiences that combine aesthetics with functionality and performance.

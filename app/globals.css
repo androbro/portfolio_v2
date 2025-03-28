@@ -89,6 +89,5 @@ section {
 
 /* Container styles for consistent layout */
 .content-container {
-	width: 100%;
 	max-width: 100%;
 }
