@@ -10,51 +10,56 @@ export function About() {
 	const sectionRef = useRef<HTMLElement>(null);
 	const headingRef = useRef<HTMLHeadingElement>(null);
 	const textRef = useRef<HTMLParagraphElement>(null);
-	const imageRef = useRef<HTMLDivElement>(null);
+	const quoteRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		// GSAP animation for text and image fade-in on scroll
+		const section = sectionRef.current;
+		const heading = headingRef.current;
+		const text = textRef.current;
+		const quote = quoteRef.current;
+
+		if (!section || !heading || !text || !quote) return;
+
 		const tl = gsap.timeline({
 			scrollTrigger: {
-				trigger: sectionRef.current,
-				start: "top 70%",
+				trigger: section,
+				start: "top center",
+				end: "bottom center",
 			},
 		});
 
-		tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
-			.fromTo(textRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.3")
-			.fromTo(
-				imageRef.current,
-				{ x: 30, opacity: 0 },
-				{ x: 0, opacity: 1, duration: 0.6 },
-				"-=0.4"
-			);
+		tl.fromTo(heading, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
+			.fromTo(text, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.3")
+			.fromTo(quote, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.3");
 	}, []);
 
 	return (
-		<section ref={sectionRef} id="about" className="py-24">
+		<section ref={sectionRef} id="about" className="min-h-screen flex items-center py-20">
 			<div className="container mx-auto px-4">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-					<div>
-						<h2 ref={headingRef} className="text-3xl md:text-4xl font-bold mb-8">
-							About Me
-						</h2>
-						<p ref={textRef} className="text-lg leading-relaxed mb-6">
+				<div className="max-w-4xl">
+					<h2 ref={headingRef} className="text-sm uppercase tracking-wider text-white/60 mb-8">
+						This is me
+					</h2>
+					<div ref={quoteRef} className="mb-12">
+						<h3 className="text-4xl md:text-6xl font-normal leading-tight mb-8">
+							I believe in a user centered design approach, ensuring that every project I work on is
+							tailored to meet the specific needs of its users.
+						</h3>
+					</div>
+					<div
+						ref={textRef}
+						className="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg text-white/80"
+					>
+						<p>
 							I'm a frontend web developer dedicated to turning ideas into creative solutions. I
 							specialize in creating seamless and intuitive user experiences.
 						</p>
-						<p className="text-lg leading-relaxed">
+						<p>
 							My approach focuses on creating scalable, high-performing solutions tailored to both
 							user needs and business objectives. By prioritizing performance, accessibility, and
 							responsiveness, I strive to deliver experiences that not only engage users but also
 							drive tangible results.
 						</p>
-					</div>
-					<div
-						ref={imageRef}
-						className="bg-gray-200 rounded-lg h-80 flex items-center justify-center"
-					>
-						<span className="text-gray-500">Your profile image here</span>
 					</div>
 				</div>
 			</div>

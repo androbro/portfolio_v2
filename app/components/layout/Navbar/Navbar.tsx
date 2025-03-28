@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -11,14 +12,21 @@ export function Navbar() {
 	};
 
 	return (
-		<header className="fixed w-full top-0 z-50 bg-transparent">
-			<div className="container mx-auto px-4 py-4 flex justify-end items-center">
-				{/* Hamburger Menu Button */}
-				<button
-					type="button"
-					className="text-white z-50"
-					onClick={toggleMobileMenu}
-					aria-label="Toggle menu"
+		<>
+			{/* Hamburger Menu Button */}
+			<button
+				type="button"
+				className="fixed top-8 right-8 text-white z-50"
+				onClick={toggleMobileMenu}
+				aria-label="Toggle menu"
+			>
+				<motion.div
+					animate={mobileMenuOpen ? "open" : "closed"}
+					variants={{
+						open: { rotate: 180 },
+						closed: { rotate: 0 },
+					}}
+					transition={{ duration: 0.3 }}
 				>
 					{mobileMenuOpen ? (
 						<svg
@@ -54,60 +62,98 @@ export function Navbar() {
 							<line x1="3" y1="18" x2="21" y2="18" />
 						</svg>
 					)}
-				</button>
-			</div>
+				</motion.div>
+			</button>
 
-			{/* Full-screen Menu */}
-			{mobileMenuOpen && (
-				<div className="fixed inset-0 bg-black/95 backdrop-blur-md z-40 flex items-center justify-center">
-					<nav className="w-full max-w-md mx-auto">
-						<div className="flex flex-col space-y-8 text-center">
-							<Link
-								href="/#hero"
-								className="text-3xl text-white hover:text-accent transition-colors"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								Home
-							</Link>
-							<Link
-								href="/#about"
-								className="text-3xl text-white hover:text-accent transition-colors"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								About Me
-							</Link>
-							<Link
-								href="/#tech-stack"
-								className="text-3xl text-white hover:text-accent transition-colors"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								Tech Stack
-							</Link>
-							<Link
-								href="/#experience"
-								className="text-3xl text-white hover:text-accent transition-colors"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								Experience
-							</Link>
-							<Link
-								href="/#projects"
-								className="text-3xl text-white hover:text-accent transition-colors"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								Projects
-							</Link>
-							<Link
-								href="/#contact"
-								className="text-3xl text-white hover:text-accent transition-colors"
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								Contact
-							</Link>
+			{/* Side Navigation */}
+			<AnimatePresence>
+				{mobileMenuOpen && (
+					<motion.header
+						className="fixed right-0 top-0 h-full w-[300px] bg-black/95 backdrop-blur-md z-40 flex flex-col p-8 pt-24"
+						initial={{ x: "100%" }}
+						animate={{ x: 0 }}
+						exit={{ x: "100%" }}
+						transition={{ type: "spring", damping: 20, stiffness: 100 }}
+					>
+						{/* Social Links */}
+						<div className="flex flex-col gap-4">
+							<span className="text-white/60 text-sm uppercase tracking-wider">Social</span>
+							<div className="flex flex-col gap-3">
+								<Link
+									href="https://github.com"
+									target="_blank"
+									className="text-white hover:text-accent transition-colors"
+								>
+									Github
+								</Link>
+								<Link
+									href="https://linkedin.com"
+									target="_blank"
+									className="text-white hover:text-accent transition-colors"
+								>
+									Linkedin
+								</Link>
+								<Link
+									href="https://facebook.com"
+									target="_blank"
+									className="text-white hover:text-accent transition-colors"
+								>
+									Facebook
+								</Link>
+								<Link href="/old" className="text-white hover:text-accent transition-colors">
+									Old Version
+								</Link>
+							</div>
 						</div>
-					</nav>
-				</div>
-			)}
-		</header>
+
+						{/* Menu Links */}
+						<div className="flex flex-col gap-4 mt-8">
+							<span className="text-white/60 text-sm uppercase tracking-wider">Menu</span>
+							<div className="flex flex-col gap-3">
+								<Link
+									href="/#hero"
+									className="text-white hover:text-accent transition-colors flex items-center gap-2"
+								>
+									<span className="inline-block w-2 h-2 rounded-full nav-dot-yellow" />
+									Home
+								</Link>
+								<Link
+									href="/#about"
+									className="text-white hover:text-accent transition-colors flex items-center gap-2"
+								>
+									<span className="inline-block w-2 h-2 rounded-full nav-dot-blue" />
+									About Me
+								</Link>
+								<Link
+									href="/#experience"
+									className="text-white hover:text-accent transition-colors flex items-center gap-2"
+								>
+									<span className="inline-block w-2 h-2 rounded-full nav-dot-teal" />
+									Experience
+								</Link>
+								<Link
+									href="/#projects"
+									className="text-white hover:text-accent transition-colors flex items-center gap-2"
+								>
+									<span className="inline-block w-2 h-2 rounded-full nav-dot-purple" />
+									Projects
+								</Link>
+							</div>
+						</div>
+
+						{/* Contact Info */}
+						<div className="flex flex-col gap-4 mt-auto">
+							<span className="text-white/60 text-sm uppercase tracking-wider">Get in touch</span>
+							<a
+								href="mailto:tazmirul@gmail.com"
+								className="text-white hover:text-accent transition-colors"
+							>
+								tazmirul@gmail.com
+							</a>
+						</div>
+					</motion.header>
+				)}
+			</AnimatePresence>
+		</>
 	);
 }

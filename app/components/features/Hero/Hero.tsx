@@ -11,7 +11,6 @@ export function Hero() {
 	const projectsRef = useRef<HTMLDivElement>(null);
 	const hoursRef = useRef<HTMLDivElement>(null);
 	const cursorRef = useRef<HTMLDivElement>(null);
-	const containerRef = useRef<HTMLDivElement>(null);
 
 	// Custom cursor
 	useEffect(() => {
@@ -32,32 +31,6 @@ export function Hero() {
 		return () => {
 			window.removeEventListener("mousemove", onMouseMove);
 		};
-	}, []);
-
-	// Create stars
-	useEffect(() => {
-		const container = containerRef.current;
-		if (!container) return;
-
-		// Create 50 stars with random positions and durations
-		for (let i = 0; i < 50; i++) {
-			const star = document.createElement("div");
-			star.classList.add("star");
-
-			// Random horizontal position
-			const posX = Math.random() * 100;
-			star.style.left = `${posX}%`;
-
-			// Random animation duration between 10 and 30 seconds
-			const duration = 10 + Math.random() * 20;
-			star.style.animationDuration = `${duration}s`;
-
-			// Random delay to stagger the stars
-			const delay = Math.random() * 30;
-			star.style.animationDelay = `${delay}s`;
-
-			container.appendChild(star);
-		}
 	}, []);
 
 	// GSAP animations
@@ -88,44 +61,46 @@ export function Hero() {
 
 	return (
 		<>
-			<div ref={containerRef} className="fixed inset-0 pointer-events-none overflow-hidden" />
 			<div ref={cursorRef} className="custom-cursor" />
 
 			<section id="hero" className="min-h-screen flex items-center justify-center pt-20 relative">
 				<div className="container mx-auto px-4">
 					<div className="flex flex-col items-center md:items-start">
-						<h1 ref={headingRef} className="text-5xl md:text-7xl font-bold mb-6">
+						<h1 ref={headingRef} className="text-5xl md:text-7xl font-normal mb-6">
 							<span className="text-accent">FRONTEND</span>
 							<br />
 							DEVELOPER
 						</h1>
-						<p ref={paragraphRef} className="text-lg md:text-xl max-w-2xl mb-8 text-white/80">
+						<p
+							ref={paragraphRef}
+							className="text-lg md:text-xl max-w-2xl mb-8 text-white/80 font-light"
+						>
 							Hi! I'm Koen De Vulder. A creative Frontend Developer with 3+ years of experience in
 							building high-performance, scalable, and responsive web solutions.
 						</p>
 						<button
 							ref={buttonRef}
 							type="button"
-							className="bg-accent text-black px-8 py-3 font-medium hover:bg-accent/90 transition-colors"
+							className="bg-accent text-black px-8 py-3 font-normal hover:bg-accent/90 transition-colors"
 						>
 							HIRE ME
 						</button>
-					</div>
-				</div>
 
-				{/* Stats */}
-				<div className="fixed bottom-8 right-8 space-y-4 text-right">
-					<div ref={experienceRef} className="flex flex-col">
-						<span className="text-3xl md:text-4xl text-accent font-bold">3+</span>
-						<span className="text-sm text-white/60">Years of Experience</span>
-					</div>
-					<div ref={projectsRef} className="flex flex-col">
-						<span className="text-3xl md:text-4xl text-accent font-bold">7+</span>
-						<span className="text-sm text-white/60">Completed Projects</span>
-					</div>
-					<div ref={hoursRef} className="flex flex-col">
-						<span className="text-3xl md:text-4xl text-accent font-bold">10k+</span>
-						<span className="text-sm text-white/60">Hours Worked</span>
+						{/* Stats */}
+						<div className="absolute bottom-8 right-8 space-y-4 text-right">
+							<div ref={experienceRef} className="flex flex-col">
+								<span className="text-3xl md:text-4xl text-accent font-normal">3+</span>
+								<span className="text-sm text-white/60">Years of Experience</span>
+							</div>
+							<div ref={projectsRef} className="flex flex-col">
+								<span className="text-3xl md:text-4xl text-accent font-normal">7+</span>
+								<span className="text-sm text-white/60">Completed Projects</span>
+							</div>
+							<div ref={hoursRef} className="flex flex-col">
+								<span className="text-3xl md:text-4xl text-accent font-normal">10k+</span>
+								<span className="text-sm text-white/60">Hours Worked</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
