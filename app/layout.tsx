@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Anton } from "next/font/google";
 import { Navbar } from "./components/layout/Navbar";
 import { BackgroundStars } from "./components/ui/BackgroundStars";
+import { Cursor } from "./components/ui/Cursor";
+import { CursorContextProvider } from "./components/ui/Cursor/CursorContext";
 import { SmoothScroller } from "./components/ui/SmoothScroller";
 import "./globals.css";
 
@@ -26,10 +28,13 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${anton.className} antialiased`}>
 				<BackgroundStars />
-				<SmoothScroller>
-					<Navbar />
-					{children}
-				</SmoothScroller>
+				<CursorContextProvider>
+					<Cursor />
+					<SmoothScroller>
+						<Navbar />
+						{children}
+					</SmoothScroller>
+				</CursorContextProvider>
 			</body>
 		</html>
 	);

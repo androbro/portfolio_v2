@@ -10,6 +10,8 @@
 		"format": "biome format --write"
 	},
 	"dependencies": {
+		"@motion-canvas/2d": "^3.17.2",
+		"@motion-canvas/core": "^3.17.2",
 		"gsap": "^3.12.7",
 		"lenis": "^1.2.3",
 		"motion": "^12.6.2",

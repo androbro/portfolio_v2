@@ -29,27 +29,25 @@ body {
 	letter-spacing: 0.02em;
 }
 
-/* Hide cursor on touch devices */
-@media (hover: none) {
-	body {
-		cursor: auto;
-	}
-	.custom-cursor {
-		display: none;
-	}
+/* All clickable elements should have no default cursor */
+a,
+button,
+[role="button"],
+input[type="submit"] {
+	cursor: none;
 }
 
-.custom-cursor {
-	position: fixed;
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	background-color: var(--accent);
-	pointer-events: none;
-	z-index: 9999;
-	mix-blend-mode: difference;
-	transform: translate(-50%, -50%);
-	transition: transform 0.1s ease;
+/* Text selection color */
+::selection {
+	background-color: var(--accent); /* Green for white/black text */
+	color: #000; /* Black text when highlighted */
+}
+
+/* Text selection for green text */
+*[class*="text-accent"] ::selection,
+.text-accent ::selection {
+	background-color: #000; /* Black for green text */
+	color: var(--accent); /* Keep text green */
 }
 
 /* Navigation dot colors */

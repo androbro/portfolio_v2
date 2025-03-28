@@ -1,0 +1,23 @@
+.cursor {
+	position: fixed;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background-color: var(--accent);
+	pointer-events: none;
+	z-index: 9999;
+	mix-blend-mode: difference;
+	left: 0;
+	top: 0;
+	transform-origin: center;
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) {
+	body {
+		cursor: auto;
+	}
+	.cursor {
+		display: none;
+	}
+}

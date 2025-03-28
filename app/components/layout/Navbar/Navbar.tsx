@@ -26,10 +26,10 @@ export function Navbar() {
 						open: { rotate: 180 },
 						closed: { rotate: 0 },
 					}}
-					transition={{ duration: 0.3 }}
+					transition={{ duration: 0.5, type: "spring", bounce: 0.3 }}
 				>
 					{mobileMenuOpen ? (
-						<svg
+						<motion.svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
 							height="24"
@@ -40,12 +40,31 @@ export function Navbar() {
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							aria-hidden="true"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.2 }}
 						>
-							<line x1="18" y1="6" x2="6" y2="18" />
-							<line x1="6" y1="6" x2="18" y2="18" />
-						</svg>
+							<motion.line 
+								x1="18" 
+								y1="6" 
+								x2="6" 
+								y2="18" 
+								initial={{ pathLength: 0 }}
+								animate={{ pathLength: 1 }}
+								transition={{ duration: 0.5, delay: 0.1 }}
+							/>
+							<motion.line 
+								x1="6" 
+								y1="6" 
+								x2="18" 
+								y2="18" 
+								initial={{ pathLength: 0 }}
+								animate={{ pathLength: 1 }}
+								transition={{ duration: 0.5, delay: 0.2 }}
+							/>
+						</motion.svg>
 					) : (
-						<svg
+						<motion.svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
 							height="24"
@@ -56,11 +75,38 @@ export function Navbar() {
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							aria-hidden="true"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.2 }}
 						>
-							<line x1="3" y1="12" x2="21" y2="12" />
-							<line x1="3" y1="6" x2="21" y2="6" />
-							<line x1="3" y1="18" x2="21" y2="18" />
-						</svg>
+							<motion.line 
+								x1="3" 
+								y1="12" 
+								x2="21" 
+								y2="12" 
+								initial={{ x2: "3" }}
+								animate={{ x2: "21" }}
+								transition={{ duration: 0.4, delay: 0.1 }}
+							/>
+							<motion.line 
+								x1="3" 
+								y1="6" 
+								x2="21" 
+								y2="6" 
+								initial={{ x2: "3" }}
+								animate={{ x2: "21" }}
+								transition={{ duration: 0.4 }}
+							/>
+							<motion.line 
+								x1="3" 
+								y1="18" 
+								x2="21" 
+								y2="18" 
+								initial={{ x2: "3" }}
+								animate={{ x2: "21" }}
+								transition={{ duration: 0.4, delay: 0.2 }}
+							/>
+						</motion.svg>
 					)}
 				</motion.div>
 			</button>
