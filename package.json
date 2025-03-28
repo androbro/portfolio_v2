@@ -10,7 +10,6 @@
 		"format": "biome format --write"
 	},
 	"dependencies": {
-		"framer-motion": "^12.6.2",
 		"gsap": "^3.12.7",
 		"lenis": "^1.2.3",
 		"motion": "^12.6.2",
