@@ -35,10 +35,10 @@ export function Contact() {
 				</h2>
 				<a
 					ref={emailRef}
-					href="mailto:youremail@example.com"
+					href="mailto:devulderk@gmail.com"
 					className="inline-block text-xl md:text-2xl font-medium text-gray-700 hover:text-black transition-colors"
 				>
-					youremail@example.com
+					devulderk@gmail.com
 				</a>
 			</div>
 		</section>

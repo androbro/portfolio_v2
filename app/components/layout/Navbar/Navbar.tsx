@@ -145,10 +145,10 @@ export function Navbar() {
 						<div className="flex flex-col gap-4 mt-auto">
 							<span className="text-white/60 text-sm uppercase tracking-wider">Get in touch</span>
 							<a
-								href="mailto:tazmirul@gmail.com"
+								href="mailto:devulderk@gmail.com"
 								className="text-white hover:text-accent transition-colors"
 							>
-								tazmirul@gmail.com
+								devulderk@gmail.com
 							</a>
 						</div>
 					</motion.header>
