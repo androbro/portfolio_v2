@@ -33,23 +33,23 @@ export function Hero() {
 
 	return (
 		<section id="hero" className="min-h-screen flex items-center justify-center pt-20 relative">
-			<div className="container mx-auto px-4">
+			<div className="content-container">
 				<div className="flex flex-col items-center md:items-start">
-					<h1 ref={headingRef} className="text-5xl md:text-7xl font-bold mb-6">
+					<h1 ref={headingRef} className="text-5xl md:text-7xl font-light mb-6">
 						<span className="text-accent">FRONTEND</span>
 						<br />
-						<span className="ml-4">DEVELOPER</span>
+						DEVELOPER
 					</h1>
 					<p
 						ref={paragraphRef}
-						className="text-lg md:text-lg max-w-2xl mb-8 text-white font-thin"
+						className="text-lg md:text-lg max-w-3xl mb-8 text-white/70 font-thin"
 					>
-						Hi! I'm <span className="font-medium">Koen De Vulder</span>. A creative Frontend Developer with 3+ years of experience in
+						Hi! I'm Koen De Vulder. A creative Frontend Developer with 3+ years of experience in
 						building high-performance, scalable, and responsive web solutions.
 					</p>
 					<motion.button
 						type="button"
-						className="bg-accent text-black px-8 py-3 font-bold"
+						className="bg-accent text-black px-8 py-3 font-light"
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6 }}

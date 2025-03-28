@@ -81,6 +81,14 @@ h6 {
 section {
 	background: transparent;
 	position: relative;
-	margin-left: "20rem";
-	margin-right: "20rem";
+	padding-left: 6rem;
+	padding-right: 6rem;
+	width: 100%;
+	max-width: 100%;
+}
+
+/* Container styles for consistent layout */
+.content-container {
+	width: 100%;
+	max-width: 100%;
 }

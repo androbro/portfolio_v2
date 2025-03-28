@@ -77,9 +77,9 @@ export function TechStack() {
 	}, []);
 
 	return (
-		<section ref={sectionRef} id="stack" className="py-24 bg-gray-50">
-			<div className="container mx-auto px-4">
-				<h2 ref={headingRef} className="text-3xl md:text-4xl font-bold mb-16 text-center">
+		<section id="skills" className="flex items-center justify-center py-20">
+			<div className="content-container">
+				<h2 ref={headingRef} className="text-3xl md:text-4xl font-bold text-center">
 					My Stack
 				</h2>
 
