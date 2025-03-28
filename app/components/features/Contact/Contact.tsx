@@ -1,45 +1,51 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from "motion/react";
 
 export function Contact() {
-	const sectionRef = useRef<HTMLElement>(null);
-	const headingRef = useRef<HTMLHeadingElement>(null);
-	const emailRef = useRef<HTMLAnchorElement>(null);
-
-	useEffect(() => {
-		// GSAP animation for contact section elements
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: sectionRef.current,
-				start: "top 70%",
-			},
-		});
-
-		tl.fromTo(
-			headingRef.current,
-			{ y: 30, opacity: 0 },
-			{ y: 0, opacity: 1, duration: 0.6 }
-		).fromTo(emailRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "-=0.3");
-	}, []);
-
 	return (
-		<section ref={sectionRef} id="contact" className="py-24">
-			<div className="container mx-auto px-4 text-center">
-				<h2 ref={headingRef} className="text-3xl md:text-4xl font-bold mb-8">
-					Have a project in mind?
-				</h2>
-				<a
-					ref={emailRef}
-					href="mailto:devulderk@gmail.com"
-					className="inline-block text-xl md:text-2xl font-medium text-gray-700 hover:text-black transition-colors"
-				>
-					devulderk@gmail.com
-				</a>
+		<section id="contact" className="min-h-screen flex items-center justify-center py-20">
+			<div className="container mx-auto px-4">
+				<div className="max-w-4xl mx-auto">
+					<div className="flex items-center gap-4 mb-16">
+						<span className="text-accent text-5xl">*</span>
+						<motion.h2
+							className="text-2xl uppercase"
+							initial={{ y: 50, opacity: 0 }}
+							whileInView={{ y: 0, opacity: 1 }}
+							transition={{ duration: 0.6 }}
+							viewport={{ once: false }}
+						>
+							Get In Touch
+						</motion.h2>
+					</div>
+
+					<motion.div
+						className="mb-12"
+						initial={{ y: 30, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: false }}
+					>
+						<h3 className="text-4xl md:text-5xl font-light mb-4">
+							Have a project in mind?<br />Let's work together.
+						</h3>
+						<p className="text-white/60 max-w-2xl font-light">
+							I'm currently available for freelance work. If you have a project that you want to get started, think you need my help with something or just fancy saying hey, then get in touch.
+						</p>
+					</motion.div>
+
+					<motion.a
+						href="mailto:contact@example.com"
+						className="inline-block bg-accent text-black px-8 py-3 font-light"
+						initial={{ y: 30, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: false }}
+					>
+						contact@example.com
+					</motion.a>
+				</div>
 			</div>
 		</section>
 	);

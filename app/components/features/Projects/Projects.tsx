@@ -4,22 +4,24 @@ import { motion } from "motion/react";
 
 const projects = [
 	{
-		title: "E-commerce Platform",
-		description: "A modern e-commerce solution built with Next.js and Stripe",
-		link: "#",
-		tech: "Next.js, TypeScript, Stripe",
-	},
-	{
-		title: "Task Management App",
-		description: "Real-time task management with collaborative features",
-		link: "#",
-		tech: "React, Firebase, TailwindCSS",
+		title: "E-commerce Web App",
+		description: "A fully responsive e-commerce platform built with Next.js and Stripe.",
+		year: "2023",
 	},
 	{
 		title: "Portfolio Website",
-		description: "Personal portfolio with smooth animations and interactions",
-		link: "#",
-		tech: "Next.js, GSAP, Framer Motion",
+		description: "A creative portfolio website for a digital agency.",
+		year: "2023",
+	},
+	{
+		title: "SaaS Dashboard",
+		description: "An analytics dashboard for a SaaS product using React and D3.js.",
+		year: "2022",
+	},
+	{
+		title: "Task Management App",
+		description: "A collaborative task management application with real-time updates.",
+		year: "2022",
 	},
 ];
 
@@ -37,7 +39,7 @@ export function Projects() {
 							transition={{ duration: 0.6 }}
 							viewport={{ once: false }}
 						>
-							Selected Projects
+							My Projects
 						</motion.h2>
 					</div>
 
@@ -45,19 +47,19 @@ export function Projects() {
 						{projects.map((project, index) => (
 							<motion.div
 								key={project.title}
-								className="group"
+								className="border-b border-white/10 pb-12 last:border-0 group"
 								initial={{ y: 50, opacity: 0 }}
 								whileInView={{ y: 0, opacity: 1 }}
 								transition={{ duration: 0.8, delay: index * 0.2 }}
 								viewport={{ once: false }}
 							>
-								<div className="flex flex-col gap-4 mb-2">
-									<h3 className="text-4xl md:text-5xl font-normal group-hover:text-accent transition-colors">
+								<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+									<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
 										{project.title}
 									</h3>
-									<p className="text-xl text-white/80">{project.description}</p>
-									<span className="text-white/60">{project.tech}</span>
+									<span className="text-white/60">{project.year}</span>
 								</div>
+								<p className="text-white/80 max-w-2xl">{project.description}</p>
 							</motion.div>
 						))}
 					</div>

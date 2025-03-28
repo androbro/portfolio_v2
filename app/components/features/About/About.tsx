@@ -34,32 +34,37 @@ export function About() {
 	}, []);
 
 	return (
-		<section ref={sectionRef} id="about" className="min-h-screen flex items-center py-20">
-			<div className="container mx-auto px-4">
-				<div className="max-w-4xl">
-					<h2 ref={headingRef} className="text-sm uppercase tracking-wider text-white/60 mb-8">
-						This is me
-					</h2>
-					<div ref={quoteRef} className="mb-12">
-						<h3 className="text-4xl md:text-6xl font-normal leading-tight mb-8">
+		<section ref={sectionRef} id="about" className="min-h-screen flex items-center justify-center py-20">
+			<div className="container px-4">
+				<div className="max-w-4xl ">
+					<div ref={quoteRef} className="mb-20">
+						<h3 className="text-4xl md:text-5xl font-light leading-tight">
 							I believe in a user centered design approach, ensuring that every project I work on is
 							tailored to meet the specific needs of its users.
 						</h3>
 					</div>
 					<div
 						ref={textRef}
-						className="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg text-white/80"
+						className="grid grid-cols-1 gap-8 text-lg text-white/80"
 					>
-						<p>
-							I'm a frontend web developer dedicated to turning ideas into creative solutions. I
-							specialize in creating seamless and intuitive user experiences.
-						</p>
-						<p>
-							My approach focuses on creating scalable, high-performing solutions tailored to both
-							user needs and business objectives. By prioritizing performance, accessibility, and
-							responsiveness, I strive to deliver experiences that not only engage users but also
-							drive tangible results.
-						</p>
+					<p className="pb-3 border-b text-muted-foreground slide-up-and-fade">This is me.</p>
+						<div className="flex flex-col md:flex-row gap-8">
+							<div className="md:w-1/3">
+								<h4 className="text-2xl font-light mb-4">Hi, I'm Tajmirul.</h4>
+							</div>
+							<div className="md:w-2/3 space-y-6">
+								<p className="font-light">
+									I'm a frontend web developer dedicated to turning ideas into creative solutions. I
+									specialize in creating seamless and intuitive user experiences.
+								</p>
+								<p className="font-light">
+									My approach focuses on creating scalable, high-performing solutions tailored to both
+									user needs and business objectives. By prioritizing performance, accessibility, and
+									responsiveness, I strive to deliver experiences that not only engage users but also
+									drive tangible results.
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

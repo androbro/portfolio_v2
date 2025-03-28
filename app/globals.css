@@ -81,4 +81,6 @@ h6 {
 section {
 	background: transparent;
 	position: relative;
+	margin-left: "20rem";
+	margin-right: "20rem";
 }

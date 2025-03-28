@@ -27,9 +27,9 @@ const experiences = [
 
 export function Experience() {
 	return (
-		<section id="experience" className="min-h-screen flex items-center py-20">
+		<section id="experience" className="min-h-screen flex items-center justify-center py-20">
 			<div className="container mx-auto px-4">
-				<div className="max-w-4xl">
+				<div className="max-w-4xl mx-auto">
 					<div className="flex items-center gap-4 mb-16">
 						<span className="text-accent text-5xl">*</span>
 						<motion.h2
@@ -54,7 +54,7 @@ export function Experience() {
 								viewport={{ once: false }}
 							>
 								<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-									<h3 className="text-4xl md:text-5xl font-normal group-hover:text-accent transition-colors">
+									<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
 										{exp.position}
 									</h3>
 									<span className="text-white/60">{exp.period}</span>
