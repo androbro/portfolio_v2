@@ -74,21 +74,23 @@ export function Experience() {
 					</div>
 
 					<div className="space-y-12">
-						{experiences.map((exp, index) => (
-							<div
-								key={exp.company}
-								ref={(el) => (experienceRefs.current[index] = el)}
-								className="group"
-							>
-								<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-									<h3 className="text-4xl md:text-5xl font-normal group-hover:text-accent transition-colors">
-										{exp.position}
-									</h3>
-									<span className="text-white/60">{exp.period}</span>
+						{experiences.map((exp, index) => {
+							const setRef = (el: HTMLDivElement | null) => {
+								experienceRefs.current[index] = el;
+							};
+
+							return (
+								<div key={exp.company} ref={setRef} className="group">
+									<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+										<h3 className="text-4xl md:text-5xl font-normal group-hover:text-accent transition-colors">
+											{exp.position}
+										</h3>
+										<span className="text-white/60">{exp.period}</span>
+									</div>
+									<span className="text-xl text-white/80">{exp.company}</span>
 								</div>
-								<span className="text-xl text-white/80">{exp.company}</span>
-							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 			</div>

@@ -3,13 +3,14 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
+import JavaScript from "../../../assets/icons/Javascript";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Define tech stack categories and items
 const techStack = {
 	frontend: [
-		{ name: "Javascript", icon: "💻" },
+		{ name: "Javascript", Icon: JavaScript },
 		{ name: "Typescript", icon: "📝" },
 		{ name: "React", icon: "⚛️" },
 		{ name: "Next.js", icon: "🔲" },
@@ -89,7 +90,11 @@ export function TechStack() {
 						<div className="grid grid-cols-2 gap-4">
 							{techStack.frontend.map((tech) => (
 								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md">
-									<span className="text-2xl">{tech.icon}</span>
+									{tech.Icon ? (
+										<tech.Icon className="w-8 h-8" />
+									) : (
+										<span className="text-2xl">{tech.icon}</span>
+									)}
 									<span className="text-lg">{tech.name}</span>
 								</div>
 							))}

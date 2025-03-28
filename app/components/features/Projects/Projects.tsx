@@ -72,21 +72,23 @@ export function Projects() {
 					</div>
 
 					<div className="space-y-12">
-						{projects.map((project, index) => (
-							<div
-								key={project.title}
-								ref={(el) => (projectRefs.current[index] = el)}
-								className="group"
-							>
-								<div className="flex flex-col gap-4 mb-2">
-									<h3 className="text-4xl md:text-5xl font-normal group-hover:text-accent transition-colors">
-										{project.title}
-									</h3>
-									<p className="text-xl text-white/80">{project.description}</p>
-									<span className="text-white/60">{project.tech}</span>
+						{projects.map((project, index) => {
+							const setRef = (el: HTMLDivElement | null) => {
+								projectRefs.current[index] = el;
+							};
+
+							return (
+								<div key={project.title} ref={setRef} className="group">
+									<div className="flex flex-col gap-4 mb-2">
+										<h3 className="text-4xl md:text-5xl font-normal group-hover:text-accent transition-colors">
+											{project.title}
+										</h3>
+										<p className="text-xl text-white/80">{project.description}</p>
+										<span className="text-white/60">{project.tech}</span>
+									</div>
 								</div>
-							</div>
-						))}
+							);
+						})}
 					</div>
 				</div>
 			</div>
