@@ -6,7 +6,4 @@ alwaysApply: true
 
 # Your rule content
 
-- never use the package Framer-Motion
-- dont install it
-- dont remove motion
-- always use motion as animation library
+- when working with animations, only use motion, never use framer-motion

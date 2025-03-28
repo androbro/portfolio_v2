@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import JavaScript from "../../../assets/icons/Javascript";
 
@@ -10,32 +11,37 @@ gsap.registerPlugin(ScrollTrigger);
 // Define tech stack categories and items
 const techStack = {
 	frontend: [
-		{ name: "Javascript", Icon: JavaScript },
-		{ name: "Typescript", icon: "📝" },
+		{ name: "HTML", icon: "🌐" },
+		{ name: "CSS", icon: "🎨" },
+		{ name: "JavaScript", Icon: JavaScript },
+		{ name: "TypeScript", icon: "📝" },
 		{ name: "React", icon: "⚛️" },
 		{ name: "Next.js", icon: "🔲" },
 		{ name: "Redux", icon: "🔄" },
-		{ name: "Tailwind CSS", icon: "🎨" },
+		{ name: "Tailwind CSS", icon: "💨" },
 		{ name: "GSAP", icon: "✨" },
-		{ name: "Framer Motion", icon: "🎭" },
+		{ name: "Motion", icon: "🎭" },
 		{ name: "SASS", icon: "💅" },
-		{ name: "Bootstrap", icon: "🅱️" },
 	],
 	backend: [
 		{ name: "Node.js", icon: "🟢" },
-		{ name: "Nest.js", icon: "🐈" },
 		{ name: "Express.js", icon: "🚂" },
+		{ name: "Firebase", icon: "🔥" },
+		{ name: "RESTful APIs", icon: "🔌" },
 	],
 	database: [
-		{ name: "MySQL", icon: "🐬" },
-		{ name: "PostgreSQL", icon: "🐘" },
 		{ name: "MongoDB", icon: "🍃" },
-		{ name: "Prisma", icon: "🔺" },
+		{ name: "MySQL", icon: "🐬" },
+		{ name: "Supabase", icon: "⚡" },
 	],
 	tools: [
 		{ name: "Git", icon: "🔄" },
-		{ name: "Docker", icon: "🐳" },
-		{ name: "AWS", icon: "☁️" },
+		{ name: "GitHub", icon: "🐙" },
+		{ name: "VS Code", icon: "📝" },
+		{ name: "Figma", icon: "🎨" },
+		{ name: "Jest", icon: "🃏" },
+		{ name: "Webpack", icon: "📦" },
+		{ name: "Vite", icon: "⚡" },
 	],
 };
 
@@ -77,25 +83,35 @@ export function TechStack() {
 	}, []);
 
 	return (
-		<section id="skills" className="flex items-center justify-center py-20">
+		<section ref={sectionRef} id="skills" className="flex items-center justify-center py-20">
 			<div className="content-container">
-				<h2 ref={headingRef} className="text-3xl md:text-4xl font-bold text-center">
-					My Stack
-				</h2>
+				<div className="flex items-center gap-4 mb-16">
+					<span className="text-accent text-5xl">*</span>
+					<motion.h2
+						ref={headingRef}
+						className="text-2xl uppercase"
+						initial={{ y: 50, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.6 }}
+						viewport={{ once: false }}
+					>
+						My Tech Stack
+					</motion.h2>
+				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
 					{/* Frontend */}
 					<div className="tech-category tech-category-0">
-						<h3 className="text-2xl font-semibold mb-6 text-gray-700">frontend</h3>
+						<h3 className="text-2xl font-light mb-6 text-accent">Frontend</h3>
 						<div className="grid grid-cols-2 gap-4">
 							{techStack.frontend.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md">
+								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
 									{tech.Icon ? (
-										<tech.Icon className="w-8 h-8" />
+										<tech.Icon className="w-6 h-6" />
 									) : (
 										<span className="text-2xl">{tech.icon}</span>
 									)}
-									<span className="text-lg">{tech.name}</span>
+									<span className="text-lg font-light">{tech.name}</span>
 								</div>
 							))}
 						</div>
@@ -103,12 +119,12 @@ export function TechStack() {
 
 					{/* Backend */}
 					<div className="tech-category tech-category-1">
-						<h3 className="text-2xl font-semibold mb-6 text-gray-700">backend</h3>
+						<h3 className="text-2xl font-light mb-6 text-accent">Backend</h3>
 						<div className="grid grid-cols-2 gap-4">
 							{techStack.backend.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md">
+								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
 									<span className="text-2xl">{tech.icon}</span>
-									<span className="text-lg">{tech.name}</span>
+									<span className="text-lg font-light">{tech.name}</span>
 								</div>
 							))}
 						</div>
@@ -116,12 +132,12 @@ export function TechStack() {
 
 					{/* Database */}
 					<div className="tech-category tech-category-2">
-						<h3 className="text-2xl font-semibold mb-6 text-gray-700">database</h3>
+						<h3 className="text-2xl font-light mb-6 text-accent">Database</h3>
 						<div className="grid grid-cols-2 gap-4">
 							{techStack.database.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md">
+								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
 									<span className="text-2xl">{tech.icon}</span>
-									<span className="text-lg">{tech.name}</span>
+									<span className="text-lg font-light">{tech.name}</span>
 								</div>
 							))}
 						</div>
@@ -129,12 +145,12 @@ export function TechStack() {
 
 					{/* Tools */}
 					<div className="tech-category tech-category-3">
-						<h3 className="text-2xl font-semibold mb-6 text-gray-700">tools</h3>
+						<h3 className="text-2xl font-light mb-6 text-accent">Tools</h3>
 						<div className="grid grid-cols-2 gap-4">
 							{techStack.tools.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md">
+								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
 									<span className="text-2xl">{tech.icon}</span>
-									<span className="text-lg">{tech.name}</span>
+									<span className="text-lg font-light">{tech.name}</span>
 								</div>
 							))}
 						</div>

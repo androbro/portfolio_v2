@@ -4,25 +4,23 @@ import { motion } from "motion/react";
 
 const experiences = [
 	{
-		company: "Strativ AB",
-		position: "Software Engineer (Frontend)",
-		period: "Dec 2024 - Present",
-	},
-	{
-		company: "Epikcoders",
+		company: "Freelance",
 		position: "Frontend Developer",
-		period: "Oct 2023 - Nov 2024",
+		period: "Jan 2023 - Present",
+		description: "Building responsive and interactive web applications for various clients using React, Next.js, and modern frontend technologies."
 	},
 	{
-		company: "Anchorblock Technology",
-		position: "Frontend Engineer",
-		period: "Oct 2022 - Sep 2023",
+		company: "WebDev Agency",
+		position: "Junior Frontend Developer",
+		period: "Mar 2022 - Dec 2022",
+		description: "Developed UI components and implemented responsive designs for client websites. Collaborated with design and backend teams to deliver complete web solutions."
 	},
 	{
-		company: "Branex IT",
-		position: "Frontend Developer (Part-time)",
-		period: "Jan 2022 - Oct 2022",
-	},
+		company: "TechStart Studio",
+		position: "Frontend Intern",
+		period: "Sep 2021 - Feb 2022",
+		description: "Assisted in building user interfaces for web applications, learned industry best practices, and gained hands-on experience with modern frontend frameworks."
+	}
 ];
 
 export function Experience() {
@@ -38,7 +36,7 @@ export function Experience() {
 						transition={{ duration: 0.6 }}
 						viewport={{ once: false }}
 					>
-						My Experience
+						Work Experience
 					</motion.h2>
 				</div>
 
@@ -46,7 +44,7 @@ export function Experience() {
 					{experiences.map((exp, index) => (
 						<motion.div
 							key={exp.company}
-							className="group"
+							className="group border-b border-white/10 pb-12 last:border-0"
 							initial={{ y: 50, opacity: 0 }}
 							whileInView={{ y: 0, opacity: 1 }}
 							transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -58,7 +56,8 @@ export function Experience() {
 								</h3>
 								<span className="text-white/60">{exp.period}</span>
 							</div>
-							<span className="text-xl text-white/80">{exp.company}</span>
+							<span className="text-xl text-white/80 mb-4 block">{exp.company}</span>
+							<p className="text-white/70 max-w-3xl font-light">{exp.description}</p>
 						</motion.div>
 					))}
 				</div>

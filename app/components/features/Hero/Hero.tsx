@@ -44,11 +44,10 @@ export function Hero() {
 						ref={paragraphRef}
 						className="text-lg md:text-lg max-w-3xl mb-8 text-white/70 font-thin"
 					>
-						Hi! I'm Koen De Vulder. A creative Frontend Developer with 3+ years of experience in
-						building high-performance, scalable, and responsive web solutions.
+						Hi! I'm Koen De Vulder. A creative Frontend Developer with a passion for building innovative, responsive, and user-friendly web applications.
 					</p>
-					<motion.button
-						type="button"
+					<motion.a
+						href="#contact"
 						className="bg-accent text-black px-8 py-3 font-light"
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -62,8 +61,8 @@ export function Hero() {
 							scale: 0.98
 						}}
 					>
-						HIRE ME
-					</motion.button>
+						CONTACT ME
+					</motion.a>
 
 					{/* Stats */}
 					<div className="absolute bottom-8 right-8 space-y-4 text-right">
@@ -72,12 +71,12 @@ export function Hero() {
 							<span className="text-sm text-white/60">Years of Experience</span>
 						</div>
 						<div ref={projectsRef} className="flex flex-col">
-							<span className="text-3xl md:text-4xl text-accent font-light">7+</span>
+							<span className="text-3xl md:text-4xl text-accent font-light">10+</span>
 							<span className="text-sm text-white/60">Completed Projects</span>
 						</div>
 						<div ref={hoursRef} className="flex flex-col">
-							<span className="text-3xl md:text-4xl text-accent font-light">10k+</span>
-							<span className="text-sm text-white/60">Hours Worked</span>
+							<span className="text-3xl md:text-4xl text-accent font-light">5000+</span>
+							<span className="text-sm text-white/60">Hours Coded</span>
 						</div>
 					</div>
 				</div>

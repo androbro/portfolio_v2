@@ -4,24 +4,29 @@ import { motion } from "motion/react";
 
 const projects = [
 	{
-		title: "E-commerce Web App",
-		description: "A fully responsive e-commerce platform built with Next.js and Stripe.",
+		title: "Health Dashboard",
+		description: "A comprehensive health tracking dashboard with data visualization built using React, D3.js, and Firebase.",
 		year: "2023",
+	},
+	{
+		title: "E-commerce Platform",
+		description: "A fully responsive e-commerce solution with integrated payment processing using Next.js and Stripe.",
+		year: "2023",
+	},
+	{
+		title: "Social Media App",
+		description: "A social networking platform with real-time messaging and content sharing features built with MERN stack.",
+		year: "2022",
 	},
 	{
 		title: "Portfolio Website",
-		description: "A creative portfolio website for a digital agency.",
-		year: "2023",
-	},
-	{
-		title: "SaaS Dashboard",
-		description: "An analytics dashboard for a SaaS product using React and D3.js.",
+		description: "A modern, responsive portfolio website showcasing creative work and professional achievements.",
 		year: "2022",
 	},
 	{
-		title: "Task Management App",
-		description: "A collaborative task management application with real-time updates.",
-		year: "2022",
+		title: "Weather Application",
+		description: "An interactive weather application with location-based forecasts using React and OpenWeather API.",
+		year: "2021",
 	},
 ];
 

@@ -38,29 +38,27 @@ export function About() {
 			<div className="content-container">
 				<div ref={quoteRef}>
 					<h3 className="text-4xl md:text-6xl font-light leading-tight mb-22">
-						I believe in a user centered design approach, ensuring that every project I work on is
-						tailored to meet the specific needs of its users.
+						I create meaningful digital experiences that combine aesthetics with functionality and performance.
 					</h3>
 				</div>
 				<div 
 					ref={textRef}
 					className="grid grid-cols-1 gap-8 text-lg text-white/80"
 				>
-				<p className="pb-3 border-b text-muted-foreground slide-up-and-fade">This is me.</p>
+				<p className="pb-3 border-b text-muted-foreground slide-up-and-fade">About Me</p>
 					<div className="flex flex-col md:flex-row gap-8">
 						<div className="md:w-1/3">
 							<h4 className="text-2xl font-light mb-4">Hi, I'm Koen.</h4>
 						</div>
 						<div className="md:w-2/3 space-y-6">
 							<p className="font-light">
-								I'm a frontend web developer dedicated to turning ideas into creative solutions. I
-								specialize in creating seamless and intuitive user experiences.
+								I'm a frontend developer with experience in building responsive and performant web applications using modern technologies like React, Next.js, and TypeScript.
 							</p>
 							<p className="font-light">
-								My approach focuses on creating scalable, high-performing solutions tailored to both
-								user needs and business objectives. By prioritizing performance, accessibility, and
-								responsiveness, I strive to deliver experiences that not only engage users but also
-								drive tangible results.
+								My goal is to create clean, efficient code that delivers exceptional user experiences. I'm passionate about continuous learning and staying current with emerging web technologies.
+							</p>
+							<p className="font-light">
+								When I'm not coding, I enjoy exploring new design trends, contributing to open-source projects, and sharing knowledge with the developer community.
 							</p>
 						</div>
 					</div>
