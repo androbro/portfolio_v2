@@ -44,31 +44,9 @@ const quoteOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]); // F
 		<section ref={sectionRef} id="about" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
-					<figure className="sticky top-24 left-0 w-20 h-20 float-left mr-8">
-						<svg width="75" height="75" viewBox="0 0 100 100">
-							<circle
-								cx="50"
-								cy="50"
-								r="30"
-								pathLength="1"
-								className="stroke-primary/20 fill-none stroke-[5px]"
-							/>
-							<motion.circle
-								cx="50"
-								cy="50"
-								r="30"
-								pathLength="1"
-								className="stroke-primary fill-none stroke-[5px]"
-								style={{
-									pathLength: scrollYProgress,
-								}}
-							/>
-						</svg>
-					</figure>
-					
 					<div ref={quoteRef}>
 						<motion.h3 
-							className="text-4xl md:text-6xl font-light leading-tight mb-22"
+							className="text-4xl md:text-6xl font-light mb-22"
 							style={{
 								opacity: quoteOpacity,
 								y: quoteY
