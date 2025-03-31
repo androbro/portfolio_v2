@@ -1,223 +1,259 @@
 "use client";
 
-import { AsterixIcon, JavaScript } from "@/app/assets/icons";
-import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { AsterixIcon } from "@/app/assets/icons";
+import { motion } from "motion/react";
 
-// Define tech stack categories and items
-const techStack = {
-	frontend: [
-		{ name: "HTML", icon: "🌐" },
-		{ name: "CSS", icon: "🎨" },
-		{ name: "JavaScript", Icon: JavaScript },
-		{ name: "TypeScript", icon: "📝" },
-		{ name: "React", icon: "⚛️" },
-		{ name: "Next.js", icon: "🔲" },
-		{ name: "Redux", icon: "🔄" },
-		{ name: "Tailwind CSS", icon: "💨" },
-		{ name: "GSAP", icon: "✨" },
-		{ name: "Motion", icon: "🎭" },
-		{ name: "SASS", icon: "💅" },
-	],
-	backend: [
-		{ name: "Node.js", icon: "🟢" },
-		{ name: "Express.js", icon: "🚂" },
-		{ name: "Firebase", icon: "🔥" },
-		{ name: "RESTful APIs", icon: "🔌" },
-	],
-	database: [
-		{ name: "MongoDB", icon: "🍃" },
-		{ name: "MySQL", icon: "🐬" },
-		{ name: "Supabase", icon: "⚡" },
-	],
-	tools: [
-		{ name: "Git", icon: "🔄" },
-		{ name: "GitHub", icon: "🐙" },
-		{ name: "VS Code", icon: "📝" },
-		{ name: "Figma", icon: "🎨" },
-		{ name: "Jest", icon: "🃏" },
-		{ name: "Webpack", icon: "📦" },
-		{ name: "Vite", icon: "⚡" },
-	],
-};
+// Tech icons - using placeholders for now
+const DemoIcon = ({ className }: { className?: string }) => (
+	<div className={`${className} flex items-center justify-center rounded-md`}>
+		<span className="text-2xl">��</span>
+	</div>
+);
 
 export function TechStack() {
-	const sectionRef = useRef<HTMLElement>(null);
-	
-	const { scrollYProgress } = useScroll({
-		target: sectionRef,
-		offset: ["start end", "end start"],
-	});
-	
-	// Create scroll-linked animations
-	const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 1], [0, 1, 1]);
-	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
-	
-	// Create animations for the tech categories
-	const frontendOpacity = useTransform(scrollYProgress, [0.1, 0.2, 1], [0, 1, 1]);
-	const frontendY = useTransform(scrollYProgress, [0.1, 0.2, 1], [30, 0, 0]);
-	
-	const backendOpacity = useTransform(scrollYProgress, [0.15, 0.25, 1], [0, 1, 1]);
-	const backendY = useTransform(scrollYProgress, [0.15, 0.25, 1], [30, 0, 0]);
-	
-	const databaseOpacity = useTransform(scrollYProgress, [0.2, 0.3, 1], [0, 1, 1]);
-	const databaseY = useTransform(scrollYProgress, [0.2, 0.3, 1], [30, 0, 0]);
-	
-	const toolsOpacity = useTransform(scrollYProgress, [0.25, 0.35, 1], [0, 1, 1]);
-	const toolsY = useTransform(scrollYProgress, [0.25, 0.35, 1], [30, 0, 0]);
-	
-	// Create a progress circle animation
-	const progressPathLength = scrollYProgress;
-
 	return (
-		<section ref={sectionRef} id="skills" className="flex items-center justify-center py-20">
-			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-				<div className="relative">					
-					<div className="flex items-center gap-4 mb-16">
-						<motion.div
-							className="w-10 h-10 text-accent flex items-center justify-center"
-							animate={{
-								rotate: 360
-							}}
-							transition={{
-								duration: 6,
-								repeat: Infinity,
-								ease: "linear"
-							}}
-						>
-							<AsterixIcon />
-						</motion.div>
-						<motion.h2
-							className="text-2xl uppercase"
-							style={{
-								opacity: titleOpacity,
-								y: titleY
-							}}
-						>
-							My Tech Stack
-						</motion.h2>
+		<section id="skills" className="flex flex-col items-center justify-center py-20">
+			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl w-full">
+				<div className="flex items-center gap-4 mb-16">
+					<motion.div
+						className="text-accent" 
+						animate={{
+							rotate: 360
+						}}
+						transition={{
+							duration: 6,
+							repeat: Infinity,
+							ease: "linear"
+						}}
+					>
+						<AsterixIcon className="w-8 h-8" />
+					</motion.div>
+					<h2 className="text-2xl uppercase">My Stack</h2>
+				</div>
+
+				<div className="flex flex-col space-y-16">
+					{/* FRONTEND */}
+					<div>
+						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Frontend</h3>
+						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-yellow-500 text-black w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">JS</span>
+								</div>
+								<span>Javascript</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-blue-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">TS</span>
+								</div>
+								<span>Typescript</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-blue-400 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">⚛️</span>
+								</div>
+								<span>React</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-black text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">N</span>
+								</div>
+								<span>Next.JS</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-purple-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">R</span>
+								</div>
+								<span>Redux</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-blue-300 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">T</span>
+								</div>
+								<span>Tailwind CSS</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-green-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">G</span>
+								</div>
+								<span>GSAP</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-purple-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">FM</span>
+								</div>
+								<span>Frammer Motion</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-pink-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">S</span>
+								</div>
+								<span>SASS</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-purple-800 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">B</span>
+								</div>
+								<span>Bootstrap</span>
+							</motion.div>
+						</div>
 					</div>
-
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-						{/* Frontend */}
-						<motion.div 
-							className="tech-category tech-category-0"
-							style={{
-								opacity: frontendOpacity,
-								y: frontendY
-							}}
-						>
-							<h3 className="text-2xl font-light mb-6 text-accent">Frontend</h3>
-							<div className="grid grid-cols-2 gap-4">
-								{techStack.frontend.map((tech, index) => (
-									<motion.div 
-										key={tech.name} 
-										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
-										style={{
-											opacity: useTransform(
-												scrollYProgress, 
-												[0.15 + index * 0.01, 0.25 + index * 0.01, 1], 
-												[0, 1, 1]
-											)
-										}}
-									>
-										{tech.Icon ? (
-											<tech.Icon className="w-6 h-6" />
-										) : (
-											<span className="text-2xl">{tech.icon}</span>
-										)}
-										<span className="text-lg font-light">{tech.name}</span>
-									</motion.div>
-								))}
-							</div>
-						</motion.div>
-
-						{/* Backend */}
-						<motion.div 
-							className="tech-category tech-category-1"
-							style={{
-								opacity: backendOpacity,
-								y: backendY
-							}}
-						>
-							<h3 className="text-2xl font-light mb-6 text-accent">Backend</h3>
-							<div className="grid grid-cols-2 gap-4">
-								{techStack.backend.map((tech, index) => (
-									<motion.div 
-										key={tech.name} 
-										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
-										style={{
-											opacity: useTransform(
-												scrollYProgress, 
-												[0.2 + index * 0.01, 0.3 + index * 0.01, 1], 
-												[0, 1, 1]
-											)
-										}}
-									>
-										<span className="text-2xl">{tech.icon}</span>
-										<span className="text-lg font-light">{tech.name}</span>
-									</motion.div>
-								))}
-							</div>
-						</motion.div>
-
-						{/* Database */}
-						<motion.div 
-							className="tech-category tech-category-2"
-							style={{
-								opacity: databaseOpacity,
-								y: databaseY
-							}}
-						>
-							<h3 className="text-2xl font-light mb-6 text-accent">Database</h3>
-							<div className="grid grid-cols-2 gap-4">
-								{techStack.database.map((tech, index) => (
-									<motion.div 
-										key={tech.name} 
-										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
-										style={{
-											opacity: useTransform(
-												scrollYProgress, 
-												[0.25 + index * 0.01, 0.35 + index * 0.01, 1], 
-												[0, 1, 1]
-											)
-										}}
-									>
-										<span className="text-2xl">{tech.icon}</span>
-										<span className="text-lg font-light">{tech.name}</span>
-									</motion.div>
-								))}
-							</div>
-						</motion.div>
-
-						{/* Tools */}
-						<motion.div 
-							className="tech-category tech-category-3"
-							style={{
-								opacity: toolsOpacity,
-								y: toolsY
-							}}
-						>
-							<h3 className="text-2xl font-light mb-6 text-accent">Tools</h3>
-							<div className="grid grid-cols-2 gap-4">
-								{techStack.tools.map((tech, index) => (
-									<motion.div 
-										key={tech.name} 
-										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
-										style={{
-											opacity: useTransform(
-												scrollYProgress, 
-												[0.3 + index * 0.01, 0.4 + index * 0.01, 1], 
-												[0, 1, 1]
-											)
-										}}
-									>
-										<span className="text-2xl">{tech.icon}</span>
-										<span className="text-lg font-light">{tech.name}</span>
-									</motion.div>
-								))}
-							</div>
-						</motion.div>
+					
+					{/* BACKEND */}
+					<div>
+						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Backend</h3>
+						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-green-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">N</span>
+								</div>
+								<span>Node.JS</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-red-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">N</span>
+								</div>
+								<span>Nest.JS</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-gray-200 text-black w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">EX</span>
+								</div>
+								<span>Express.Js</span>
+							</motion.div>
+						</div>
+					</div>
+					
+					{/* DATABASE */}
+					<div>
+						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Database</h3>
+						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-blue-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">M</span>
+								</div>
+								<span>MySQL</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-blue-400 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">P</span>
+								</div>
+								<span>PostgreSQL</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-green-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">M</span>
+								</div>
+								<span>MongoDB</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-gray-700 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">P</span>
+								</div>
+								<span>Prisma</span>
+							</motion.div>
+						</div>
+					</div>
+					
+					{/* TOOLS */}
+					<div>
+						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Tools</h3>
+						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-red-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">G</span>
+								</div>
+								<span>Git</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-blue-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">D</span>
+								</div>
+								<span>Docker</span>
+							</motion.div>
+							
+							<motion.div 
+								className="flex flex-col items-center"
+								whileHover={{ scale: 1.05 }}
+							>
+								<div className="bg-gray-600 text-orange-300 w-16 h-16 rounded-md flex items-center justify-center mb-2">
+									<span className="text-3xl">A</span>
+								</div>
+								<span>AWS</span>
+							</motion.div>
+						</div>
 					</div>
 				</div>
 			</div>
