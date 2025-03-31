@@ -27,7 +27,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"app/assets/icons/**/*.tsx"
+		"app/assets/icons/**/*.tsx",
+		"app/assets/content/**/*.ts"
 	],
 	"exclude": ["node_modules"]
 }

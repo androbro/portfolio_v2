@@ -1,23 +1,21 @@
 {
-	"java.configuration.updateBuildConfiguration": "automatic",
 	"editor.defaultFormatter": "biomejs.biome",
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
 	"editor.formatOnSave": true,
 	"editor.formatOnSaveMode": "file",
 	"editor.codeActionsOnSave": {
-		"source.removeUnusedImports": "explicit",
+		"source.removeUnusedImports": "always",
 		"source.fixAll": "always",
-		"source.fixAll.biome": "explicit",
-		"source.fixAll.eslint": "explicit",
+		"source.fixAll.biome": "always",
+		"source.fixAll.eslint": "always",
 		"source.organizeImports": "always",
-		"source.organizeImports.biome": "explicit",
-		"source.formatDocument": "explicit",
-		"source.formatDocument.biome": "explicit"
+		"source.organizeImports.biome": "always",
+		"source.formatDocument": "always",
+		"source.formatDocument.biome": "always"
 	},
 	"editor.inlayHints.enabled": "on",
 	"files.autoSave": "onFocusChange",
-
 	"[html]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
@@ -33,12 +31,9 @@
 	"[typescript]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
-
 	"[json]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
-
-	// C# formatters
 	"[csharp]": {
 		"editor.defaultFormatter": "ms-dotnettools.csharp",
 		"editor.formatOnSave": true,
@@ -47,8 +42,6 @@
 			"source.fixAll": "always"
 		}
 	},
-
-	// Enable C# features
 	"csharp.format.enable": true,
 	"dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
 	"dotnet.server.useOmnisharp": true,
