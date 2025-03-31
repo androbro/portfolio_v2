@@ -2,15 +2,87 @@
 
 import { AsterixIcon } from "@/app/assets/icons";
 import { motion } from "motion/react";
+import { useState } from "react";
 
-// Tech icons - using placeholders for now
-const DemoIcon = ({ className }: { className?: string }) => (
-	<div className={`${className} flex items-center justify-center rounded-md`}>
-		<span className="text-2xl">��</span>
-	</div>
-);
+// Tech stack data structured in categories
+const techStackData = {
+	frontend: [
+		{ name: "Javascript", initials: "JS", color: "bg-yellow-500", textColor: "text-black" },
+		{ name: "Typescript", initials: "TS", color: "bg-blue-500", textColor: "text-white" },
+		{ name: "React", initials: "⚛️", color: "bg-blue-400", textColor: "text-white" },
+		{ name: "Next.JS", initials: "N", color: "bg-black", textColor: "text-white" },
+		{ name: "Redux", initials: "R", color: "bg-purple-500", textColor: "text-white" },
+		{ name: "Tailwind CSS", initials: "T", color: "bg-blue-300", textColor: "text-white" },
+		{ name: "GSAP", initials: "G", color: "bg-green-500", textColor: "text-white" },
+		{ name: "Frammer Motion", initials: "FM", color: "bg-purple-600", textColor: "text-white" },
+		{ name: "SASS", initials: "S", color: "bg-pink-500", textColor: "text-white" },
+		{ name: "Bootstrap", initials: "B", color: "bg-purple-800", textColor: "text-white" },
+	],
+	backend: [
+		{ name: "Node.JS", initials: "N", color: "bg-green-600", textColor: "text-white" },
+		{ name: "Nest.JS", initials: "N", color: "bg-red-500", textColor: "text-white" },
+		{ name: "Express.Js", initials: "EX", color: "bg-gray-200", textColor: "text-black" },
+	],
+	database: [
+		{ name: "MySQL", initials: "M", color: "bg-blue-600", textColor: "text-white" },
+		{ name: "PostgreSQL", initials: "P", color: "bg-blue-400", textColor: "text-white" },
+		{ name: "MongoDB", initials: "M", color: "bg-green-500", textColor: "text-white" },
+		{ name: "Prisma", initials: "P", color: "bg-gray-700", textColor: "text-white" },
+	],
+	tools: [
+		{ name: "Git", initials: "G", color: "bg-red-500", textColor: "text-white" },
+		{ name: "Docker", initials: "D", color: "bg-blue-600", textColor: "text-white" },
+		{ name: "AWS", initials: "A", color: "bg-gray-600", textColor: "text-orange-300" },
+	]
+};
 
 export function TechStack() {
+	const [techStack, setTechStack] = useState(techStackData);
+	
+	// Function to render a category section
+	const renderCategory = (category: string, techs: any[]) => {
+		return (
+			<div key={category} className="mb-20">
+				<div className="flex flex-col md:flex-row">
+					{/* Text on the left */}
+					<div className="md:w-1/3 mb-8 md:mb-0">
+						<h3 className="text-5xl font-bold text-gray-400 uppercase sticky top-20">
+							{category}
+						</h3>
+					</div>
+					
+					{/* Icons on the right */}
+					<div className="md:w-2/3">
+						<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+							{techs.map((tech, index) => (
+								<motion.div 
+									key={`${category}-${tech.name}`}
+									className="flex flex-col items-center"
+									initial={{ opacity: 0, x: 50 }}
+									whileInView={{ 
+										opacity: 1, 
+										x: 0,
+										transition: { 
+											duration: 0.5, 
+											delay: index * 0.1
+										}
+									}}
+									viewport={{ once: true }}
+									whileHover={{ scale: 1.05 }}
+								>
+									<div className={`${tech.color} ${tech.textColor} w-16 h-16 rounded-md flex items-center justify-center mb-2`}>
+										<span className="text-3xl">{tech.initials}</span>
+									</div>
+									<span>{tech.name}</span>
+								</motion.div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<section id="skills" className="flex flex-col items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl w-full">
@@ -31,230 +103,11 @@ export function TechStack() {
 					<h2 className="text-2xl uppercase">My Stack</h2>
 				</div>
 
-				<div className="flex flex-col space-y-16">
-					{/* FRONTEND */}
-					<div>
-						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Frontend</h3>
-						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-yellow-500 text-black w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">JS</span>
-								</div>
-								<span>Javascript</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-blue-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">TS</span>
-								</div>
-								<span>Typescript</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-blue-400 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">⚛️</span>
-								</div>
-								<span>React</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-black text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">N</span>
-								</div>
-								<span>Next.JS</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-purple-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">R</span>
-								</div>
-								<span>Redux</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-blue-300 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">T</span>
-								</div>
-								<span>Tailwind CSS</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-green-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">G</span>
-								</div>
-								<span>GSAP</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-purple-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">FM</span>
-								</div>
-								<span>Frammer Motion</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-pink-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">S</span>
-								</div>
-								<span>SASS</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-purple-800 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">B</span>
-								</div>
-								<span>Bootstrap</span>
-							</motion.div>
-						</div>
-					</div>
-					
-					{/* BACKEND */}
-					<div>
-						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Backend</h3>
-						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-green-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">N</span>
-								</div>
-								<span>Node.JS</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-red-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">N</span>
-								</div>
-								<span>Nest.JS</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-gray-200 text-black w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">EX</span>
-								</div>
-								<span>Express.Js</span>
-							</motion.div>
-						</div>
-					</div>
-					
-					{/* DATABASE */}
-					<div>
-						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Database</h3>
-						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-blue-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">M</span>
-								</div>
-								<span>MySQL</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-blue-400 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">P</span>
-								</div>
-								<span>PostgreSQL</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-green-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">M</span>
-								</div>
-								<span>MongoDB</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-gray-700 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">P</span>
-								</div>
-								<span>Prisma</span>
-							</motion.div>
-						</div>
-					</div>
-					
-					{/* TOOLS */}
-					<div>
-						<h3 className="text-5xl font-bold text-gray-400 uppercase mb-8">Tools</h3>
-						<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-red-500 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">G</span>
-								</div>
-								<span>Git</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-blue-600 text-white w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">D</span>
-								</div>
-								<span>Docker</span>
-							</motion.div>
-							
-							<motion.div 
-								className="flex flex-col items-center"
-								whileHover={{ scale: 1.05 }}
-							>
-								<div className="bg-gray-600 text-orange-300 w-16 h-16 rounded-md flex items-center justify-center mb-2">
-									<span className="text-3xl">A</span>
-								</div>
-								<span>AWS</span>
-							</motion.div>
-						</div>
-					</div>
+				<div className="flex flex-col">
+					{/* Map over tech stack categories */}
+					{Object.entries(techStack).map(([category, techs]) => 
+						renderCategory(category, techs)
+					)}
 				</div>
 			</div>
 		</section>
