@@ -1,8 +1,8 @@
 "use client";
 
+import { AsterixIcon, JavaScript } from "@/app/assets/icons";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import JavaScript from "../../../assets/icons/Javascript";
 
 // Define tech stack categories and items
 const techStack = {
@@ -72,31 +72,21 @@ export function TechStack() {
 	return (
 		<section ref={sectionRef} id="skills" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-				<div className="relative">
-					<figure className="sticky top-24 left-0 w-20 h-20 float-left mr-8">
-						<svg width="75" height="75" viewBox="0 0 100 100">
-							<circle
-								cx="50"
-								cy="50"
-								r="30"
-								pathLength="1"
-								className="stroke-primary/20 fill-none stroke-[5px]"
-							/>
-							<motion.circle
-								cx="50"
-								cy="50"
-								r="30"
-								pathLength="1"
-								className="stroke-primary fill-none stroke-[5px]"
-								style={{
-									pathLength: progressPathLength,
-								}}
-							/>
-						</svg>
-					</figure>
-					
+				<div className="relative">					
 					<div className="flex items-center gap-4 mb-16">
-						<span className="text-accent text-5xl">*</span>
+						<motion.div
+							className="w-10 h-10 text-accent flex items-center justify-center"
+							animate={{
+								rotate: 360
+							}}
+							transition={{
+								duration: 6,
+								repeat: Infinity,
+								ease: "linear"
+							}}
+						>
+							<AsterixIcon />
+						</motion.div>
 						<motion.h2
 							className="text-2xl uppercase"
 							style={{
