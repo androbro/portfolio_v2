@@ -1,12 +1,8 @@
 "use client";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import JavaScript from "../../../assets/icons/Javascript";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Define tech stack categories and items
 const techStack = {
@@ -47,113 +43,191 @@ const techStack = {
 
 export function TechStack() {
 	const sectionRef = useRef<HTMLElement>(null);
-	const headingRef = useRef<HTMLHeadingElement>(null);
-
-	useEffect(() => {
-		// GSAP animation for staggered tech items appearance
-		const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: sectionRef.current,
-				start: "top 70%",
-			},
-		});
-
-		tl.fromTo(headingRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 });
-
-		// Animate tech items with staggered effect
-		const categories = document.querySelectorAll(".tech-category");
-		categories.forEach((category, i) => {
-			const techItems = document.querySelectorAll(`.tech-category-${i} .tech-item`);
-
-			gsap.fromTo(
-				techItems,
-				{ y: 20, opacity: 0 },
-				{
-					y: 0,
-					opacity: 1,
-					duration: 0.4,
-					stagger: 0.1,
-					scrollTrigger: {
-						trigger: category,
-						start: "top 80%",
-					},
-				}
-			);
-		});
-	}, []);
+	
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start end", "end start"],
+	});
+	
+	// Create scroll-linked animations
+	const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 1], [0, 1, 1]);
+	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
+	
+	// Create animations for the tech categories
+	const frontendOpacity = useTransform(scrollYProgress, [0.1, 0.2, 1], [0, 1, 1]);
+	const frontendY = useTransform(scrollYProgress, [0.1, 0.2, 1], [30, 0, 0]);
+	
+	const backendOpacity = useTransform(scrollYProgress, [0.15, 0.25, 1], [0, 1, 1]);
+	const backendY = useTransform(scrollYProgress, [0.15, 0.25, 1], [30, 0, 0]);
+	
+	const databaseOpacity = useTransform(scrollYProgress, [0.2, 0.3, 1], [0, 1, 1]);
+	const databaseY = useTransform(scrollYProgress, [0.2, 0.3, 1], [30, 0, 0]);
+	
+	const toolsOpacity = useTransform(scrollYProgress, [0.25, 0.35, 1], [0, 1, 1]);
+	const toolsY = useTransform(scrollYProgress, [0.25, 0.35, 1], [30, 0, 0]);
+	
+	// Create a progress circle animation
+	const progressPathLength = scrollYProgress;
 
 	return (
 		<section ref={sectionRef} id="skills" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-				<div className="flex items-center gap-4 mb-16">
-					<span className="text-accent text-5xl">*</span>
-					<motion.h2
-						ref={headingRef}
-						className="text-2xl uppercase"
-						initial={{ y: 50, opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
-						transition={{ duration: 0.6 }}
-						viewport={{ once: false }}
-					>
-						My Tech Stack
-					</motion.h2>
-				</div>
+				<div className="relative">
+					<figure className="sticky top-24 left-0 w-20 h-20 float-left mr-8">
+						<svg width="75" height="75" viewBox="0 0 100 100">
+							<circle
+								cx="50"
+								cy="50"
+								r="30"
+								pathLength="1"
+								className="stroke-primary/20 fill-none stroke-[5px]"
+							/>
+							<motion.circle
+								cx="50"
+								cy="50"
+								r="30"
+								pathLength="1"
+								className="stroke-primary fill-none stroke-[5px]"
+								style={{
+									pathLength: progressPathLength,
+								}}
+							/>
+						</svg>
+					</figure>
+					
+					<div className="flex items-center gap-4 mb-16">
+						<span className="text-accent text-5xl">*</span>
+						<motion.h2
+							className="text-2xl uppercase"
+							style={{
+								opacity: titleOpacity,
+								y: titleY
+							}}
+						>
+							My Tech Stack
+						</motion.h2>
+					</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-					{/* Frontend */}
-					<div className="tech-category tech-category-0">
-						<h3 className="text-2xl font-light mb-6 text-accent">Frontend</h3>
-						<div className="grid grid-cols-2 gap-4">
-							{techStack.frontend.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
-									{tech.Icon ? (
-										<tech.Icon className="w-6 h-6" />
-									) : (
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+						{/* Frontend */}
+						<motion.div 
+							className="tech-category tech-category-0"
+							style={{
+								opacity: frontendOpacity,
+								y: frontendY
+							}}
+						>
+							<h3 className="text-2xl font-light mb-6 text-accent">Frontend</h3>
+							<div className="grid grid-cols-2 gap-4">
+								{techStack.frontend.map((tech, index) => (
+									<motion.div 
+										key={tech.name} 
+										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
+										style={{
+											opacity: useTransform(
+												scrollYProgress, 
+												[0.15 + index * 0.01, 0.25 + index * 0.01, 1], 
+												[0, 1, 1]
+											)
+										}}
+									>
+										{tech.Icon ? (
+											<tech.Icon className="w-6 h-6" />
+										) : (
+											<span className="text-2xl">{tech.icon}</span>
+										)}
+										<span className="text-lg font-light">{tech.name}</span>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+
+						{/* Backend */}
+						<motion.div 
+							className="tech-category tech-category-1"
+							style={{
+								opacity: backendOpacity,
+								y: backendY
+							}}
+						>
+							<h3 className="text-2xl font-light mb-6 text-accent">Backend</h3>
+							<div className="grid grid-cols-2 gap-4">
+								{techStack.backend.map((tech, index) => (
+									<motion.div 
+										key={tech.name} 
+										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
+										style={{
+											opacity: useTransform(
+												scrollYProgress, 
+												[0.2 + index * 0.01, 0.3 + index * 0.01, 1], 
+												[0, 1, 1]
+											)
+										}}
+									>
 										<span className="text-2xl">{tech.icon}</span>
-									)}
-									<span className="text-lg font-light">{tech.name}</span>
-								</div>
-							))}
-						</div>
-					</div>
+										<span className="text-lg font-light">{tech.name}</span>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
 
-					{/* Backend */}
-					<div className="tech-category tech-category-1">
-						<h3 className="text-2xl font-light mb-6 text-accent">Backend</h3>
-						<div className="grid grid-cols-2 gap-4">
-							{techStack.backend.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
-									<span className="text-2xl">{tech.icon}</span>
-									<span className="text-lg font-light">{tech.name}</span>
-								</div>
-							))}
-						</div>
-					</div>
+						{/* Database */}
+						<motion.div 
+							className="tech-category tech-category-2"
+							style={{
+								opacity: databaseOpacity,
+								y: databaseY
+							}}
+						>
+							<h3 className="text-2xl font-light mb-6 text-accent">Database</h3>
+							<div className="grid grid-cols-2 gap-4">
+								{techStack.database.map((tech, index) => (
+									<motion.div 
+										key={tech.name} 
+										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
+										style={{
+											opacity: useTransform(
+												scrollYProgress, 
+												[0.25 + index * 0.01, 0.35 + index * 0.01, 1], 
+												[0, 1, 1]
+											)
+										}}
+									>
+										<span className="text-2xl">{tech.icon}</span>
+										<span className="text-lg font-light">{tech.name}</span>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
 
-					{/* Database */}
-					<div className="tech-category tech-category-2">
-						<h3 className="text-2xl font-light mb-6 text-accent">Database</h3>
-						<div className="grid grid-cols-2 gap-4">
-							{techStack.database.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
-									<span className="text-2xl">{tech.icon}</span>
-									<span className="text-lg font-light">{tech.name}</span>
-								</div>
-							))}
-						</div>
-					</div>
-
-					{/* Tools */}
-					<div className="tech-category tech-category-3">
-						<h3 className="text-2xl font-light mb-6 text-accent">Tools</h3>
-						<div className="grid grid-cols-2 gap-4">
-							{techStack.tools.map((tech) => (
-								<div key={tech.name} className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors">
-									<span className="text-2xl">{tech.icon}</span>
-									<span className="text-lg font-light">{tech.name}</span>
-								</div>
-							))}
-						</div>
+						{/* Tools */}
+						<motion.div 
+							className="tech-category tech-category-3"
+							style={{
+								opacity: toolsOpacity,
+								y: toolsY
+							}}
+						>
+							<h3 className="text-2xl font-light mb-6 text-accent">Tools</h3>
+							<div className="grid grid-cols-2 gap-4">
+								{techStack.tools.map((tech, index) => (
+									<motion.div 
+										key={tech.name} 
+										className="tech-item flex items-center gap-3 p-3 rounded-md bg-white/5 hover:bg-white/10 transition-colors"
+										style={{
+											opacity: useTransform(
+												scrollYProgress, 
+												[0.3 + index * 0.01, 0.4 + index * 0.01, 1], 
+												[0, 1, 1]
+											)
+										}}
+									>
+										<span className="text-2xl">{tech.icon}</span>
+										<span className="text-lg font-light">{tech.name}</span>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 const projects = [
 	{
@@ -31,41 +32,93 @@ const projects = [
 ];
 
 export function Projects() {
+	const sectionRef = useRef<HTMLElement>(null);
+	
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start end", "end start"],
+	});
+	
+	// Create scroll-linked animations
+	const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 1], [0, 1, 1]);
+	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
+	
+	// Create a progress circle animation
+	const progressPathLength = scrollYProgress;
+	
 	return (
-		<section id="projects" className="flex items-center justify-center py-20">
+		<section ref={sectionRef} id="projects" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-				<div className="flex items-center gap-4 mb-16">
-					<span className="text-accent text-5xl">*</span>
-					<motion.h2
-						className="text-2xl uppercase"
-						initial={{ y: 50, opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
-						transition={{ duration: 0.6 }}
-						viewport={{ once: false }}
-					>
-						My Projects
-					</motion.h2>
-				</div>
-
-				<div className="space-y-12">
-					{projects.map((project, index) => (
-						<motion.div
-							key={project.title}
-							className="border-b border-white/10 pb-12 last:border-0 group"
-							initial={{ y: 50, opacity: 0 }}
-							whileInView={{ y: 0, opacity: 1 }}
-							transition={{ duration: 0.8, delay: index * 0.2 }}
-							viewport={{ once: false }}
+				<div className="relative">
+					<figure className="sticky top-24 left-0 w-20 h-20 float-left mr-8">
+						<svg width="75" height="75" viewBox="0 0 100 100">
+							<circle
+								cx="50"
+								cy="50"
+								r="30"
+								pathLength="1"
+								className="stroke-primary/20 fill-none stroke-[5px]"
+							/>
+							<motion.circle
+								cx="50"
+								cy="50"
+								r="30"
+								pathLength="1"
+								className="stroke-primary fill-none stroke-[5px]"
+								style={{
+									pathLength: progressPathLength,
+								}}
+							/>
+						</svg>
+					</figure>
+					
+					<div className="flex items-center gap-4 mb-16">
+						<span className="text-accent text-5xl">*</span>
+						<motion.h2
+							className="text-2xl uppercase"
+							style={{
+								opacity: titleOpacity,
+								y: titleY
+							}}
 						>
-							<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-								<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
-									{project.title}
-								</h3>
-								<span className="text-white/60">{project.year}</span>
-							</div>
-							<p className="text-white/80 max-w-2xl">{project.description}</p>
-						</motion.div>
-					))}
+							My Projects
+						</motion.h2>
+					</div>
+
+					<div className="space-y-12">
+						{projects.map((project, index) => {
+							// Create staggered animations for each project item
+							const itemOpacity = useTransform(
+								scrollYProgress, 
+								[0.1 + index * 0.05, 0.2 + index * 0.05, 1], 
+								[0, 1, 1]
+							);
+							const itemY = useTransform(
+								scrollYProgress, 
+								[0.1 + index * 0.05, 0.2 + index * 0.05, 1], 
+								[50, 0, 0]
+							);
+							
+							return (
+								<motion.div
+									key={project.title}
+									className="border-b border-white/10 pb-12 last:border-0 group"
+									style={{
+										opacity: itemOpacity,
+										y: itemY
+									}}
+								>
+									<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+										<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
+											{project.title}
+										</h3>
+										<span className="text-white/60">{project.year}</span>
+									</div>
+									<p className="text-white/80 max-w-2xl">{project.description}</p>
+								</motion.div>
+							);
+						})}
+					</div>
 				</div>
 			</div>
 		</section>
