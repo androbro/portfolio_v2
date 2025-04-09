@@ -1,5 +1,6 @@
 import { animate } from "motion/react";
 import { useCallback, useState } from "react";
+import type { TechStackDataType } from "./TechStackClient";
 
 // Constants
 const SCROLL_OFFSET = 100; // px - Offset from top when scrolling up
@@ -9,8 +10,6 @@ type TechData = {
 	name: string;
 	iconUrl: string;
 }[];
-
-type TechStackDataType = Record<string, TechData>;
 
 interface UseTechStackToggleProps {
 	sectionElement: HTMLElement | null;
