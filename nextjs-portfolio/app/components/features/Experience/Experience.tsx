@@ -55,7 +55,7 @@ export async function Experience() {
 
 			return {
 				company: item.company,
-				position: item.position,
+				role: item.role,
 				period:
 					item.period || `${item.startDate} - ${item.endDate || "Present"}`,
 				description: descriptionText,

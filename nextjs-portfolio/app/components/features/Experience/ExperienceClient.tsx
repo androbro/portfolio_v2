@@ -7,7 +7,7 @@ import { useRef } from "react";
 // Type definition for experience data
 export type ExperienceItem = {
 	company: string;
-	position: string;
+	role: string;
 	period: string;
 	description: string;
 };
@@ -86,7 +86,7 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 								>
 									<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
 										<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
-											{exp.position}
+											{exp.role}
 										</h3>
 										<span className="text-white/60">{exp.period}</span>
 									</div>
