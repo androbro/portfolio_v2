@@ -2,22 +2,42 @@
 
 import { techStackData } from "@/app/assets/content/TechStackData";
 import { AsterixIcon } from "@/app/assets/icons";
-import { motion, useScroll } from "motion/react";
+import { AnimatePresence, animate, motion } from "motion/react";
 import { useRef, useState } from "react";
+
+// --- Constants ---
+const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
+const SCROLL_OFFSET = 100; // px - Offset from top when scrolling up
 
 export function TechStack() {
 	const [showAll, setShowAll] = useState(false);
 	const sectionRef = useRef<HTMLElement>(null);
-	const { scrollY } = useScroll();
+	const buttonRef = useRef<HTMLButtonElement>(null);
+
+	const allCategoryKeys = Object.keys(techStackData);
+	const totalCategoriesCount = allCategoryKeys.length;
+
+	// Simplified scroll animation function
+	const smoothScrollTo = (yPosition: number) => {
+		console.log("smoothScrollTo", yPosition);
+		animate(window.scrollY, yPosition, {
+			duration: 0.5, // Simple, consistent duration
+			ease: "easeIn",
+			onUpdate: (latest) => window.scrollTo(0, latest),
+		});
+	};
 
 	const handleShowToggle = () => {
-		setShowAll(!showAll);
 		if (showAll && sectionRef.current) {
-			// Use smooth scroll with motion
-			window.scrollTo({
-				top: sectionRef.current.offsetTop - 100, // Offset to account for any fixed headers
-				behavior: "smooth",
-			});
+			// --- Show Less ---
+			// Scroll up immediately
+			smoothScrollTo(sectionRef.current.offsetTop - SCROLL_OFFSET);
+			// Then update state to trigger exit animations
+			setShowAll(false);
+		} else {
+			// --- Show More ---
+			// Just update state. Scroll down will be handled by useEffect after render.
+			setShowAll(true);
 		}
 	};
 
@@ -30,9 +50,33 @@ export function TechStack() {
 			color: string;
 			textColor: string;
 		}[],
+		index: number,
 	) => {
 		return (
-			<div key={category} className="mb-20">
+			<motion.div
+				key={category}
+				className="mb-20"
+				initial={{ opacity: 0, y: 50 }}
+				animate={{
+					opacity: 1,
+					y: 0,
+					transition: {
+						duration: 0.5,
+						delay: index * 0.2, // Entry delay remains top-to-bottom
+						ease: "easeOut",
+					},
+				}}
+				exit={{
+					opacity: 0,
+					y: -50,
+					transition: {
+						duration: 0.5,
+						// Reverse the delay calculation for exit
+						delay: (totalCategoriesCount - 1 - index) * 0.15,
+						ease: "easeIn",
+					},
+				}}
+			>
 				<div className="flex flex-col md:flex-row">
 					{/* Text on the left */}
 					<div className="md:w-1/3 mb-8 md:mb-0">
@@ -42,7 +86,7 @@ export function TechStack() {
 					{/* Icons on the right */}
 					<div className="md:w-2/3">
 						<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-							{techs.map((tech, index) => (
+							{techs.map((tech, techIndex) => (
 								<motion.div
 									key={`${category}-${tech.name}`}
 									className="flex flex-row items-center gap-4"
@@ -55,7 +99,7 @@ export function TechStack() {
 										x: 0,
 										transition: {
 											duration: 0.5,
-											delay: index * 0.1,
+											delay: techIndex * 0.1,
 										},
 									}}
 									viewport={{
@@ -76,20 +120,19 @@ export function TechStack() {
 						</div>
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		);
 	};
 
 	// Get visible categories based on showAll state
 	const getVisibleCategories = () => {
-		const defaultCategories = ["frontend", "backend", "database"];
 		const entries = Object.entries(techStackData);
 
 		if (showAll) {
 			return entries;
 		}
-
-		return entries.filter(([category]) => defaultCategories.includes(category));
+		// Use the constant for default categories
+		return entries.filter(([category]) => DEFAULT_VISIBLE_CATEGORIES.includes(category));
 	};
 
 	return (
@@ -117,11 +160,16 @@ export function TechStack() {
 				</div>
 
 				<div className="flex flex-col">
-					{/* Map over visible tech stack categories */}
-					{getVisibleCategories().map(([category, techs]) => renderCategory(category, techs))}
+					{/* Wrap list with AnimatePresence */}
+					<AnimatePresence initial={false}>
+						{getVisibleCategories().map(([category, techs], index) =>
+							renderCategory(category, techs, index),
+						)}
+					</AnimatePresence>
 
 					{/* Show More/Less button */}
 					<motion.button
+						ref={buttonRef}
 						onClick={handleShowToggle}
 						className="self-center mt-8 px-6 py-2 bg-accent text-black font-light hover:bg-white/90 transition-colors"
 						whileHover={{ scale: 1.05 }}
