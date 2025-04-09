@@ -2,9 +2,25 @@
 
 import { techStackData } from "@/app/assets/content/TechStackData";
 import { AsterixIcon } from "@/app/assets/icons";
-import { motion } from "motion/react";
+import { motion, useScroll } from "motion/react";
+import { useRef, useState } from "react";
 
 export function TechStack() {
+	const [showAll, setShowAll] = useState(false);
+	const sectionRef = useRef<HTMLElement>(null);
+	const { scrollY } = useScroll();
+
+	const handleShowToggle = () => {
+		setShowAll(!showAll);
+		if (showAll && sectionRef.current) {
+			// Use smooth scroll with motion
+			window.scrollTo({
+				top: sectionRef.current.offsetTop - 100, // Offset to account for any fixed headers
+				behavior: "smooth",
+			});
+		}
+	};
+
 	// Function to render a category section
 	const renderCategory = (
 		category: string,
@@ -29,7 +45,7 @@ export function TechStack() {
 							{techs.map((tech, index) => (
 								<motion.div
 									key={`${category}-${tech.name}`}
-									className="flex flex-col items-center"
+									className="flex flex-row items-center gap-4"
 									initial={{
 										opacity: 0,
 										x: 50,
@@ -50,11 +66,11 @@ export function TechStack() {
 									}}
 								>
 									<div
-										className={`${tech.color} ${tech.textColor} w-16 h-16 rounded-md flex items-center justify-center mb-2`}
+										className={`${tech.color} ${tech.textColor} w-16 h-16 rounded-md flex items-center justify-center shrink-0`}
 									>
 										<span className="text-3xl">{tech.initials}</span>
 									</div>
-									<span>{tech.name}</span>
+									<span className="text-lg">{tech.name}</span>
 								</motion.div>
 							))}
 						</div>
@@ -64,8 +80,24 @@ export function TechStack() {
 		);
 	};
 
+	// Get visible categories based on showAll state
+	const getVisibleCategories = () => {
+		const defaultCategories = ["frontend", "backend", "database"];
+		const entries = Object.entries(techStackData);
+
+		if (showAll) {
+			return entries;
+		}
+
+		return entries.filter(([category]) => defaultCategories.includes(category));
+	};
+
 	return (
-		<section id="skills" className="flex flex-col items-center justify-center py-20">
+		<section
+			ref={sectionRef}
+			id="skills"
+			className="flex flex-col items-center justify-center py-20"
+		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl w-full">
 				<div className="flex items-center gap-4 mb-16">
 					<motion.div
@@ -85,10 +117,18 @@ export function TechStack() {
 				</div>
 
 				<div className="flex flex-col">
-					{/* Map over tech stack categories */}
-					{Object.entries(techStackData).map(([category, techs]) =>
-						renderCategory(category, techs),
-					)}
+					{/* Map over visible tech stack categories */}
+					{getVisibleCategories().map(([category, techs]) => renderCategory(category, techs))}
+
+					{/* Show More/Less button */}
+					<motion.button
+						onClick={handleShowToggle}
+						className="self-center mt-8 px-6 py-2 bg-accent text-black font-light hover:bg-white/90 transition-colors"
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+					>
+						{showAll ? "Show Less" : "Show More"}
+					</motion.button>
 				</div>
 			</div>
 		</section>
