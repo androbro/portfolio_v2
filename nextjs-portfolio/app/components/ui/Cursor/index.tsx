@@ -19,7 +19,7 @@ export function Cursor() {
 			boxShadow: "0 0 1px 0px var(--accent) inset, 0 0 1px 0px var(--accent)",
 			scale: 1,
 			borderRadius: "50%",
-			backgroundColor: "transparent",
+			backgroundColor: "rgba(255, 255, 255, 0)",
 			transition: {
 				duration: 0.2,
 			},
@@ -28,7 +28,7 @@ export function Cursor() {
 		cursorLeave: {
 			scale: 0,
 			border: 0,
-			backgroundColor: "transparent",
+			backgroundColor: "rgba(255, 255, 255, 0)",
 			transition: {
 				duration: 0.2,
 			},

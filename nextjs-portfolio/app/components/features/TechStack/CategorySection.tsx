@@ -3,7 +3,7 @@
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { client } from "../../../sanity/client";
 
 type Tech = {
@@ -29,37 +29,6 @@ export function CategorySection({ visibleCategories }: CategorySectionProps) {
 		() => visibleCategories.length,
 		[visibleCategories],
 	);
-
-	// Log all icon URLs when component mounts
-	useEffect(() => {
-		console.log("=== Tech Stack Icon URLs ===");
-		for (const [category, techs] of visibleCategories) {
-			console.log(`Category: ${category}`);
-			for (const tech of techs) {
-				const originalUrl =
-					tech.iconUrl || (tech.icon ? "Sanity Image" : "undefined");
-
-				let processedUrl: string | undefined;
-				if (tech.iconUrl) {
-					if (tech.iconUrl.startsWith("http")) {
-						processedUrl = tech.iconUrl;
-					} else if (tech.iconUrl.includes(".svg")) {
-						processedUrl = tech.iconUrl.startsWith("/icons/")
-							? tech.iconUrl
-							: `/icons/${tech.iconUrl.replace("icons/", "")}`;
-					} else {
-						processedUrl = `/icons/${tech.iconUrl.replace("icons/", "")}.svg`;
-					}
-				} else if (tech.icon) {
-					processedUrl = urlFor(tech.icon)?.width(64).height(64).url();
-				} else {
-					processedUrl = "undefined";
-				}
-
-				console.log(`${tech.name}: ${originalUrl} -> ${processedUrl}`);
-			}
-		}
-	}, [visibleCategories]);
 
 	// Function to render a category section
 	const renderCategory = (category: string, techs: Tech[], index: number) => {
