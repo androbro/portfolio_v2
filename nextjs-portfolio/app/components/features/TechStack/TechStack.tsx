@@ -1,16 +1,65 @@
 "use client";
 
-import { techStackData } from "@/app/assets/content/TechStackData";
 import { AsterixIcon } from "@/app/assets/icons";
+import { client } from "@/app/sanity/client";
 import { motion } from "motion/react";
+import type { SanityDocument } from "next-sanity";
 import { useEffect, useRef, useState } from "react";
 import { CategorySection } from "./CategorySection";
 import { useTechStackToggle } from "./useTechStackToggle";
 
-// Moved constants to component file
 const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
 
-export function TechStack() {
+const TECHSTACK_QUERY = `*[_type == "techStack"]`;
+const options = { next: { revalidate: 30 } };
+
+// Type for the transformed tech stack data
+type TechStackDataType = Record<string, { name: string; iconUrl: string }[]>;
+
+export async function TechStack() {
+	const techStackItems = await client.fetch<SanityDocument[]>(
+		TECHSTACK_QUERY,
+		{},
+		options,
+	);
+
+	// Transform Sanity data to match the expected format
+	const transformedTechStack: TechStackDataType = {};
+
+	// Process the Sanity data into the required format
+	for (const item of techStackItems) {
+		// Make sure the category exists in our object
+		if (!transformedTechStack[item.category]) {
+			transformedTechStack[item.category] = [];
+		}
+
+		// Add the tech item to the appropriate category
+		transformedTechStack[item.category].push({
+			name: item.name,
+			iconUrl: item.iconUrl || `/icons/${item.name.toLowerCase()}.svg`, // Fallback
+		});
+	}
+
+	// Get all category names from the transformed data
+	const allCategories = Object.keys(transformedTechStack);
+
+	// Client-side component
+	return (
+		<TechStackClient
+			techStackData={transformedTechStack}
+			allCategories={allCategories}
+		/>
+	);
+}
+
+// Client-side component to handle interactive elements
+function TechStackClient({
+	techStackData,
+	allCategories,
+}: {
+	techStackData: TechStackDataType;
+	allCategories: string[];
+}) {
 	const sectionRef = useRef<HTMLElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const [sectionElement, setSectionElement] = useState<HTMLElement | null>(
@@ -26,7 +75,8 @@ export function TechStack() {
 		useTechStackToggle({
 			sectionElement,
 			defaultCategories: DEFAULT_VISIBLE_CATEGORIES,
-			allCategories: Object.keys(techStackData),
+			allCategories,
+			techStackData,
 		});
 
 	return (

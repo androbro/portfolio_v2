@@ -1,16 +1,10 @@
-import { techStackData } from "@/app/assets/content/TechStackData";
 import { animate } from "motion/react";
 import { useCallback, useState } from "react";
 
 // Constants
 const SCROLL_OFFSET = 100; // px - Offset from top when scrolling up
 
-interface UseTechStackToggleProps {
-	sectionElement: HTMLElement | null;
-	defaultCategories: string[];
-	allCategories: string[];
-}
-
+// Types
 type TechData = {
 	name: string;
 	iconUrl: string;
@@ -18,10 +12,18 @@ type TechData = {
 
 type TechStackDataType = Record<string, TechData>;
 
+interface UseTechStackToggleProps {
+	sectionElement: HTMLElement | null;
+	defaultCategories: string[];
+	allCategories: string[];
+	techStackData: TechStackDataType;
+}
+
 export function useTechStackToggle({
 	sectionElement,
 	defaultCategories,
 	allCategories,
+	techStackData,
 }: UseTechStackToggleProps) {
 	const [showAll, setShowAll] = useState(false);
 
@@ -57,7 +59,7 @@ export function useTechStackToggle({
 		}
 		// Use the constant for default categories
 		return entries.filter(([category]) => defaultCategories.includes(category));
-	}, [showAll, defaultCategories]);
+	}, [showAll, defaultCategories, techStackData]);
 
 	return {
 		showAll,
