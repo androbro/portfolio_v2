@@ -1,3 +1,5 @@
-import { postType } from './postType'
+import { techStackType } from './techstackType'
+import { projectType } from './projectType'
+import { workExperienceType } from './workExperienceType'
 
-export const schemaTypes = [postType]
+export const schemaTypes = [techStackType, projectType, workExperienceType]

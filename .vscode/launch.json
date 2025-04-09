@@ -23,6 +23,13 @@
 				"uriFormat": "%s",
 				"action": "debugWithChrome"
 			}
+		},
+		{
+			"name": "Combined: Sanity + Next.js",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run dev:all",
+			"cwd": "${workspaceFolder}"
 		}
 	]
 }
