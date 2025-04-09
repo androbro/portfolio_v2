@@ -46,9 +46,7 @@ export function TechStack() {
 		category: string,
 		techs: {
 			name: string;
-			initials: string;
-			color: string;
-			textColor: string;
+			iconUrl: string;
 		}[],
 		index: number,
 	) => {
@@ -109,11 +107,11 @@ export function TechStack() {
 										scale: 1.05,
 									}}
 								>
-									<div
-										className={`${tech.color} ${tech.textColor} w-16 h-16 rounded-md flex items-center justify-center shrink-0`}
-									>
-										<span className="text-3xl">{tech.initials}</span>
-									</div>
+									<img
+										src={tech.iconUrl}
+										alt={`${tech.name} logo`}
+										className="w-16 h-16 object-contain shrink-0"
+									/>
 									<span className="text-lg">{tech.name}</span>
 								</motion.div>
 							))}
