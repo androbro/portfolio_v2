@@ -16,6 +16,40 @@ interface ExperienceClientProps {
 	experiences: ExperienceItem[];
 }
 
+// Format date from "YYYY-MM-DD" to "Month YYYY"
+function formatPeriod(period: string): string {
+	// Check if the period string follows the expected format
+	const dateRangePattern = /(\d{4}-\d{2}-\d{2})\s*-\s*(\d{4}-\d{2}-\d{2})/;
+	const match = period.match(dateRangePattern);
+
+	if (!match) return period; // Return original if not matching expected format
+
+	const [_, startDate, endDate] = match;
+
+	const formatDate = (dateStr: string) => {
+		const date = new Date(dateStr);
+		const monthNames = [
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December",
+		];
+		const month = monthNames[date.getMonth()];
+		const year = date.getFullYear();
+		return `${month} ${year}`;
+	};
+
+	return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+}
+
 export function ExperienceClient({ experiences }: ExperienceClientProps) {
 	const sectionRef = useRef<HTMLElement>(null);
 
@@ -88,7 +122,9 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 										<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
 											{exp.role}
 										</h3>
-										<span className="text-white/60">{exp.period}</span>
+										<span className="text-white/60">
+											{formatPeriod(exp.period)}
+										</span>
 									</div>
 									<span className="text-xl text-white/80 mb-4 block">
 										{exp.company}
