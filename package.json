@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
+		"dev": "npm run dev:all",
 		"dev:next": "cd nextjs-portfolio && npm run dev",
 		"dev:sanity": "cd studio-portfolio && npm run dev",
 		"dev:all": "concurrently \"npm run dev:next\" \"npm run dev:sanity\"",
