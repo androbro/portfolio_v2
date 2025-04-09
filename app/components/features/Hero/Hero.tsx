@@ -11,23 +11,25 @@ import { useEffect, useRef, useState } from "react";
  */
 const calculateWorkingHours = (): number => {
 	// Start date: July 1, 2022
-	const startDate = new Date(2022, 6, 1);
+	const startDate = new Date(2020, 11, 20);
 	const currentDate = new Date();
-	
+
 	// Calculate total days between dates
-	const totalDays = Math.floor((currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-	
+	const totalDays = Math.floor(
+		(currentDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
+	);
+
 	// Calculate number of weeks
 	const totalWeeks = Math.floor(totalDays / 7);
-	
+
 	// Calculate weekdays (5 per week) plus remaining weekdays
 	const weekdaysFromCompleteWeeks = totalWeeks * 5;
-	
+
 	// Calculate remaining days
-	let remainingDays = totalDays % 7;
+	const remainingDays = totalDays % 7;
 	let startDayOfWeek = startDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
 	if (startDayOfWeek === 0) startDayOfWeek = 7; // Adjust Sunday to be 7
-	
+
 	// Count remaining weekdays
 	let extraWeekdays = 0;
 	for (let i = 0; i < remainingDays; i++) {
@@ -37,32 +39,33 @@ const calculateWorkingHours = (): number => {
 			extraWeekdays++;
 		}
 	}
-	
+
 	// Total weekdays
 	const totalWeekdays = weekdaysFromCompleteWeeks + extraWeekdays;
-	
+
 	// Subtract vacation days (32 days per year)
 	const yearsWorked = Math.floor(totalDays / 365);
 	const remainingDaysInYear = totalDays % 365;
-	
+
 	// Prorated vacation days
-	const vacationDays = (yearsWorked * 32) + Math.floor((remainingDaysInYear / 365) * 32);
-	
+	const vacationDays = yearsWorked * 32 + Math.floor((remainingDaysInYear / 365) * 32);
+
 	// Final working days
 	const workingDays = totalWeekdays - vacationDays;
-	
+
 	// Hours worked (8 hours per day)
 	const hoursWorked = workingDays * 8;
-	
+
 	// Add current day hours if it's a weekday and during working hours
 	if (currentDate.getDay() >= 1 && currentDate.getDay() <= 5) {
 		const currentHour = currentDate.getHours();
-		if (currentHour >= 9 && currentHour < 17) { // 9 AM to 5 PM
+		if (currentHour >= 9 && currentHour < 17) {
+			// 9 AM to 5 PM
 			const extraHours = currentHour - 9;
 			return hoursWorked + extraHours;
 		}
 	}
-	
+
 	return hoursWorked;
 };
 
@@ -84,13 +87,13 @@ export function Hero() {
 				paragraphRef.current,
 				{ y: 20, opacity: 0 },
 				{ y: 0, opacity: 1, duration: 0.8 },
-				"-=0.4"
+				"-=0.4",
 			)
 			.fromTo(
 				[experienceRef.current, projectsRef.current, hoursRef.current],
 				{ y: 30, opacity: 0 },
 				{ y: 0, opacity: 1, duration: 0.8, stagger: 0.1 },
-				"-=0.3"
+				"-=0.3",
 			);
 	}, []);
 
@@ -120,7 +123,8 @@ export function Hero() {
 						ref={paragraphRef}
 						className="text-lg md:text-lg max-w-3xl mb-8 text-white/70 font-thin"
 					>
-						Hi! I'm Koen De Vulder. Aspiring Frontend Composer | Crafting Harmony with React | Fueling Curiosity with Coffee.
+						Hi! I'm Koen De Vulder. Aspiring Frontend Composer | Crafting Harmony with React |
+						Fueling Curiosity with Coffee.
 					</p>
 					<motion.a
 						href="#contact"
@@ -128,13 +132,13 @@ export function Hero() {
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.6 }}
-						whileHover={{ 
+						whileHover={{
 							backgroundColor: "rgba(220, 220, 220, 1)",
-							scale: 1.05
+							scale: 1.05,
 						}}
-						whileTap={{ 
+						whileTap={{
 							backgroundColor: "rgba(255, 255, 255, 1)",
-							scale: 0.98
+							scale: 0.98,
 						}}
 					>
 						CONTACT ME
@@ -147,15 +151,14 @@ export function Hero() {
 							<span className="text-sm text-white/60">Years of Experience</span>
 						</div>
 						<div ref={projectsRef} className="flex flex-col">
-							<span className="text-3xl md:text-4xl text-accent font-light">10+</span>
+							<span className="text-3xl md:text-4xl text-accent font-light">7+</span>
 							<span className="text-sm text-white/60">Completed Projects</span>
 						</div>
 						<div ref={hoursRef} className="flex flex-col">
-							<motion.div
-								className="relative group"
-								whileHover={{ scale: 1.05 }}
-							>
-								<span className="text-3xl md:text-4xl text-accent font-light">{workHours.toLocaleString()}+</span>
+							<motion.div className="relative group" whileHover={{ scale: 1.05 }}>
+								<span className="text-3xl md:text-4xl text-accent font-light">
+									{workHours.toLocaleString("en-US")}+
+								</span>
 								<div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bottom-full right-0 mb-2 p-2 bg-black/80 text-white text-xs rounded w-48">
 									<p className="font-light">Based on:</p>
 									<ul className="text-left list-disc pl-4 mt-1 space-y-1">
