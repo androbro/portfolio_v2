@@ -54,10 +54,44 @@ export function useTechStackToggle({
 		const entries = Object.entries(techStackData) as [string, TechData][];
 
 		if (showAll) {
-			return entries;
+			// Define a preferred category order
+			const preferredOrder = [
+				"frontend",
+				"backend",
+				"database",
+				"devops-tools",
+				"other",
+				"mobile",
+			];
+
+			// Sort entries based on the preferred order
+			return entries.sort(([catA], [catB]) => {
+				const indexA = preferredOrder.indexOf(catA);
+				const indexB = preferredOrder.indexOf(catB);
+
+				// If both categories are in preferredOrder, sort by their position
+				if (indexA !== -1 && indexB !== -1) {
+					return indexA - indexB;
+				}
+
+				// If only catA is in preferredOrder, it comes first
+				if (indexA !== -1) return -1;
+
+				// If only catB is in preferredOrder, it comes first
+				if (indexB !== -1) return 1;
+
+				// If neither is in preferredOrder, maintain alphabetical order
+				return catA.localeCompare(catB);
+			});
 		}
-		// Use the constant for default categories
-		return entries.filter(([category]) => defaultCategories.includes(category));
+
+		// Use the constant for default categories, maintaining their order
+		return defaultCategories
+			.filter((category) => techStackData[category])
+			.map((category) => [category, techStackData[category]]) as [
+			string,
+			TechData,
+		][];
 	}, [showAll, defaultCategories, techStackData]);
 
 	return {
