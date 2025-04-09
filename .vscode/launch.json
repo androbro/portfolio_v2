@@ -30,6 +30,20 @@
 			"request": "launch",
 			"command": "npm run dev:all",
 			"cwd": "${workspaceFolder}"
+		},
+		{
+			"name": "deploy sanity (from studio)",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run deploy",
+			"cwd": "${workspaceFolder}/studio-portfolio"
+		},
+		{
+			"name": "deploy sanity (from root)",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm run deploy:sanity",
+			"cwd": "${workspaceFolder}"
 		}
 	]
 }
