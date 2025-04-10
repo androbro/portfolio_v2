@@ -16,5 +16,18 @@ export const initSmoothScroll = () => {
 
 	requestAnimationFrame(raf);
 
+	// Handle Next.js navigation events
+	if (typeof window !== "undefined") {
+		// Reset scroll on route change start
+		window.addEventListener("beforeunload", () => {
+			lenis.scrollTo(0, { immediate: true });
+		});
+
+		// Reset scroll on route change complete
+		window.addEventListener("load", () => {
+			lenis.scrollTo(0, { immediate: true });
+		});
+	}
+
 	return lenis;
 };
