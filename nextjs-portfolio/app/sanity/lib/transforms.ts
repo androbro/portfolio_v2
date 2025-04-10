@@ -24,6 +24,7 @@ interface PortableTextBlock {
 export interface SanityProject extends SanityDocument {
 	title: string;
 	description: string | PortableTextBlock[];
+	fullDescription?: PortableTextBlock[];
 	publishedYear?: string;
 	image?: SanityImageSource;
 	url?: string;
@@ -32,23 +33,41 @@ export interface SanityProject extends SanityDocument {
 	slug?: {
 		current: string;
 	};
+	projectScreenshots?: Array<{
+		url: string;
+		alt?: string;
+		caption?: string;
+	}>;
+	features?: string[];
+	challenges?: Array<{
+		challenge: string;
+		solution: string;
+	}>;
+	duration?: string;
 }
 
 // Output structure expected by ProjectsClient
 export interface ProjectItem {
 	title: string;
 	description: string;
-	fullDescription: string;
+	fullDescription: PortableTextBlock[] | string;
 	year: string;
 	image?: string;
 	url?: string;
 	repositoryUrl?: string;
 	tags: string[];
 	slug?: string;
-	projectScreenshots?: string[];
-	features: string[];
-	challenges: string[];
-	solutions: string[];
+	projectScreenshots?: Array<{
+		url: string;
+		alt?: string;
+		caption?: string;
+	}>;
+	features?: string[];
+	challenges?: Array<{
+		challenge: string;
+		solution: string;
+	}>;
+	duration?: string;
 }
 
 // Input structure from Sanity for tech stack items
@@ -103,11 +122,12 @@ export function transformSanityProjects(
 			repositoryUrl: item.repositoryUrl,
 			tags: Array.isArray(item.tags) ? item.tags : [],
 			slug: item.slug?.current,
-			projectScreenshots: item.projectScreenshots,
-			features: item.features,
-			challenges: item.challenges,
-			solutions: item.solutions,
-			fullDescription: descriptionText,
+			projectScreenshots: item.projectScreenshots || [],
+			features: item.features || [],
+			challenges: item.challenges || [],
+			duration: item.duration,
+			// Keep fullDescription as the portable text array for rich text rendering
+			fullDescription: item.fullDescription || descriptionText,
 		};
 	});
 }

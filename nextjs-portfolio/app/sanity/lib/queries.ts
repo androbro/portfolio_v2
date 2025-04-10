@@ -12,7 +12,16 @@ export const allProjectsQueryDetailed = defineQuery(/* groq */ `
 export const projectBySlugQuery = defineQuery(/* groq */ `
   *[_type == "project" && slug.current == $slug][0] {
     ...,
-    "tags": tags[]->name
+    "tags": tags[]->name,
+    fullDescription,
+    "projectScreenshots": projectScreenshots[] {
+      "url": asset->url,
+      "alt": alt,
+      "caption": caption
+    },
+    features,
+    challenges,
+    duration
   }
 `);
 
