@@ -1,19 +1,21 @@
 "use client";
 
 import { AsterixIcon } from "@/app/assets/icons";
+import type { ProjectItem } from "@/app/sanity/lib/transforms"; // Use the centralized type
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { ProjectItemCard } from "./ProjectItemCard"; // Import the new component
 
-// Type definition for project data
-export type ProjectItem = {
-	title: string;
-	description: string;
-	year: string;
-	image?: string;
-	url?: string;
-	repositoryUrl?: string;
-	tags?: string[];
-};
+// Type definition for project data is removed, using imported type
+// export type ProjectItem = {
+// 	title: string;
+// 	description: string;
+// 	year: string;
+// 	image?: string;
+// 	url?: string;
+// 	repositoryUrl?: string;
+// 	tags?: string[];
+// };
 
 interface ProjectsClientProps {
 	projects: ProjectItem[];
@@ -27,12 +29,11 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 		offset: ["start end", "end start"],
 	});
 
-	// Create scroll-linked animations
-	const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 1], [0, 1, 1]);
-	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
+	// Create scroll-linked animations for the section title
+	const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]); // Simplified range
+	const titleY = useTransform(scrollYProgress, [0, 0.1], [50, 0]); // Simplified range
 
-	// Create a progress circle animation
-	const progressPathLength = scrollYProgress;
+	// Removed individual item animation logic (itemOpacity, itemY)
 
 	return (
 		<section
@@ -42,12 +43,12 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
+					{/* Section Header */}
 					<div className="flex items-center gap-4 mb-16">
+						{/* Asterix Icon */}
 						<motion.div
 							className="text-accent"
-							animate={{
-								rotate: 360,
-							}}
+							animate={{ rotate: 360 }}
 							transition={{
 								duration: 6,
 								repeat: Number.POSITIVE_INFINITY,
@@ -56,6 +57,7 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 						>
 							<AsterixIcon className="w-8 h-8" />
 						</motion.div>
+						{/* Section Title */}
 						<motion.h2
 							className="text-2xl uppercase"
 							style={{
@@ -67,81 +69,18 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 						</motion.h2>
 					</div>
 
+					{/* Project List */}
 					<div className="space-y-12">
-						{projects.map((project, index) => {
-							// Create staggered animations for each project item
-							const itemOpacity = useTransform(
-								scrollYProgress,
-								[0.1 + index * 0.05, 0.2 + index * 0.05, 1],
-								[0, 1, 1],
-							);
-							const itemY = useTransform(
-								scrollYProgress,
-								[0.1 + index * 0.05, 0.2 + index * 0.05, 1],
-								[50, 0, 0],
-							);
-
-							return (
-								<motion.div
-									key={project.title}
-									className="border-b border-white/10 pb-12 last:border-0 group"
-									style={{
-										opacity: itemOpacity,
-										y: itemY,
-									}}
-								>
-									<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-										<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
-											{project.title}
-										</h3>
-										<span className="text-white/60">{project.year}</span>
-									</div>
-									<p className="text-white/80 max-w-2xl">
-										{project.description}
-									</p>
-
-									{/* Display tags if available */}
-									{project.tags && project.tags.length > 0 && (
-										<div className="flex flex-wrap gap-2 mt-3">
-											{project.tags.map((tag) => (
-												<span
-													key={tag}
-													className="px-2 py-1 text-xs bg-white/10 rounded-md"
-												>
-													{tag}
-												</span>
-											))}
-										</div>
-									)}
-
-									{/* Display project links if available */}
-									{(project.url || project.repositoryUrl) && (
-										<div className="flex gap-4 mt-4">
-											{project.url && (
-												<a
-													href={project.url}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="text-accent hover:underline"
-												>
-													View Project
-												</a>
-											)}
-											{project.repositoryUrl && (
-												<a
-													href={project.repositoryUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="text-white/70 hover:text-white hover:underline"
-												>
-													Source Code
-												</a>
-											)}
-										</div>
-									)}
-								</motion.div>
-							);
-						})}
+						{projects.map((project, index) => (
+							// Render the extracted component
+							<ProjectItemCard
+								key={project.title} // Key is still needed here for map
+								project={project}
+								index={index}
+								scrollYProgress={scrollYProgress} // Pass down scroll progress
+							/>
+							// Removed the large block of JSX that is now in ProjectItemCard
+						))}
 					</div>
 				</div>
 			</div>
