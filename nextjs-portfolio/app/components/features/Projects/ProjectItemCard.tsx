@@ -3,7 +3,8 @@
 import type { ProjectItem } from "@/app/sanity/lib/transforms"; // Import the shared ProjectItem type
 import { type MotionValue, motion, useTransform } from "motion/react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface ProjectItemCardProps {
 	project: ProjectItem;
@@ -16,6 +17,9 @@ export function ProjectItemCard({
 	index,
 	scrollYProgress,
 }: ProjectItemCardProps) {
+	const router = useRouter();
+	const [isNavigating, setIsNavigating] = useState(false);
+
 	// Create staggered animations for each project item based on index and scroll progress
 	const itemOpacity = useTransform(
 		scrollYProgress,
@@ -32,6 +36,13 @@ export function ProjectItemCard({
 	// Use the slug from the project data if available, otherwise generate it from the title
 	const slug = project.slug || project.title.toLowerCase().replace(/\s+/g, "-");
 
+	// Handle navigation with loading state
+	const handleNavigate = (e: React.MouseEvent | React.KeyboardEvent) => {
+		e.preventDefault();
+		setIsNavigating(true);
+		router.push(`/projects/${slug}`);
+	};
+
 	return (
 		<motion.div
 			key={project.title}
@@ -41,7 +52,12 @@ export function ProjectItemCard({
 				y: itemY,
 			}}
 		>
-			<Link href={`/projects/${slug}`} className="block">
+			<button
+				type="button"
+				onClick={handleNavigate}
+				onKeyDown={handleNavigate}
+				className="block cursor-pointer w-full text-left border-0 bg-transparent p-0"
+			>
 				<div className="flex flex-col md:flex-row">
 					{/* Project Image */}
 					<div className="relative w-full md:w-1/3 h-48 md:h-auto">
@@ -98,7 +114,7 @@ export function ProjectItemCard({
 						</div>
 					</div>
 				</div>
-			</Link>
+			</button>
 		</motion.div>
 	);
 }
