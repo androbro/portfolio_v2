@@ -12,7 +12,7 @@ export function SectionTitle({ title }: { title: string }) {
 	const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 1], [0, 1, 1]);
 	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
 	return (
-		<div className="flex items-center gap-4 mb-16">
+		<div className="flex items-center gap-4 mb-12">
 			<motion.div
 				className="text-accent"
 				animate={{

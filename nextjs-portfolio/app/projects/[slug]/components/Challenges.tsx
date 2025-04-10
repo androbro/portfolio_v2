@@ -9,7 +9,7 @@ export function Challenges({
 
 	return (
 		<div className="mt-12">
-			<SectionTitle title="Challenges & Solutions" />
+			<SectionTitle title="Challenges" />
 			<div className="space-y-8">
 				{challenges.map((item, index) => (
 					<motion.div
