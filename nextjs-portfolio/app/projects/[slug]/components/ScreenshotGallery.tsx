@@ -10,7 +10,7 @@ export function ScreenshotGallery({
 	if (!screenshots || screenshots.length === 0) return null;
 
 	return (
-		<section className="mt-12">
+		<div className="mt-12">
 			<h2 className="text-2xl font-medium mb-6">Project Screenshots</h2>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				{screenshots.map((screenshot, index) => (
@@ -36,6 +36,6 @@ export function ScreenshotGallery({
 					</motion.div>
 				))}
 			</div>
-		</section>
+		</div>
 	);
 }

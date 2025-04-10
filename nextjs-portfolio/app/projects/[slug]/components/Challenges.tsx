@@ -7,7 +7,7 @@ export function Challenges({
 	if (!challenges || challenges.length === 0) return null;
 
 	return (
-		<section className="mt-12">
+		<div className="mt-12">
 			<h2 className="text-2xl font-medium mb-6">Challenges & Solutions</h2>
 			<div className="space-y-8">
 				{challenges.map((item, index) => (
@@ -26,6 +26,6 @@ export function Challenges({
 					</motion.div>
 				))}
 			</div>
-		</section>
+		</div>
 	);
 }
