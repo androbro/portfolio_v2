@@ -6,9 +6,6 @@ import {
 import type { SanityDocument } from "next-sanity";
 import { HeroClient } from "./HeroClient";
 
-// Queries and options for Sanity
-// const PROJECTS_QUERY = `*[_type == "project"] | order(publishedAt desc)`; // Remove local query
-// const EXPERIENCE_QUERY = `*[_type == "workExperience"] | order(startDate desc)`; // Remove local query
 const options = { next: { revalidate: 30 } };
 
 export async function Hero() {
