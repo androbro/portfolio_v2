@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { Suspense } from "react";
 import { Navbar } from "./components/layout/Navbar";
 import { BackgroundStars } from "./components/ui/BackgroundStars";
 import { Cursor } from "./components/ui/Cursor";
 import { CursorContextProvider } from "./components/ui/Cursor/CursorContext";
+import { LoadingScreen } from "./components/ui/LoadingScreen";
 import { SmoothScroller } from "./components/ui/SmoothScroller";
 import "./globals.css";
+import RootLoading from "./loading";
 
 const roboto = Roboto({
 	weight: ["100", "300", "400", "500", "700"],
@@ -32,9 +35,12 @@ export default function RootLayout({
 					<Cursor />
 					<SmoothScroller>
 						<Navbar />
-						{children}
+						<Suspense fallback={<RootLoading />}>
+							{children}
+						</Suspense>
 					</SmoothScroller>
 				</CursorContextProvider>
+				<LoadingScreen />
 			</body>
 		</html>
 	);
