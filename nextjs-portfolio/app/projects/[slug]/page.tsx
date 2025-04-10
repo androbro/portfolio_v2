@@ -5,20 +5,21 @@ import {
 	type SanityProject,
 	transformSanityProjects,
 } from "@/app/sanity/lib/transforms";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-// Updated interface to match Next.js 15's expected type structure
-type ProjectPageProps = {
-	params: {
+type Props = {
+	params: Promise<{
 		slug: string;
-	};
-	searchParams?: Record<string, string | string[] | undefined>;
+	}>;
+	searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export async function generateMetadata({ params }: ProjectPageProps) {
-	const project = await getProject(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const resolvedParams = await params;
+	const project = await getProject(resolvedParams.slug);
 
 	if (!project) {
 		return {
@@ -34,7 +35,6 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 
 async function getProject(slug: string): Promise<ProjectItem | null> {
 	try {
-		// Fetch only the specific project by slug
 		const project = await client.fetch<SanityProject | null>(
 			projectBySlugQuery,
 			{ slug },
@@ -45,7 +45,6 @@ async function getProject(slug: string): Promise<ProjectItem | null> {
 			return null;
 		}
 
-		// Transform the single project
 		const [transformedProject] = transformSanityProjects([project]);
 		return transformedProject;
 	} catch (error) {
@@ -54,8 +53,9 @@ async function getProject(slug: string): Promise<ProjectItem | null> {
 	}
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-	const project = await getProject(params.slug);
+export default async function ProjectPage({ params }: Props) {
+	const resolvedParams = await params;
+	const project = await getProject(resolvedParams.slug);
 
 	if (!project) {
 		notFound();
