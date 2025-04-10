@@ -9,14 +9,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-interface ProjectPageProps {
-	params: {
+// Updated interface to match Next.js 15's expected type structure
+type ProjectPageProps = {
+	params: Promise<{
 		slug: string;
-	};
-}
+	}>;
+	searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
 
 export async function generateMetadata({ params }: ProjectPageProps) {
-	const project = await getProject(params.slug);
+	const resolvedParams = await params;
+	const project = await getProject(resolvedParams.slug);
 
 	if (!project) {
 		return {
@@ -53,7 +56,8 @@ async function getProject(slug: string): Promise<ProjectItem | null> {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-	const project = await getProject(params.slug);
+	const resolvedParams = await params;
+	const project = await getProject(resolvedParams.slug);
 
 	if (!project) {
 		notFound();
