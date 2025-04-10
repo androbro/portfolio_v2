@@ -1,8 +1,8 @@
 "use client";
 
-import { AsterixIcon } from "@/app/assets/icons";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { SectionTitle } from "../common/SectionTitle";
 
 // Type definition for experience data
 export type ExperienceItem = {
@@ -70,31 +70,7 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
-					<div className="flex items-center gap-4 mb-16">
-						<motion.div
-							className="text-accent"
-							animate={{
-								rotate: 360,
-							}}
-							transition={{
-								duration: 6,
-								repeat: Number.POSITIVE_INFINITY,
-								ease: "linear",
-							}}
-						>
-							<AsterixIcon className="w-8 h-8" />
-						</motion.div>
-						<motion.h2
-							className="text-2xl uppercase"
-							style={{
-								opacity: titleOpacity,
-								y: titleY,
-							}}
-						>
-							Work Experience
-						</motion.h2>
-					</div>
-
+					<SectionTitle title="Work Experience" />
 					<div className="space-y-12">
 						{experiences.map((exp, index) => {
 							// Create staggered animations for each experience item

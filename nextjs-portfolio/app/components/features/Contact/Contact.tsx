@@ -1,24 +1,12 @@
 "use client";
 
 import { motion } from "motion/react";
-
+import { SectionTitle } from "../common/SectionTitle";
 export function Contact() {
 	return (
 		<section id="contact" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-				<div className="flex items-center gap-4 mb-16">
-					<span className="text-accent text-5xl">*</span>
-					<motion.h2
-						className="text-2xl uppercase"
-						initial={{ y: 50, opacity: 0 }}
-						whileInView={{ y: 0, opacity: 1 }}
-						transition={{ duration: 0.6 }}
-						viewport={{ once: false }}
-					>
-						Get In Touch
-					</motion.h2>
-				</div>
-
+				<SectionTitle title="Get In Touch" />
 				<motion.div
 					className="mb-12"
 					initial={{ y: 30, opacity: 0 }}

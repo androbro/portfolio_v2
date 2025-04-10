@@ -1,21 +1,10 @@
 "use client";
 
-import { AsterixIcon } from "@/app/assets/icons";
-import type { ProjectItem } from "@/app/sanity/lib/transforms"; // Use the centralized type
-import { motion, useScroll, useTransform } from "motion/react";
+import type { ProjectItem } from "@/app/sanity/lib/transforms";
+import { useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ProjectItemCard } from "./ProjectItemCard"; // Import the new component
-
-// Type definition for project data is removed, using imported type
-// export type ProjectItem = {
-// 	title: string;
-// 	description: string;
-// 	year: string;
-// 	image?: string;
-// 	url?: string;
-// 	repositoryUrl?: string;
-// 	tags?: string[];
-// };
+import { SectionTitle } from "../common/SectionTitle";
+import { ProjectItemCard } from "./ProjectItemCard";
 
 interface ProjectsClientProps {
 	projects: ProjectItem[];
@@ -43,31 +32,7 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
-					{/* Section Header */}
-					<div className="flex items-center gap-4 mb-16">
-						{/* Asterix Icon */}
-						<motion.div
-							className="text-accent"
-							animate={{ rotate: 360 }}
-							transition={{
-								duration: 6,
-								repeat: Number.POSITIVE_INFINITY,
-								ease: "linear",
-							}}
-						>
-							<AsterixIcon className="w-8 h-8" />
-						</motion.div>
-						{/* Section Title */}
-						<motion.h2
-							className="text-2xl uppercase"
-							style={{
-								opacity: titleOpacity,
-								y: titleY,
-							}}
-						>
-							My Projects
-						</motion.h2>
-					</div>
+					<SectionTitle title="My Projects" />
 
 					{/* Project Grid */}
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">

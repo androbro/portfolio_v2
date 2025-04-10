@@ -1,11 +1,10 @@
 "use client";
 
-import { AsterixIcon } from "@/app/assets/icons";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { SectionTitle } from "../common/SectionTitle";
 import { CategorySection } from "./CategorySection";
 import { useTechStackToggle } from "./useTechStackToggle";
-
 // Constants
 const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
 
@@ -50,22 +49,7 @@ export function TechStackClient({
 			className="flex flex-col items-center justify-center py-20"
 		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl w-full">
-				<div className="flex items-center gap-4 mb-16">
-					<motion.div
-						className="text-accent"
-						animate={{
-							rotate: 360,
-						}}
-						transition={{
-							duration: 6,
-							repeat: Number.POSITIVE_INFINITY,
-							ease: "linear",
-						}}
-					>
-						<AsterixIcon className="w-8 h-8" />
-					</motion.div>
-					<h2 className="text-2xl uppercase">My Stack</h2>
-				</div>
+				<SectionTitle title="My Stack" />
 
 				<div className="flex flex-col">
 					{/* CategorySection handles the animation and rendering */}
