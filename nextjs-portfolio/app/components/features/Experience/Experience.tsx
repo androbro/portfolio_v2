@@ -1,9 +1,10 @@
 import { client } from "@/app/sanity/client";
+import { allExperienceQuery } from "@/app/sanity/lib/queries";
 import type { SanityDocument } from "next-sanity";
 import { ExperienceClient, type ExperienceItem } from "./ExperienceClient";
 
 // Query and options for Sanity
-const EXPERIENCE_QUERY = `*[_type == "workExperience"] | order(startDate desc)`;
+// const EXPERIENCE_QUERY = `*[_type == "workExperience"] | order(startDate desc)`;
 const options = { next: { revalidate: 30 } };
 
 // Types for Portable Text
@@ -24,7 +25,7 @@ interface PortableTextBlock {
 export async function Experience() {
 	// Fetch data from Sanity
 	const experienceItems = await client.fetch<SanityDocument[]>(
-		EXPERIENCE_QUERY,
+		allExperienceQuery,
 		{},
 		options,
 	);

@@ -1,12 +1,13 @@
 import { client } from "@/app/sanity/client";
+import { allProjectsQueryDetailed } from "@/app/sanity/lib/queries";
 import type { SanityDocument } from "next-sanity";
 import { type ProjectItem, ProjectsClient } from "./ProjectsClient";
 
 // Query and options for Sanity
-const PROJECTS_QUERY = `*[_type == "project"] | order(publishedAt desc) {
-  ...,
-  "tags": tags[]->name
-}`;
+// const PROJECTS_QUERY = `*[_type == "project"] | order(publishedAt desc) {
+//   ...,
+//   "tags": tags[]->name
+// }`; // Remove local query
 const options = { next: { revalidate: 30 } };
 
 // Types for Portable Text
@@ -27,7 +28,7 @@ interface PortableTextBlock {
 export async function Projects() {
 	// Fetch data from Sanity
 	const projectItems = await client.fetch<SanityDocument[]>(
-		PROJECTS_QUERY,
+		allProjectsQueryDetailed,
 		{},
 		options,
 	);

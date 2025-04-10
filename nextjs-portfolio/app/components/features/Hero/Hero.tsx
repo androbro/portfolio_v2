@@ -1,16 +1,20 @@
 import { client } from "@/app/sanity/client";
+import {
+	allExperienceQuery,
+	allProjectsQuerySimple,
+} from "@/app/sanity/lib/queries"; // Import queries
 import type { SanityDocument } from "next-sanity";
 import { HeroClient } from "./HeroClient";
 
 // Queries and options for Sanity
-const PROJECTS_QUERY = `*[_type == "project"] | order(publishedAt desc)`;
-const EXPERIENCE_QUERY = `*[_type == "workExperience"] | order(startDate desc)`;
+// const PROJECTS_QUERY = `*[_type == "project"] | order(publishedAt desc)`; // Remove local query
+// const EXPERIENCE_QUERY = `*[_type == "workExperience"] | order(startDate desc)`; // Remove local query
 const options = { next: { revalidate: 30 } };
 
 export async function Hero() {
 	// Fetch project data from Sanity
 	const projectItems = await client.fetch<SanityDocument[]>(
-		PROJECTS_QUERY,
+		allProjectsQuerySimple, // Use imported query
 		{},
 		options,
 	);
@@ -20,7 +24,7 @@ export async function Hero() {
 
 	// Fetch experience data from Sanity
 	const experienceItems = await client.fetch<SanityDocument[]>(
-		EXPERIENCE_QUERY,
+		allExperienceQuery, // Use imported query
 		{},
 		options,
 	);

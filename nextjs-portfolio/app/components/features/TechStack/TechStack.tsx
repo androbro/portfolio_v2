@@ -1,15 +1,16 @@
 import { client } from "@/app/sanity/client";
+import { allTechStackQuery } from "@/app/sanity/lib/queries";
 import type { SanityDocument } from "next-sanity";
 import { TechStackClient, type TechStackDataType } from "./TechStackClient";
 
 // Query and options for Sanity
-const TECHSTACK_QUERY = `*[_type == "techStack"]`;
+// const TECHSTACK_QUERY = `*[_type == "techStack"]`;
 const options = { next: { revalidate: 30 } };
 
 export async function TechStack() {
 	// Fetch data from Sanity
 	const techStackItems = await client.fetch<SanityDocument[]>(
-		TECHSTACK_QUERY,
+		allTechStackQuery,
 		{},
 		options,
 	);
