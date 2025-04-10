@@ -95,38 +95,6 @@ export const projectType = defineType({
 			],
 		}),
 		defineField({
-			name: "mockImages",
-			title: "Mock Images",
-			description: "Mockup images for projects that cannot be shared publicly",
-			type: "array",
-			of: [
-				{
-					type: "image",
-					options: {
-						hotspot: true,
-					},
-					fields: [
-						{
-							name: "caption",
-							type: "string",
-							title: "Caption",
-							options: {
-								isHighlighted: true,
-							},
-						},
-						{
-							name: "alt",
-							type: "string",
-							title: "Alt Text",
-							options: {
-								isHighlighted: true,
-							},
-						},
-					],
-				},
-			],
-		}),
-		defineField({
 			name: "url",
 			title: "Project URL",
 			type: "url",

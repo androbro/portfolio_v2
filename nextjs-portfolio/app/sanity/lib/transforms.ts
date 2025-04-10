@@ -38,12 +38,17 @@ export interface SanityProject extends SanityDocument {
 export interface ProjectItem {
 	title: string;
 	description: string;
+	fullDescription: string;
 	year: string;
-	image?: string; // Expects a URL string
+	image?: string;
 	url?: string;
 	repositoryUrl?: string;
 	tags: string[];
-	slug?: string; // Add slug property
+	slug?: string;
+	projectScreenshots?: string[];
+	features: string[];
+	challenges: string[];
+	solutions: string[];
 }
 
 // Input structure from Sanity for tech stack items
@@ -93,12 +98,16 @@ export function transformSanityProjects(
 			title: item.title ?? "Untitled Project",
 			description: descriptionText,
 			year: item.publishedYear ?? new Date().getFullYear().toString(),
-			// Use urlForImage to generate the image URL string if image exists
 			image: item.image ? urlForImage(item.image).url() : undefined,
 			url: item.url,
 			repositoryUrl: item.repositoryUrl,
 			tags: Array.isArray(item.tags) ? item.tags : [],
-			slug: item.slug?.current, // Extract the slug from the Sanity data
+			slug: item.slug?.current,
+			projectScreenshots: item.projectScreenshots,
+			features: item.features,
+			challenges: item.challenges,
+			solutions: item.solutions,
+			fullDescription: descriptionText,
 		};
 	});
 }

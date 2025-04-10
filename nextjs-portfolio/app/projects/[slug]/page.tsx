@@ -94,7 +94,7 @@ function ProjectHeader({ project }: { project: ProjectItem }) {
 function ProjectContent({ project }: { project: ProjectItem }) {
 	return (
 		<div className="prose prose-invert max-w-none">
-			<p className="text-lg text-white/80">{project.description}</p>
+			<p className="text-lg text-white/80">{project.fullDescription}</p>
 
 			{/* Project links */}
 			{(project.url || project.repositoryUrl) && (
