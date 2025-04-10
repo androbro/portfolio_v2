@@ -1,5 +1,5 @@
 import { client } from "@/app/sanity/client";
-import { allProjectsQueryDetailed } from "@/app/sanity/lib/queries";
+import { projectBySlugQuery } from "@/app/sanity/lib/queries";
 import {
 	type ProjectItem,
 	type SanityProject,
@@ -31,18 +31,25 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 }
 
 async function getProject(slug: string): Promise<ProjectItem | null> {
-	const projects = await client.fetch<SanityProject[]>(
-		allProjectsQueryDetailed,
-		{},
-		{ next: { revalidate: 30 } },
-	);
+	try {
+		// Fetch only the specific project by slug
+		const project = await client.fetch<SanityProject | null>(
+			projectBySlugQuery,
+			{ slug },
+			{ next: { revalidate: 30 } },
+		);
 
-	const transformedProjects = transformSanityProjects(projects);
-	return (
-		transformedProjects.find(
-			(project) => project.title.toLowerCase().replace(/\s+/g, "-") === slug,
-		) || null
-	);
+		if (!project) {
+			return null;
+		}
+
+		// Transform the single project
+		const [transformedProject] = transformSanityProjects([project]);
+		return transformedProject;
+	} catch (error) {
+		console.error("Error fetching project:", error);
+		return null;
+	}
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -86,7 +93,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 						<div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
 							<Image
 								src={project.image}
-								alt={project.title}
+								alt={`${project.title} project`}
 								fill
 								className="object-cover"
 								priority

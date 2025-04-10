@@ -29,6 +29,9 @@ export interface SanityProject extends SanityDocument {
 	url?: string;
 	repositoryUrl?: string;
 	tags?: string[];
+	slug?: {
+		current: string;
+	};
 }
 
 // Output structure expected by ProjectsClient
@@ -40,6 +43,7 @@ export interface ProjectItem {
 	url?: string;
 	repositoryUrl?: string;
 	tags: string[];
+	slug?: string; // Add slug property
 }
 
 /**
@@ -81,6 +85,7 @@ export function transformSanityProjects(
 			url: item.url,
 			repositoryUrl: item.repositoryUrl,
 			tags: Array.isArray(item.tags) ? item.tags : [],
+			slug: item.slug?.current, // Extract the slug from the Sanity data
 		};
 	});
 }

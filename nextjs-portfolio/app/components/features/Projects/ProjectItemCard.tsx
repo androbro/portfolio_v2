@@ -29,8 +29,8 @@ export function ProjectItemCard({
 		[50, 0], // Animate from 50px down to 0
 	);
 
-	// Create a URL-friendly slug from the project title
-	const slug = project.title.toLowerCase().replace(/\s+/g, "-");
+	// Use the slug from the project data if available, otherwise generate it from the title
+	const slug = project.slug || project.title.toLowerCase().replace(/\s+/g, "-");
 
 	return (
 		<motion.div
