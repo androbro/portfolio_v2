@@ -46,6 +46,19 @@ export interface ProjectItem {
 	slug?: string; // Add slug property
 }
 
+// Input structure from Sanity for tech stack items
+export interface SanityTechStackItem extends SanityDocument {
+	name: string;
+	category: string;
+	icon?: SanityImageSource;
+}
+
+// Output structure for tech stack items
+export interface TechStackItem {
+	name: string;
+	iconUrl: string;
+}
+
 /**
  * Transforms raw Sanity project documents into the format expected by the ProjectsClient component.
  * @param projectItems - Array of Sanity project documents.
@@ -88,4 +101,32 @@ export function transformSanityProjects(
 			slug: item.slug?.current, // Extract the slug from the Sanity data
 		};
 	});
+}
+
+/**
+ * Transforms raw Sanity tech stack documents into the format expected by the TechStackClient component.
+ * @param techStackItems - Array of Sanity tech stack documents.
+ * @returns Object with categories as keys and arrays of transformed TechStackItem objects as values.
+ */
+export function transformSanityTechStack(
+	techStackItems: SanityTechStackItem[],
+): Record<string, TechStackItem[]> {
+	const transformedTechStack: Record<string, TechStackItem[]> = {};
+
+	for (const item of techStackItems) {
+		// Make sure the category exists in our object
+		if (!transformedTechStack[item.category]) {
+			transformedTechStack[item.category] = [];
+		}
+
+		// Add the tech item to the appropriate category
+		transformedTechStack[item.category].push({
+			name: item.name,
+			iconUrl: item.icon
+				? urlForImage(item.icon).url()
+				: `/icons/${item.name.toLowerCase()}.svg`,
+		});
+	}
+
+	return transformedTechStack;
 }
