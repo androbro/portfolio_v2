@@ -1,3 +1,4 @@
+import { SectionTitle } from "@/app/components/features/common/SectionTitle";
 import type { ProjectItem } from "@/app/sanity/lib/transforms";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -11,7 +12,7 @@ export function ScreenshotGallery({
 
 	return (
 		<div className="mt-12">
-			<h2 className="text-2xl font-medium mb-6">Project Screenshots</h2>
+			<SectionTitle title="Images" />
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				{screenshots.map((screenshot, index) => (
 					<motion.div

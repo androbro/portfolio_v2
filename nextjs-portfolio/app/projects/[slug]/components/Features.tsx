@@ -1,3 +1,4 @@
+import { SectionTitle } from "@/app/components/features/common/SectionTitle";
 import type { ProjectItem } from "@/app/sanity/lib/transforms";
 import { motion } from "motion/react";
 
@@ -6,7 +7,7 @@ export function Features({ features }: { features: ProjectItem["features"] }) {
 
 	return (
 		<section className="mt-12">
-			<h2 className="text-2xl font-medium mb-6">Key Features</h2>
+			<SectionTitle title="Key Features" />
 			<ul className="space-y-2 list-disc pl-5">
 				{features.map((feature, index) => (
 					<motion.li

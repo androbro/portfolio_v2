@@ -1,3 +1,4 @@
+import { SectionTitle } from "@/app/components/features/common/SectionTitle";
 import type { ProjectItem } from "@/app/sanity/lib/transforms";
 import { motion } from "motion/react";
 
@@ -8,7 +9,7 @@ export function Challenges({
 
 	return (
 		<div className="mt-12">
-			<h2 className="text-2xl font-medium mb-6">Challenges & Solutions</h2>
+			<SectionTitle title="Challenges & Solutions" />
 			<div className="space-y-8">
 				{challenges.map((item, index) => (
 					<motion.div
