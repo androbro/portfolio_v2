@@ -3,6 +3,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
 	/* config options here */
 	productionBrowserSourceMaps: false,
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "cdn.sanity.io",
+				pathname: "/images/**",
+			},
+		],
+	},
 	webpack: (config, { dev, isServer }) => {
 		// Disable source maps in development
 		if (dev) {

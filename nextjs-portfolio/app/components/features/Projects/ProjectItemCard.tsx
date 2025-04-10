@@ -2,6 +2,8 @@
 
 import type { ProjectItem } from "@/app/sanity/lib/transforms"; // Import the shared ProjectItem type
 import { type MotionValue, motion, useTransform } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectItemCardProps {
 	project: ProjectItem;
@@ -27,62 +29,76 @@ export function ProjectItemCard({
 		[50, 0], // Animate from 50px down to 0
 	);
 
+	// Create a URL-friendly slug from the project title
+	const slug = project.title.toLowerCase().replace(/\s+/g, "-");
+
 	return (
 		<motion.div
-			key={project.title} // Keep key for list rendering
-			className="border-b border-white/10 pb-12 last:border-0 group"
+			key={project.title}
+			className="border border-white/10 rounded-lg overflow-hidden bg-white/5 hover:bg-white/10 transition-colors"
 			style={{
 				opacity: itemOpacity,
 				y: itemY,
 			}}
 		>
-			<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-				<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
-					{project.title}
-				</h3>
-				<span className="text-white/60">{project.year}</span>
-			</div>
-			<p className="text-white/80 max-w-2xl">{project.description}</p>
+			<Link href={`/projects/${slug}`} className="block">
+				<div className="flex flex-col md:flex-row">
+					{/* Project Image */}
+					<div className="relative w-full md:w-1/3 h-48 md:h-auto">
+						{project.image ? (
+							<Image
+								src={project.image}
+								alt={`${project.title} project thumbnail`}
+								fill
+								className="object-cover"
+								title={`${project.title} project thumbnail`}
+							/>
+						) : (
+							<div className="w-full h-full bg-white/5 flex items-center justify-center">
+								<span className="text-white/40">No image</span>
+							</div>
+						)}
+					</div>
 
-			{/* Display tags if available */}
-			{project.tags && project.tags.length > 0 && (
-				<div className="flex flex-wrap gap-2 mt-3">
-					{project.tags.map((tag) => (
-						<span
-							key={tag}
-							className="px-2 py-1 text-xs bg-white/10 rounded-md"
-						>
-							{tag}
-						</span>
-					))}
-				</div>
-			)}
+					{/* Project Content */}
+					<div className="p-6 md:w-2/3">
+						<div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+							<h3 className="text-2xl md:text-3xl font-light group-hover:text-accent transition-colors">
+								{project.title}
+							</h3>
+							<span className="text-white/60">{project.year}</span>
+						</div>
 
-			{/* Display project links if available */}
-			{(project.url || project.repositoryUrl) && (
-				<div className="flex gap-4 mt-4">
-					{project.url && (
-						<a
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-accent hover:underline"
-						>
-							View Project
-						</a>
-					)}
-					{project.repositoryUrl && (
-						<a
-							href={project.repositoryUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="text-white/70 hover:text-white hover:underline"
-						>
-							Source Code
-						</a>
-					)}
+						<p className="text-white/80 mb-4 line-clamp-2">
+							{project.description}
+						</p>
+
+						{/* Display tags if available */}
+						{project.tags && project.tags.length > 0 && (
+							<div className="flex flex-wrap gap-2 mb-4">
+								{project.tags.slice(0, 3).map((tag) => (
+									<span
+										key={tag}
+										className="px-2 py-1 text-xs bg-white/10 rounded-md"
+									>
+										{tag}
+									</span>
+								))}
+								{project.tags.length > 3 && (
+									<span className="px-2 py-1 text-xs bg-white/10 rounded-md">
+										+{project.tags.length - 3} more
+									</span>
+								)}
+							</div>
+						)}
+
+						<div className="flex items-center text-accent">
+							<span>View Project</span>
+							<span className="ml-1">→</span>
+						</div>
+					</div>
 				</div>
-			)}
+			</Link>
 		</motion.div>
 	);
 }

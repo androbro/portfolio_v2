@@ -86,7 +86,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 						<div className="relative w-full h-[400px] mb-8 rounded-lg overflow-hidden">
 							<Image
 								src={project.image}
-								alt={project.title}
+								alt={`${project.title} project`}
 								fill
 								className="object-cover"
 								priority

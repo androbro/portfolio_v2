@@ -69,17 +69,15 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 						</motion.h2>
 					</div>
 
-					{/* Project List */}
-					<div className="space-y-12">
+					{/* Project Grid */}
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{projects.map((project, index) => (
-							// Render the extracted component
 							<ProjectItemCard
-								key={project.title} // Key is still needed here for map
+								key={project.title}
 								project={project}
 								index={index}
-								scrollYProgress={scrollYProgress} // Pass down scroll progress
+								scrollYProgress={scrollYProgress}
 							/>
-							// Removed the large block of JSX that is now in ProjectItemCard
 						))}
 					</div>
 				</div>
