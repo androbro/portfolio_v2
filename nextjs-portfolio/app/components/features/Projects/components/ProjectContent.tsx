@@ -89,44 +89,28 @@ export function ProjectContent({
           type="button"
           onClick={handleNavigate}
           onKeyDown={handleNavigate}
-          className="flex items-center text-accent hover:underline"
-          transition={smoothTransition}
+          className="px-3 py-2 rounded-md bg-accent/10 text-accent hover:bg-accent/20 transition-all flex items-center gap-1 shadow-sm"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ ...smoothTransition, duration: 0.2 }}
         >
-          <motion.span layout="position">View Project</motion.span>
-          <motion.span layout="position" className="ml-1">→</motion.span>
+          <motion.span layout="position" className="font-medium">View Project</motion.span>
+          <motion.svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="ml-1"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </motion.svg>
         </motion.button>
-        
-        <AnimatePresence mode="sync" initial={false}>
-          {isExpanded ? (
-            <motion.button
-              key="collapse-button"
-              type="button"
-              onClick={handleCollapse}
-              className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded text-white/60 hover:text-white transition-colors"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={smoothTransition}
-              layoutId="toggle-button"
-            >
-              Collapse
-            </motion.button>
-          ) : (
-            <motion.button
-              key="expand-button"
-              type="button"
-              onClick={handleCollapse}
-              className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded text-white/60 hover:text-white transition-colors"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={smoothTransition}
-              layoutId="toggle-button"
-            >
-              Expand
-            </motion.button>
-          )}
-        </AnimatePresence>
       </motion.div>
     </motion.div>
   );

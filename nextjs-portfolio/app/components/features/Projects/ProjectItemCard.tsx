@@ -92,6 +92,7 @@ export function ProjectItemCard({
 				boxShadow: isExpanded ? '0 10px 25px -5px rgba(0, 0, 0, 0.3)' : 'none',
 			}}
 			transition={smoothTransition}
+			whileHover={{ scale: 1.03 }}
 			layout
 		>
 			<div className={`flex flex-col md:flex-row h-full`}>
