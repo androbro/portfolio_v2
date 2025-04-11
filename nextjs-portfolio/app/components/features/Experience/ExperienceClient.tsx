@@ -93,6 +93,8 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 										opacity: itemOpacity,
 										y: itemY,
 									}}
+									whileHover={{ scale: 1.03 }}
+									transition={{ duration: 0.2 }}
 								>
 									<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
 										<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
