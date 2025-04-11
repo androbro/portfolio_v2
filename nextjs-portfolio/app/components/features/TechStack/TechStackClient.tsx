@@ -45,12 +45,12 @@ export function TechStackClient({
 	return (
 		<div
 			id="skills"
-			className="flex flex-col items-center justify-center py-20"
+			className="flex flex-col items-center justify-center py-20 w-full overflow-hidden"
 		>
-			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl w-full">
+			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl w-full overflow-visible">
 				<SectionTitle title="My Stack" />
 
-				<div className="flex flex-col">
+				<div className="flex flex-col overflow-hidden">
 					{/* CategorySection handles the animation and rendering */}
 					<CategorySection
 						visibleCategories={getVisibleCategories()}

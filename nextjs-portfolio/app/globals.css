@@ -17,6 +17,7 @@ html {
 	min-height: 100%;
 	/* Optional: Ensure smooth scrolling behavior if needed */
 	scroll-behavior: smooth;
+	overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 body {
@@ -24,9 +25,10 @@ body {
 	color: var(--foreground);
 	font-family: "Roboto", sans-serif;
 	cursor: none;
-	overflow-x: hidden;
+	overflow-x: hidden; /* Reinforcing the prevention of horizontal scrolling */
 	min-height: 100vh;
 	letter-spacing: 0.02em;
+	width: 100%; /* Ensure body takes exactly 100% width */
 }
 
 /* All clickable elements should have no default cursor */

@@ -7,6 +7,7 @@ export const initSmoothScroll = () => {
 		wheelMultiplier: 1,
 		touchMultiplier: 2,
 		smoothWheel: true,
+		gestureOrientation: "vertical",
 	});
 
 	function raf(time: number) {
