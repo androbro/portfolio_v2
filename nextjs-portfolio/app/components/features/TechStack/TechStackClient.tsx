@@ -43,8 +43,7 @@ export function TechStackClient({
 		});
 
 	return (
-		<section
-			ref={sectionRef}
+		<div
 			id="skills"
 			className="flex flex-col items-center justify-center py-20"
 		>
@@ -70,6 +69,6 @@ export function TechStackClient({
 					</motion.button>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }

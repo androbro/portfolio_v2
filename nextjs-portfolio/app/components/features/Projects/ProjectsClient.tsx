@@ -28,22 +28,18 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 	};
 
 	return (
-		<section
-			ref={sectionRef}
-			id="projects"
-			className="flex items-center justify-center py-20"
-		>
+		<div id="projects" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
 					<SectionTitle title="My Projects" />
 
 					{/* Project Grid */}
-					<motion.div 
+					<motion.div
 						className="relative"
 						layout
 						transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
 					>
-						<motion.div 
+						<motion.div
 							className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr"
 							layout
 							transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
@@ -63,6 +59,6 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 					</motion.div>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }

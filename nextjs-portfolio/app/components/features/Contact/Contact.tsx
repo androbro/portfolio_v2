@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { SectionTitle } from "../common/SectionTitle";
 export function Contact() {
 	return (
-		<section id="contact" className="flex items-center justify-center py-20">
+		<div id="contact" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<SectionTitle title="Get In Touch" />
 				<motion.div
@@ -41,6 +41,6 @@ export function Contact() {
 					devulderk@gmail.com
 				</motion.a>
 			</div>
-		</section>
+		</div>
 	);
 }

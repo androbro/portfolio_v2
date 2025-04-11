@@ -66,17 +66,17 @@ interface StatItemProps {
 
 const StatItem = ({ value, label, tooltip, delay = 1.0 }: StatItemProps) => (
 	<motion.div
-		className="flex flex-col"
+		className="flex flex-col items-center md:items-start"
 		initial={{ opacity: 0, y: 30 }}
 		animate={{ opacity: 1, y: 0 }}
 		transition={{ duration: 0.8, delay }}
 	>
 		<motion.div className="relative group" whileHover={{ scale: 1.05 }}>
-			<span className="text-3xl md:text-4xl text-accent font-light">
+			<span className="text-4xl md:text-5xl text-accent font-light">
 				{value}+
 			</span>
 			{tooltip && (
-				<div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bottom-full right-0 mb-2 p-2 bg-black/80 text-white text-xs rounded w-48">
+				<div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bottom-full left-1/2 -translate-x-1/2 md:left-auto md:right-0 md:translate-x-0 mb-2 p-2 bg-black/80 text-white text-xs rounded w-48">
 					{tooltip}
 				</div>
 			)}
@@ -102,7 +102,7 @@ const HeroStats = ({
 	projectsCount: number;
 	workHours: number;
 }) => (
-	<div className="absolute bottom-8 right-8 space-y-4 text-right">
+	<div className="absolute bottom-8 left-0 right-0 md:left-auto md:right-8 flex flex-row md:flex-col justify-center md:justify-start items-center md:items-end gap-8 md:gap-4 w-full md:w-auto px-4 md:px-0 md:space-y-4 md:text-right">
 		<StatItem
 			value={yearsExperience}
 			label="Years of Experience"
@@ -163,9 +163,9 @@ export function HeroClient({
 	const workHours = useWorkingHours();
 
 	return (
-		<section
+		<div
 			id="hero"
-			className="min-h-screen flex items-center justify-center pt-20 relative"
+			className="min-h-screen flex items-center justify-center pt-10 relative"
 		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="flex flex-col items-center md:items-start">
@@ -184,6 +184,6 @@ export function HeroClient({
 					/>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }

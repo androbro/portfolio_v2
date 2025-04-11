@@ -24,10 +24,18 @@ export function About() {
 	const quoteY = useTransform(scrollYProgress, [0, 0.2, 1], [100, 0, 0]); // Start from 100px down
 	const quoteOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]); // Fade in at 20%
 
-	const headingOpacity = useTransform(scrollYProgress, [0.05, 0.2, 1], [0, 1, 1]);
+	const headingOpacity = useTransform(
+		scrollYProgress,
+		[0.05, 0.2, 1],
+		[0, 1, 1],
+	);
 	const headingY = useTransform(scrollYProgress, [0.05, 0.2, 1], [30, 0, 0]);
 
-	const aboutMeOpacity = useTransform(scrollYProgress, [0.1, 0.25, 1], [0, 1, 1]);
+	const aboutMeOpacity = useTransform(
+		scrollYProgress,
+		[0.1, 0.25, 1],
+		[0, 1, 1],
+	);
 	const aboutMeY = useTransform(scrollYProgress, [0.1, 0.25, 1], [30, 0, 0]);
 
 	const para1Opacity = useTransform(scrollYProgress, [0.15, 0.3, 1], [0, 1, 1]);
@@ -40,7 +48,7 @@ export function About() {
 	const para3Y = useTransform(scrollYProgress, [0.25, 0.4, 1], [30, 0, 0]);
 
 	return (
-		<section ref={sectionRef} id="about" className="flex items-center justify-center py-20">
+		<div id="about" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
 					<div ref={quoteRef}>
@@ -51,12 +59,15 @@ export function About() {
 								y: quoteY,
 							}}
 						>
-							I create meaningful digital experiences that combine aesthetics with functionality and
-							performance.
+							I create meaningful digital experiences that combine aesthetics
+							with functionality and performance.
 						</motion.h3>
 					</div>
 
-					<div ref={textContainerRef} className="grid grid-cols-1 gap-8 text-lg text-white/80">
+					<div
+						ref={textContainerRef}
+						className="grid grid-cols-1 gap-8 text-lg text-white/80"
+					>
 						<motion.p
 							className="pb-3 border-b text-muted-foreground"
 							style={{
@@ -87,9 +98,10 @@ export function About() {
 										y: para1Y,
 									}}
 								>
-									I'm a frontend developer with experience in building web and mobile applications
-									using React, React Native, and Angular. My work focuses on creating responsive and
-									user-friendly interfaces.
+									I'm a frontend developer with experience in building web and
+									mobile applications using React, React Native, and Angular. My
+									work focuses on creating responsive and user-friendly
+									interfaces.
 								</motion.p>
 								<motion.p
 									className="font-light"
@@ -98,10 +110,11 @@ export function About() {
 										y: para2Y,
 									}}
 								>
-									I prioritize delivering optimal user experiences by considering the audience's
-									needs and project requirements. Currently, I'm expanding my expertise in React and
-									JavaScript to become a full-stack React developer and mentor others in the tech
-									community.
+									I prioritize delivering optimal user experiences by
+									considering the audience's needs and project requirements.
+									Currently, I'm expanding my expertise in React and JavaScript
+									to become a full-stack React developer and mentor others in
+									the tech community.
 								</motion.p>
 								<motion.p
 									className="font-light"
@@ -110,15 +123,15 @@ export function About() {
 										y: para3Y,
 									}}
 								>
-									Beyond coding, I enjoy playing the piano, baking, cooking, and gaming. I also stay
-									updated with the latest tech developments by watching YouTube and following tech
-									news.
+									Beyond coding, I enjoy playing the piano, baking, cooking, and
+									gaming. I also stay updated with the latest tech developments
+									by watching YouTube and following tech news.
 								</motion.p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }

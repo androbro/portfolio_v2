@@ -63,11 +63,7 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
 
 	return (
-		<section
-			ref={sectionRef}
-			id="experience"
-			className="flex items-center justify-center py-20"
-		>
+		<div id="experience" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
 					<SectionTitle title="Work Experience" />
@@ -116,6 +112,6 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 }
