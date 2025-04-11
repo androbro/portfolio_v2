@@ -1,8 +1,8 @@
 "use client";
 
 import type { ProjectItem } from "@/app/sanity/lib/transforms";
-import { useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef, useState } from "react";
 import { SectionTitle } from "../common/SectionTitle";
 import { ProjectItemCard } from "./ProjectItemCard";
 
@@ -12,6 +12,7 @@ interface ProjectsClientProps {
 
 export function ProjectsClient({ projects }: ProjectsClientProps) {
 	const sectionRef = useRef<HTMLElement>(null);
+	const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
@@ -22,7 +23,9 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 	const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]); // Simplified range
 	const titleY = useTransform(scrollYProgress, [0, 0.1], [50, 0]); // Simplified range
 
-	// Removed individual item animation logic (itemOpacity, itemY)
+	const handleExpand = (index: number) => {
+		setExpandedIndex(index === expandedIndex ? null : index);
+	};
 
 	return (
 		<section
@@ -35,18 +38,29 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 					<SectionTitle title="My Projects" />
 
 					{/* Project Grid */}
-					<div className="relative">
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+					<motion.div 
+						className="relative"
+						layout
+						transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
+					>
+						<motion.div 
+							className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr"
+							layout
+							transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
+						>
 							{projects.map((project, index) => (
 								<ProjectItemCard
 									key={project.title}
 									project={project}
 									index={index}
 									scrollYProgress={scrollYProgress}
+									isExpanded={expandedIndex === index}
+									onExpand={() => handleExpand(index)}
+									layoutId={`project-${index}`}
 								/>
 							))}
-						</div>
-					</div>
+						</motion.div>
+					</motion.div>
 				</div>
 			</div>
 		</section>
