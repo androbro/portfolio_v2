@@ -54,6 +54,15 @@ export const projectType = defineType({
 			],
 		}),
 		defineField({
+			name: "cardImage",
+			title: "Card Image",
+			type: "image",
+			options: {
+				hotspot: true,
+			},
+			validation: (rule) => rule.required(),
+		}),
+		defineField({
 			name: "image",
 			title: "Main Image",
 			type: "image",

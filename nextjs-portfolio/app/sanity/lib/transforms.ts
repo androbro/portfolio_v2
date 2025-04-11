@@ -26,6 +26,7 @@ export interface SanityProject extends SanityDocument {
 	description: string | PortableTextBlock[];
 	fullDescription?: PortableTextBlock[];
 	publishedYear?: string;
+	cardImage?: SanityImageSource;
 	image?: SanityImageSource;
 	url?: string;
 	repositoryUrl?: string;
@@ -53,6 +54,7 @@ export interface ProjectItem {
 	fullDescription: PortableTextBlock[] | string;
 	year: string;
 	image?: string;
+	cardImage?: string;
 	url?: string;
 	repositoryUrl?: string;
 	tags: string[];
@@ -118,6 +120,7 @@ export function transformSanityProjects(
 			description: descriptionText,
 			year: item.publishedYear ?? new Date().getFullYear().toString(),
 			image: item.image ? urlForImage(item.image).url() : undefined,
+			cardImage: item.cardImage ? urlForImage(item.cardImage).url() : undefined,
 			url: item.url,
 			repositoryUrl: item.repositoryUrl,
 			tags: Array.isArray(item.tags) ? item.tags : [],

@@ -56,17 +56,17 @@ export function ProjectItemCard({
 				type="button"
 				onClick={handleNavigate}
 				onKeyDown={handleNavigate}
-				className="block cursor-pointer w-full text-left border-0 bg-transparent p-0"
+				className="block cursor-pointer w-full h-full text-left border-0 bg-transparent p-0"
 			>
 				<div className="flex flex-col md:flex-row">
 					{/* Project Image */}
-					<div className="relative w-full md:w-1/3 h-48 md:h-auto">
-						{project.image ? (
+					<div className="relative w-full md:w-1/3 h-48 md:h-auto m-2">
+						{project.cardImage ? (
 							<Image
-								src={project.image}
+								src={project.cardImage}
 								alt={`${project.title} project thumbnail`}
 								fill
-								className="object-cover"
+								className="object-contain"
 								title={`${project.title} project thumbnail`}
 							/>
 						) : (
