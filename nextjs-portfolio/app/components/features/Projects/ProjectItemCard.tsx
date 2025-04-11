@@ -73,7 +73,7 @@ export function ProjectItemCard({
 	// Animation settings
 	const smoothTransition = {
 		type: "tween",
-		duration: 3,
+		duration: 0.5,
 		ease: "easeInOut"
 	};
 

@@ -26,7 +26,7 @@ export function ProjectContent({
 }: ProjectContentProps) {
   return (
     <motion.div 
-      className={`p-6 ${isExpanded ? 'md:w-1/2' : 'md:w-2/3'}`}
+      className={`p-6 ${isExpanded ? 'md:w-1/2' : 'md:w-2/3'} flex flex-col`}
       animate={{
         width: isExpanded ? '50%' : '66.667%',
       }}
@@ -69,17 +69,19 @@ export function ProjectContent({
       )}
 
       {/* Show more content when expanded */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync" initial={false}>
         {isExpanded && (
-          <motion.div layout="position">
-            <ProjectExpandedContent project={project} smoothTransition={smoothTransition} />
-          </motion.div>
+          <ProjectExpandedContent 
+            key="project-expanded-content"
+            project={project} 
+            smoothTransition={smoothTransition} 
+          />
         )}
       </AnimatePresence>
 
       <motion.div 
         layout="position"
-        className="flex items-center justify-between mt-4"
+        className="flex items-center justify-between mt-auto pt-4"
         transition={smoothTransition}
       >
         <motion.button
@@ -94,18 +96,37 @@ export function ProjectContent({
           <motion.span layout="position" className="ml-1">→</motion.span>
         </motion.button>
         
-        {isExpanded && (
-          <motion.button
-            type="button"
-            onClick={handleCollapse}
-            className="text-white/60 hover:text-white"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ ...smoothTransition, delay: 0.4 }}
-          >
-            Collapse
-          </motion.button>
-        )}
+        <AnimatePresence mode="sync" initial={false}>
+          {isExpanded ? (
+            <motion.button
+              key="collapse-button"
+              type="button"
+              onClick={handleCollapse}
+              className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded text-white/60 hover:text-white transition-colors"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={smoothTransition}
+              layoutId="toggle-button"
+            >
+              Collapse
+            </motion.button>
+          ) : (
+            <motion.button
+              key="expand-button"
+              type="button"
+              onClick={handleCollapse}
+              className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded text-white/60 hover:text-white transition-colors"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={smoothTransition}
+              layoutId="toggle-button"
+            >
+              Expand
+            </motion.button>
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );
