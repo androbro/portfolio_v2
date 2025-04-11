@@ -26,6 +26,7 @@ export function ProjectContent({
 	handleCollapse,
 }: ProjectContentProps) {
 	const [isTextTruncated, setIsTextTruncated] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const textRef = useRef<HTMLParagraphElement>(null);
 
 	useEffect(() => {
@@ -43,6 +44,11 @@ export function ProjectContent({
 		window.addEventListener("resize", checkTruncation);
 		return () => window.removeEventListener("resize", checkTruncation);
 	}, [isExpanded]);
+
+	const handleClick = async (e: React.MouseEvent | React.KeyboardEvent) => {
+		setIsLoading(true);
+		await handleNavigate(e);
+	};
 
 	return (
 		<motion.div
@@ -120,32 +126,55 @@ export function ProjectContent({
 				<motion.button
 					layout="position"
 					type="button"
-					onClick={handleNavigate}
-					onKeyDown={handleNavigate}
-					className="px-3 py-2 rounded-md bg-accent/10 text-accent hover:bg-accent/20 transition-all flex items-center gap-1 shadow-sm"
+					onClick={handleClick}
+					onKeyDown={handleClick}
+					disabled={isLoading}
+					className="px-3 py-2 rounded-md bg-accent/10 text-accent hover:bg-accent/20 transition-all flex items-center gap-1 shadow-sm relative overflow-hidden"
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 					transition={{ ...smoothTransition, duration: 0.2 }}
 				>
-					<motion.span layout="position" className="font-medium">
-						View Project
-					</motion.span>
-					<motion.svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						className="ml-1"
-						title="View project arrow"
+					<motion.div
+						className="flex items-center gap-1 relative z-10"
+						animate={{
+							opacity: isLoading ? 0.5 : 1,
+						}}
+						transition={{ duration: 0.2 }}
 					>
-						<path d="M5 12h14" />
-						<path d="m12 5 7 7-7 7" />
-					</motion.svg>
+						<motion.span layout="position" className="font-medium">
+							{isLoading ? "Loading..." : "View Project"}
+						</motion.span>
+						<motion.svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							className="ml-1"
+						>
+							<title>View project arrow</title>
+							<path d="M5 12h14" />
+							<path d="m12 5 7 7-7 7" />
+						</motion.svg>
+					</motion.div>
+					{isLoading && (
+						<motion.div
+							className="absolute bottom-0 left-0 h-[2px] bg-accent"
+							initial={{ width: "0%" }}
+							animate={{
+								width: "100%",
+							}}
+							transition={{
+								duration: 1.5,
+								repeat: Number.POSITIVE_INFINITY,
+								ease: "easeInOut",
+							}}
+						/>
+					)}
 				</motion.button>
 			</motion.div>
 		</motion.div>
