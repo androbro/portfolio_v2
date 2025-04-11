@@ -95,12 +95,15 @@ export function ProjectItemCard({
 		height: isExpanded ? '100%' : '100%',
 		zIndex: isExpanded ? 20 : 10,
 		boxShadow: isExpanded ? '0 10px 25px -5px rgba(0, 0, 0, 0.3)' : 'none',
+		// Add transformOrigin based on expand direction
+		transformOrigin: expandDirection === 'left' ? 'bottom right' : 'bottom left',
 	};
 
 	return (
 		<motion.div
 			ref={cardRef}
 			key={project.title}
+			layoutId={`project-card-${project.title}`}
 			className={`border border-white/10 rounded-lg overflow-hidden bg-white/2 hover:bg-white/10 transition-colors relative ${isExpanded ? 'col-span-2 row-span-2' : ''}`}
 			style={{
 				opacity: itemOpacity,

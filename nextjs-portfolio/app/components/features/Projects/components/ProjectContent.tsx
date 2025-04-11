@@ -32,6 +32,9 @@ export function ProjectContent({
       }}
       transition={smoothTransition}
       layout
+      style={{
+        transformOrigin: isExpanded ? 'bottom right' : 'bottom left',
+      }}
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
         <h3 className="text-2xl md:text-3xl font-light group-hover:text-accent transition-colors">

@@ -23,6 +23,9 @@ export function ProjectImage({ project, isExpanded, smoothTransition }: ProjectI
       }}
       transition={smoothTransition}
       layout
+      style={{
+        transformOrigin: isExpanded ? 'bottom right' : 'bottom left',
+      }}
     >
       {project.cardImage ? (
         <Image
