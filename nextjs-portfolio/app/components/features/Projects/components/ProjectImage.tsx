@@ -22,23 +22,33 @@ export function ProjectImage({ project, isExpanded, smoothTransition }: ProjectI
         width: isExpanded ? '50%' : '33.333%',
       }}
       transition={smoothTransition}
-      layout
-      style={{
-        transformOrigin: isExpanded ? 'bottom right' : 'bottom left',
-      }}
+      layout="preserve-aspect"
     >
       {project.cardImage ? (
-        <Image
-          src={project.cardImage}
-          alt={`${project.title} project thumbnail`}
-          fill
-          className="object-contain"
-          title={`${project.title} project thumbnail`}
-        />
+        <motion.div
+          className="relative w-full h-full"
+          layout="preserve-aspect"
+        >
+          <Image
+            src={project.cardImage}
+            alt={`${project.title} project thumbnail`}
+            fill
+            className="object-contain"
+            title={`${project.title} project thumbnail`}
+          />
+        </motion.div>
       ) : (
-        <div className="w-full h-full bg-white/5 flex items-center justify-center">
-          <span className="text-white/40">No image</span>
-        </div>
+        <motion.div 
+          className="w-full h-full bg-white/5 flex items-center justify-center"
+          layout="preserve-aspect"
+        >
+          <motion.span 
+            className="text-white/40"
+            layout="position"
+          >
+            No image
+          </motion.span>
+        </motion.div>
       )}
     </motion.div>
   );

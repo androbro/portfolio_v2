@@ -20,6 +20,7 @@ export function ProjectExpandedContent({ project, smoothTransition }: ProjectExp
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ ...smoothTransition, delay: 0.3 }}
+      layout="position"
     >
       {project.features && project.features.length > 0 && (
         <motion.div 
@@ -27,9 +28,18 @@ export function ProjectExpandedContent({ project, smoothTransition }: ProjectExp
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ...smoothTransition, delay: 0.4 }}
+          layout="position"
         >
-          <h4 className="text-lg font-medium mb-2">Key Features:</h4>
-          <ul className="list-disc pl-5 space-y-1">
+          <motion.h4 
+            className="text-lg font-medium mb-2"
+            layout="position"
+          >
+            Key Features:
+          </motion.h4>
+          <motion.ul 
+            className="list-disc pl-5 space-y-1"
+            layout="position"
+          >
             {project.features.slice(0, 3).map((feature, i) => (
               <motion.li 
                 key={i} 
@@ -37,11 +47,12 @@ export function ProjectExpandedContent({ project, smoothTransition }: ProjectExp
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ ...smoothTransition, delay: 0.5 + i * 0.1 }}
+                layout="position"
               >
                 {feature}
               </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </motion.div>
       )}
       
@@ -51,9 +62,18 @@ export function ProjectExpandedContent({ project, smoothTransition }: ProjectExp
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ ...smoothTransition, delay: 0.6 }}
+          layout="position"
         >
-          <h4 className="text-lg font-medium mb-2">Challenges:</h4>
-          <ul className="list-disc pl-5 space-y-1">
+          <motion.h4 
+            className="text-lg font-medium mb-2"
+            layout="position"
+          >
+            Challenges:
+          </motion.h4>
+          <motion.ul 
+            className="list-disc pl-5 space-y-1"
+            layout="position"
+          >
             {project.challenges.slice(0, 1).map((challenge, i) => (
               <motion.li 
                 key={i} 
@@ -61,11 +81,17 @@ export function ProjectExpandedContent({ project, smoothTransition }: ProjectExp
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ ...smoothTransition, delay: 0.7 }}
+                layout="position"
               >
-                <span className="font-medium">{challenge.challenge}:</span> {challenge.solution}
+                <motion.span 
+                  className="font-medium"
+                  layout="position"
+                >
+                  {challenge.challenge}:
+                </motion.span> {challenge.solution}
               </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </motion.div>
       )}
     </motion.div>

@@ -31,19 +31,27 @@ export function ProjectContent({
         width: isExpanded ? '50%' : '66.667%',
       }}
       transition={smoothTransition}
-      layout
-      style={{
-        transformOrigin: isExpanded ? 'bottom right' : 'bottom left',
-      }}
+      layout="preserve-aspect"
     >
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
-        <h3 className="text-2xl md:text-3xl font-light group-hover:text-accent transition-colors">
+      <motion.div layout="position" className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+        <motion.h3 
+          layout="position"
+          className="text-2xl md:text-3xl font-light group-hover:text-accent transition-colors"
+          transition={smoothTransition}
+        >
           {project.title}
-        </h3>
-        <span className="text-white/60">{project.year}</span>
-      </div>
+        </motion.h3>
+        <motion.span 
+          layout="position"
+          className="text-white/60"
+          transition={smoothTransition}
+        >
+          {project.year}
+        </motion.span>
+      </motion.div>
 
       <motion.p 
+        layout="position"
         className={`text-white/80 mb-4 ${isExpanded ? '' : 'line-clamp-2'}`}
         animate={{
           height: isExpanded ? 'auto' : '3em',
@@ -54,25 +62,37 @@ export function ProjectContent({
       </motion.p>
 
       {/* Display tags if available */}
-      {project.tags && <ProjectTags tags={project.tags} isExpanded={isExpanded} smoothTransition={smoothTransition} />}
+      {project.tags && (
+        <motion.div layout="position">
+          <ProjectTags tags={project.tags} isExpanded={isExpanded} smoothTransition={smoothTransition} />
+        </motion.div>
+      )}
 
       {/* Show more content when expanded */}
       <AnimatePresence mode="wait">
         {isExpanded && (
-          <ProjectExpandedContent project={project} smoothTransition={smoothTransition} />
+          <motion.div layout="position">
+            <ProjectExpandedContent project={project} smoothTransition={smoothTransition} />
+          </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="flex items-center justify-between mt-4">
-        <button
+      <motion.div 
+        layout="position"
+        className="flex items-center justify-between mt-4"
+        transition={smoothTransition}
+      >
+        <motion.button
+          layout="position"
           type="button"
           onClick={handleNavigate}
           onKeyDown={handleNavigate}
           className="flex items-center text-accent hover:underline"
+          transition={smoothTransition}
         >
-          <span>View Project</span>
-          <span className="ml-1">→</span>
-        </button>
+          <motion.span layout="position">View Project</motion.span>
+          <motion.span layout="position" className="ml-1">→</motion.span>
+        </motion.button>
         
         {isExpanded && (
           <motion.button
@@ -86,7 +106,7 @@ export function ProjectContent({
             Collapse
           </motion.button>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 } 

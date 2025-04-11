@@ -18,18 +18,17 @@ export function ProjectTags({ tags, isExpanded, smoothTransition }: ProjectTagsP
   return (
     <motion.div 
       className="flex flex-wrap gap-2 mb-4"
-      animate={{
-        height: isExpanded ? 'auto' : 'auto',
-      }}
+      layout="position"
       transition={smoothTransition}
     >
-      {tags.slice(0, isExpanded ? tags.length : 3).map((tag) => (
+      {tags.slice(0, isExpanded ? tags.length : 3).map((tag, i) => (
         <motion.span
           key={tag}
-          className="px-2 py-1 text-xs bg-white/10 rounded-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ ...smoothTransition, delay: 0.2 }}
+          className="px-2 py-1 bg-white/5 rounded text-xs text-white/70"
+          layout="position"
+          transition={smoothTransition}
+          initial={!isExpanded && i >= 3 ? { opacity: 0, scale: 0.8 } : undefined}
+          animate={{ opacity: 1, scale: 1 }}
         >
           {tag}
         </motion.span>
