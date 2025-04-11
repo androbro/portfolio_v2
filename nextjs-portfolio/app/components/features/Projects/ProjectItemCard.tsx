@@ -81,7 +81,7 @@ export function ProjectItemCard({
 		<motion.div
 			ref={cardRef}
 			layoutId={layoutId}
-			className={`border border-white/10 rounded-lg overflow-hidden bg-white/2 hover:bg-white/10 transition-colors relative ${isExpanded ? 'col-span-2 row-span-2' : ''}`}
+			className={`border border-white/10 rounded-lg overflow-hidden bg-white/2 hover:bg-white/10 transition-colors relative ${isExpanded ? 'col-span-2 row-span-2' : 'h-60'}`}
 			style={{
 				opacity: itemOpacity,
 				y: itemY,
