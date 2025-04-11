@@ -35,15 +35,17 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 					<SectionTitle title="My Projects" />
 
 					{/* Project Grid */}
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						{projects.map((project, index) => (
-							<ProjectItemCard
-								key={project.title}
-								project={project}
-								index={index}
-								scrollYProgress={scrollYProgress}
-							/>
-						))}
+					<div className="relative">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+							{projects.map((project, index) => (
+								<ProjectItemCard
+									key={project.title}
+									project={project}
+									index={index}
+									scrollYProgress={scrollYProgress}
+								/>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
