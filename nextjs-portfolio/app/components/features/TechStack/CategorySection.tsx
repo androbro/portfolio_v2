@@ -3,6 +3,7 @@
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "../../../sanity/client";
+import { TechIcon } from "./TechIcon";
 
 type Tech = {
 	name: string;
@@ -14,8 +15,10 @@ type TechStackData = Record<string, Tech[]>;
 
 const { projectId = "", dataset = "" } = client.config();
 
-const urlFor = (source: SanityImageSource) =>
-	source ? imageUrlBuilder({ projectId, dataset }).image(source) : null;
+const urlFor = (source: SanityImageSource): string | null | undefined => {
+	if (!source) return null;
+	return imageUrlBuilder({ projectId, dataset }).image(source).url();
+};
 
 interface CategorySectionProps {
 	visibleCategories: [string, Tech[]][];
@@ -43,23 +46,7 @@ export function CategorySection({ visibleCategories }: CategorySectionProps) {
 										key={`${category}-${tech.name}`}
 										className="flex flex-row items-center gap-4 hover:scale-105 transition-transform"
 									>
-										<img
-											src={
-												tech.iconUrl
-													? tech.iconUrl.startsWith("http")
-														? tech.iconUrl
-														: tech.iconUrl.includes(".svg")
-															? tech.iconUrl.startsWith("/icons/")
-																? tech.iconUrl
-																: `/icons/${tech.iconUrl.replace("icons/", "")}`
-															: `/icons/${tech.iconUrl.replace("icons/", "")}.svg`
-													: tech.icon
-														? urlFor(tech.icon)?.width(64).height(64).url()
-														: undefined
-											}
-											alt={`${tech.name} logo`}
-											className="w-16 h-16 object-contain shrink-0"
-										/>
+										<TechIcon tech={tech} urlFor={urlFor} />
 										<span className="text-lg">{tech.name}</span>
 									</div>
 								))}
