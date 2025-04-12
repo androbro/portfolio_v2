@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import type { TechStackDataType } from "../TechStackClient";
 
 // Constants
-const SCROLL_OFFSET = 100; // px - Offset from top when scrolling up
 const PREFERRED_CATEGORY_ORDER = [
 	"frontend",
 	"backend",
@@ -28,31 +27,16 @@ interface UseTechStackToggleProps {
 }
 
 export function useTechStackToggle({
-	sectionElement,
 	defaultCategories,
 	techStackData,
 }: UseTechStackToggleProps) {
 	const [showAll, setShowAll] = useState(false);
 
-	// Scroll to section with specified offset
-	const scrollToSection = useCallback(() => {
-		if (sectionElement) {
-			window.scrollTo({
-				top: sectionElement.offsetTop - SCROLL_OFFSET,
-				behavior: "auto",
-			});
-		}
-	}, [sectionElement]);
-
 	// Toggle between showing all or default categories
 	const handleShowToggle = useCallback(() => {
-		if (showAll) {
-			setShowAll(false);
-			setTimeout(scrollToSection, 10);
-		} else {
-			setShowAll(true);
-		}
-	}, [showAll, scrollToSection]);
+		// Simply toggle the state without any scrolling
+		setShowAll((prevState) => !prevState);
+	}, []);
 
 	// Get default categories as entries
 	const getDefaultCategories = useCallback((): CategoryEntry[] => {

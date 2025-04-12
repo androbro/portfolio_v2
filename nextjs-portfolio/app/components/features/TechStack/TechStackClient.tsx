@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useRef, useState } from "react";
 import { SectionTitle } from "../common/SectionTitle";
 import { CategorySection } from "./components/CategorySection";
 import { useTechStackToggle } from "./hooks/useTechStackToggle";
+
 // Constants
 const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
 
@@ -24,25 +26,73 @@ export function TechStackClient({
 }: TechStackClientProps) {
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
-	const [sectionElement, setSectionElement] = useState<HTMLElement | null>(
-		null,
-	);
-
-	// Update element reference when ref changes
-	useEffect(() => {
-		setSectionElement(sectionRef.current);
-	}, []);
+	const [showExitAnimation, setShowExitAnimation] = useState(false);
 
 	const { showAll, handleShowToggle, getVisibleCategories } =
 		useTechStackToggle({
-			sectionElement,
+			sectionElement: null, // Removed sectionElement since we don't use scroll behavior
 			defaultCategories: DEFAULT_VISIBLE_CATEGORIES,
 			allCategories,
 			techStackData,
 		});
 
-	// Get current visible categories
+	// Get current visible categories - memoize to avoid recalculation on every render
 	const visibleCategories = getVisibleCategories();
+
+	// Split categories into default and expanded for rendering order
+	const defaultCategories = visibleCategories.filter(([category]) =>
+		DEFAULT_VISIBLE_CATEGORIES.includes(category),
+	);
+
+	const expandedCategories = visibleCategories.filter(
+		([category]) => !DEFAULT_VISIBLE_CATEGORIES.includes(category),
+	);
+
+	// Handle toggle with sequenced animations
+	const handleSequencedToggle = () => {
+		if (showAll) {
+			// When hiding, set exit animation flag before toggle
+			setShowExitAnimation(true);
+			setTimeout(() => {
+				handleShowToggle();
+				// Reset exit animation flag after a delay
+				setTimeout(() => {
+					setShowExitAnimation(false);
+				}, 600);
+			}, 50);
+		} else {
+			// When showing more, just toggle directly
+			handleShowToggle();
+		}
+	};
+
+	// Create show more/less button component
+	const showMoreButton = (
+		<motion.button
+			type="button"
+			ref={buttonRef}
+			onClick={handleSequencedToggle}
+			className="self-center px-8 py-3 bg-accent text-black font-light hover:bg-white/90 transition-colors z-10 mt-10"
+			initial={{ opacity: 0, scale: 0.9 }}
+			animate={{
+				opacity: 1,
+				scale: 1,
+				y: [0, -5, 0],
+				transition: {
+					y: {
+						repeat: Number.POSITIVE_INFINITY,
+						repeatType: "reverse",
+						duration: 1.5,
+						ease: "easeInOut",
+					},
+				},
+			}}
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+		>
+			{showAll ? "Show Less" : "Show More"}
+		</motion.button>
+	);
 
 	return (
 		<div
@@ -54,18 +104,54 @@ export function TechStackClient({
 				<SectionTitle title="My Stack" />
 
 				<div className="flex flex-col overflow-hidden">
-					{/* CategorySection handles rendering */}
-					<CategorySection visibleCategories={visibleCategories} />
+					{/* Default categories always visible */}
+					{defaultCategories.map(([category, techs]) => (
+						<CategorySection
+							key={category}
+							category={category}
+							techs={techs}
+							isAnimated={false}
+							exitAnimation={
+								showExitAnimation &&
+								!DEFAULT_VISIBLE_CATEGORIES.includes(category)
+							}
+						/>
+					))}
 
-					{/* Show More/Less button */}
-					<button
-						type="button"
-						ref={buttonRef}
-						onClick={handleShowToggle}
-						className="self-center mt-8 px-6 py-2 bg-accent text-black font-light hover:bg-white/90 transition-colors"
-					>
-						{showAll ? "Show Less" : "Show More"}
-					</button>
+					{/* Expanded categories with animations */}
+					<AnimatePresence mode="wait">
+						{expandedCategories.map(([category, techs]) => (
+							<motion.div
+								key={category}
+								initial={{ opacity: 0, y: 40 }}
+								animate={{
+									opacity: 1,
+									y: 0,
+									transition: {
+										type: "spring",
+										stiffness: 100,
+										damping: 15,
+									},
+								}}
+								exit={{
+									opacity: 0,
+									y: 20,
+									transition: {
+										duration: 0.3,
+									},
+								}}
+							>
+								<CategorySection
+									category={category}
+									techs={techs}
+									isAnimated={true}
+								/>
+							</motion.div>
+						))}
+					</AnimatePresence>
+
+					{/* Show more/less button */}
+					<div className="flex justify-center">{showMoreButton}</div>
 				</div>
 			</div>
 		</div>
