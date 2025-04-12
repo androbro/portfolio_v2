@@ -42,7 +42,7 @@ function CategoryItem({
 	scrollYProgress,
 }: CategoryItemProps) {
 	// Calculate scroll breakpoints for this specific category
-	const startPoint = 0.05 + categoryIndex * 0.15;
+	const startPoint = categoryIndex * 0.1;
 	const midPoint = startPoint + 0.08;
 	const endPoint = startPoint + 0.18;
 
@@ -56,7 +56,7 @@ function CategoryItem({
 	const y = useTransform(
 		scrollYProgress,
 		[startPoint, midPoint, endPoint],
-		[60, 30, 0],
+		[30, 15, 0],
 	);
 
 	return (
@@ -78,24 +78,12 @@ function CategoryItem({
 				{/* Technologies grid */}
 				<div className="md:w-2/3">
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-						{techs.map((tech, techIndex) => {
-							// Stagger animations for tech items within each category
-							const delayFactor = 0.05;
-							const techDelay = techIndex * delayFactor;
-
+						{techs.map((tech) => {
 							return (
 								<motion.div
 									key={`${category}-${tech.name}`}
-									className="flex flex-row items-center gap-4 hover:scale-105 transition-transform"
-									initial={{ opacity: 0, y: 20 }}
-									animate={{
-										opacity: 1,
-										y: 0,
-										transition: {
-											delay: techDelay,
-											duration: 0.3,
-										},
-									}}
+									className="flex flex-row items-center gap-4 "
+									whileHover={{ scale: 1.1 }}
 								>
 									<TechIcon tech={tech} urlFor={urlFor} />
 									<span className="text-lg">{tech.name}</span>
