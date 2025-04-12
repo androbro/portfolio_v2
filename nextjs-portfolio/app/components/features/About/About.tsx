@@ -4,66 +4,76 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
 export function About() {
-	const sectionRef = useRef<HTMLElement>(null);
+	const sectionRef = useRef<HTMLDivElement>(null);
 	const textContainerRef = useRef<HTMLDivElement>(null);
 	const quoteRef = useRef<HTMLDivElement>(null);
 
+	// Use useScroll to get scroll progress for this section
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
 		offset: ["start end", "end start"],
 	});
 
-	// Create specific scroll-linked animations for each element
-	// Format: [startHidden, animateIn, stayVisible] => [opacity0, opacity1, opacity1]
-
-	// Create specific scroll-linked animations for each element
-	// Maps scrollYProgress to opacity and y-position for the quote
-	// const quoteOpacity = useTransform(scrollYProgress, [0, 0.15, 1], [0, 1, 1]); // Opacity changes from 0 to 1 as you scroll down
-	// const quoteY = useTransform(scrollYProgress, [0, 0.15, 1], [50, 0, 0]); // Y position moves from 50px down to its final position
-
-	const quoteY = useTransform(scrollYProgress, [0, 0.2, 1], [100, 0, 0]); // Start from 100px down
-	const quoteOpacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]); // Fade in at 20%
-
-	const headingOpacity = useTransform(
+	// Create scroll-linked animations with useTransform
+	// Format: [start, inView, fullView] => [hidden, partially visible, fully visible]
+	const headerOpacity = useTransform(
 		scrollYProgress,
-		[0.05, 0.2, 1],
-		[0, 1, 1],
+		[0, 0.1, 0.25],
+		[0, 0.5, 1],
 	);
-	const headingY = useTransform(scrollYProgress, [0.05, 0.2, 1], [30, 0, 0]);
+	const headerY = useTransform(scrollYProgress, [0, 0.1, 0.25], [50, 25, 0]);
 
-	const aboutMeOpacity = useTransform(
+	const textOpacity = useTransform(
 		scrollYProgress,
-		[0.1, 0.25, 1],
-		[0, 1, 1],
+		[0.05, 0.15, 0.3],
+		[0, 0.5, 1],
 	);
-	const aboutMeY = useTransform(scrollYProgress, [0.1, 0.25, 1], [30, 0, 0]);
+	const textY = useTransform(scrollYProgress, [0.05, 0.15, 0.3], [50, 25, 0]);
 
-	const para1Opacity = useTransform(scrollYProgress, [0.15, 0.3, 1], [0, 1, 1]);
-	const para1Y = useTransform(scrollYProgress, [0.15, 0.3, 1], [30, 0, 0]);
+	const p1Opacity = useTransform(
+		scrollYProgress,
+		[0.1, 0.25, 0.4],
+		[0, 0.5, 1],
+	);
+	const p1Y = useTransform(scrollYProgress, [0.1, 0.25, 0.4], [50, 25, 0]);
 
-	const para2Opacity = useTransform(scrollYProgress, [0.2, 0.35, 1], [0, 1, 1]);
-	const para2Y = useTransform(scrollYProgress, [0.2, 0.35, 1], [30, 0, 0]);
+	const p2Opacity = useTransform(
+		scrollYProgress,
+		[0.15, 0.3, 0.45],
+		[0, 0.5, 1],
+	);
+	const p2Y = useTransform(scrollYProgress, [0.15, 0.3, 0.45], [50, 25, 0]);
 
-	const para3Opacity = useTransform(scrollYProgress, [0.25, 0.4, 1], [0, 1, 1]);
-	const para3Y = useTransform(scrollYProgress, [0.25, 0.4, 1], [30, 0, 0]);
+	const p3Opacity = useTransform(
+		scrollYProgress,
+		[0.2, 0.35, 0.5],
+		[0, 0.5, 1],
+	);
+	const p3Y = useTransform(scrollYProgress, [0.2, 0.35, 0.5], [50, 25, 0]);
 
 	return (
-		<div id="about" className="flex items-center justify-center py-20">
+		<div
+			id="about"
+			className="flex items-center justify-center py-20"
+			ref={sectionRef}
+		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
-					<div ref={quoteRef}>
-						<motion.h3
-							className="text-4xl md:text-6xl font-light mb-22"
-							style={{
-								opacity: quoteOpacity,
-								y: quoteY,
-							}}
-						>
+					{/* header */}
+					<motion.div
+						ref={quoteRef}
+						style={{
+							opacity: headerOpacity,
+							y: headerY,
+						}}
+					>
+						<h3 className="text-4xl md:text-6xl font-light mb-22">
 							I create meaningful digital experiences that combine aesthetics
 							with functionality and performance.
-						</motion.h3>
-					</div>
+						</h3>
+					</motion.div>
 
+					{/* text container */}
 					<div
 						ref={textContainerRef}
 						className="grid grid-cols-1 gap-8 text-lg text-white/80"
@@ -71,31 +81,35 @@ export function About() {
 						<motion.p
 							className="pb-3 border-b text-muted-foreground"
 							style={{
-								opacity: aboutMeOpacity,
-								y: aboutMeY,
+								opacity: textOpacity,
+								y: textY,
 							}}
 						>
 							About Me
 						</motion.p>
 
 						<div className="flex flex-col md:flex-row gap-8">
+							{/* heading */}
 							<div className="md:w-1/3">
 								<motion.h4
 									className="text-2xl font-light mb-4"
 									style={{
-										opacity: headingOpacity,
-										y: headingY,
+										opacity: textOpacity,
+										y: textY,
 									}}
 								>
 									Hi, I'm Koen.
 								</motion.h4>
 							</div>
+
+							{/* text */}
 							<div className="md:w-2/3 space-y-6">
+								{/* paragraph 1 */}
 								<motion.p
 									className="font-light"
 									style={{
-										opacity: para1Opacity,
-										y: para1Y,
+										opacity: p1Opacity,
+										y: p1Y,
 									}}
 								>
 									I'm a frontend developer with experience in building web and
@@ -103,11 +117,13 @@ export function About() {
 									work focuses on creating responsive and user-friendly
 									interfaces.
 								</motion.p>
+
+								{/* paragraph 2 */}
 								<motion.p
 									className="font-light"
 									style={{
-										opacity: para2Opacity,
-										y: para2Y,
+										opacity: p2Opacity,
+										y: p2Y,
 									}}
 								>
 									I prioritize delivering optimal user experiences by
@@ -116,11 +132,13 @@ export function About() {
 									to become a full-stack React developer and mentor others in
 									the tech community.
 								</motion.p>
+
+								{/* paragraph 3 */}
 								<motion.p
 									className="font-light"
 									style={{
-										opacity: para3Opacity,
-										y: para3Y,
+										opacity: p3Opacity,
+										y: p3Y,
 									}}
 								>
 									Beyond coding, I enjoy playing the piano, baking, cooking, and
