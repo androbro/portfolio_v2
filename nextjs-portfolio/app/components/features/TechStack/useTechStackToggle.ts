@@ -1,4 +1,3 @@
-import { animate } from "motion/react";
 import { useCallback, useState } from "react";
 import type { TechStackDataType } from "./TechStackClient";
 
@@ -26,28 +25,30 @@ export function useTechStackToggle({
 }: UseTechStackToggleProps) {
 	const [showAll, setShowAll] = useState(false);
 
-	// Simplified scroll animation function
-	const smoothScrollTo = useCallback((yPosition: number) => {
-		animate(window.scrollY, yPosition, {
-			duration: 0.5, // Simple, consistent duration
-			ease: "easeIn",
-			onUpdate: (latest) => window.scrollTo(0, latest),
+	// Simple scroll function without animation
+	const scrollTo = useCallback((yPosition: number) => {
+		window.scrollTo({
+			top: yPosition,
+			behavior: "auto",
 		});
 	}, []);
 
 	const handleShowToggle = useCallback(() => {
 		if (showAll && sectionElement) {
 			// --- Show Less ---
-			// Scroll up immediately
-			smoothScrollTo(sectionElement.offsetTop - SCROLL_OFFSET);
-			// Then update state to trigger exit animations
+			// First update state to show fewer categories
 			setShowAll(false);
+			// Then scroll up
+			setTimeout(() => {
+				if (sectionElement) {
+					scrollTo(sectionElement.offsetTop - SCROLL_OFFSET);
+				}
+			}, 10);
 		} else {
 			// --- Show More ---
-			// Just update state. Scroll down will be handled by useEffect after render.
 			setShowAll(true);
 		}
-	}, [showAll, sectionElement, smoothScrollTo]);
+	}, [showAll, sectionElement, scrollTo]);
 
 	// Get visible categories based on showAll state
 	const getVisibleCategories = useCallback(() => {
