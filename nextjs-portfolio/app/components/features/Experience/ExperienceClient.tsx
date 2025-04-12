@@ -58,10 +58,6 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 		offset: ["start end", "end start"],
 	});
 
-	// Create scroll-linked animations
-	const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 1], [0, 1, 1]);
-	const titleY = useTransform(scrollYProgress, [0, 0.1, 1], [50, 0, 0]);
-
 	return (
 		<div id="experience" className="flex items-center justify-center py-20">
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
@@ -69,7 +65,6 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 					<SectionTitle title="Work Experience" />
 					<div className="space-y-12">
 						{experiences.map((exp, index) => {
-							// Create staggered animations for each experience item
 							const itemOpacity = useTransform(
 								scrollYProgress,
 								[0.1 + index * 0.05, 0.2 + index * 0.05, 1],
