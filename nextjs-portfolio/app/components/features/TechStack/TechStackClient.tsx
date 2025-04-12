@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { SectionTitle } from "../common/SectionTitle";
 import { CategorySection } from "./CategorySection";
-import { useTechStackToggle } from "./useTechStackToggle";
+import { useTechStackToggle } from "./hooks/useTechStackToggle";
 // Constants
 const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
 
@@ -55,10 +55,7 @@ export function TechStackClient({
 
 				<div className="flex flex-col overflow-hidden">
 					{/* CategorySection handles rendering */}
-					<CategorySection
-						visibleCategories={visibleCategories}
-						techStackData={techStackData}
-					/>
+					<CategorySection visibleCategories={visibleCategories} />
 
 					{/* Show More/Less button */}
 					<button
