@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SectionTitle } from "../common/SectionTitle";
-import { CategorySection } from "./CategorySection";
+import { CategorySection } from "./components/CategorySection";
 import { useTechStackToggle } from "./hooks/useTechStackToggle";
 // Constants
 const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
