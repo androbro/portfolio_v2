@@ -44,20 +44,20 @@ export function Navbar() {
 							animate={{ opacity: 1 }}
 							transition={{ duration: 0.2 }}
 						>
-							<motion.line 
-								x1="18" 
-								y1="6" 
-								x2="6" 
-								y2="18" 
+							<motion.line
+								x1="18"
+								y1="6"
+								x2="6"
+								y2="18"
 								initial={{ pathLength: 0 }}
 								animate={{ pathLength: 1 }}
 								transition={{ duration: 0.5, delay: 0.1 }}
 							/>
-							<motion.line 
-								x1="6" 
-								y1="6" 
-								x2="18" 
-								y2="18" 
+							<motion.line
+								x1="6"
+								y1="6"
+								x2="18"
+								y2="18"
 								initial={{ pathLength: 0 }}
 								animate={{ pathLength: 1 }}
 								transition={{ duration: 0.5, delay: 0.2 }}
@@ -79,29 +79,29 @@ export function Navbar() {
 							animate={{ opacity: 1 }}
 							transition={{ duration: 0.2 }}
 						>
-							<motion.line 
-								x1="3" 
-								y1="12" 
-								x2="21" 
-								y2="12" 
+							<motion.line
+								x1="3"
+								y1="12"
+								x2="21"
+								y2="12"
 								initial={{ x2: "3" }}
 								animate={{ x2: "21" }}
 								transition={{ duration: 0.4, delay: 0.1 }}
 							/>
-							<motion.line 
-								x1="3" 
-								y1="6" 
-								x2="21" 
-								y2="6" 
+							<motion.line
+								x1="3"
+								y1="6"
+								x2="21"
+								y2="6"
 								initial={{ x2: "3" }}
 								animate={{ x2: "21" }}
 								transition={{ duration: 0.4 }}
 							/>
-							<motion.line 
-								x1="3" 
-								y1="18" 
-								x2="21" 
-								y2="18" 
+							<motion.line
+								x1="3"
+								y1="18"
+								x2="21"
+								y2="18"
 								initial={{ x2: "3" }}
 								animate={{ x2: "21" }}
 								transition={{ duration: 0.4, delay: 0.2 }}
@@ -123,38 +123,32 @@ export function Navbar() {
 					>
 						{/* Social Links */}
 						<div className="flex flex-col gap-4">
-							<span className="text-white/60 text-sm uppercase tracking-wider">Social</span>
+							<span className="text-white/60 text-sm uppercase tracking-wider">
+								Social
+							</span>
 							<div className="flex flex-col gap-3">
 								<Link
-									href="https://github.com"
+									href="https://github.com/androbro"
 									target="_blank"
 									className="text-white hover:text-accent transition-colors"
 								>
 									Github
 								</Link>
 								<Link
-									href="https://linkedin.com"
+									href="https://www.linkedin.com/in/koendevulder"
 									target="_blank"
 									className="text-white hover:text-accent transition-colors"
 								>
 									Linkedin
-								</Link>
-								<Link
-									href="https://facebook.com"
-									target="_blank"
-									className="text-white hover:text-accent transition-colors"
-								>
-									Facebook
-								</Link>
-								<Link href="/old" className="text-white hover:text-accent transition-colors">
-									Old Version
 								</Link>
 							</div>
 						</div>
 
 						{/* Menu Links */}
 						<div className="flex flex-col gap-4 mt-8">
-							<span className="text-white/60 text-sm uppercase tracking-wider">Menu</span>
+							<span className="text-white/60 text-sm uppercase tracking-wider">
+								Menu
+							</span>
 							<div className="flex flex-col gap-3">
 								<Link
 									href="/#hero"
@@ -169,6 +163,13 @@ export function Navbar() {
 								>
 									<span className="inline-block w-2 h-2 rounded-full nav-dot-blue" />
 									About Me
+								</Link>
+								<Link
+									href="/#tech-stack"
+									className="text-white hover:text-accent transition-colors flex items-center gap-2"
+								>
+									<span className="inline-block w-2 h-2 rounded-full nav-dot-teal" />
+									Tech Stack
 								</Link>
 								<Link
 									href="/#experience"
@@ -189,7 +190,9 @@ export function Navbar() {
 
 						{/* Contact Info */}
 						<div className="flex flex-col gap-4 mt-auto">
-							<span className="text-white/60 text-sm uppercase tracking-wider">Get in touch</span>
+							<span className="text-white/60 text-sm uppercase tracking-wider">
+								Get in touch
+							</span>
 							<a
 								href="mailto:devulderk@gmail.com"
 								className="text-white hover:text-accent transition-colors"
