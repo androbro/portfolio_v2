@@ -30,13 +30,13 @@ export function Content({ scrollYProgress }: ContentProps) {
 					y: textY,
 				}}
 			>
-				About Me
+				This is me
 			</motion.p>
 
 			<div className="flex flex-col md:flex-row gap-8">
 				<div className="md:w-1/3">
 					<motion.h4
-						className="text-2xl font-light mb-4"
+						className="text-5xl md:text-2xl font-normal md:font-light mb-4"
 						style={{
 							opacity: textOpacity,
 							y: textY,
