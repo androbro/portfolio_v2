@@ -84,5 +84,6 @@ export function useWorkingHours() {
 		return () => clearInterval(interval);
 	}, []);
 
-	return workHours;
+	// Round down to nearest thousand
+	return Math.floor(workHours / 1000) * 1000;
 }
