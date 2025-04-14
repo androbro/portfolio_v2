@@ -1,15 +1,15 @@
 "use client";
 
-import type { ProjectItem } from "@/app/sanity/lib/transforms"; // Import the shared ProjectItem type
+import type { ProjectItem } from "@/app/sanity/lib/transforms";
 import { type MotionValue, motion, useTransform } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
-import { ProjectContent, ProjectImage } from "./components";
+import { ProjectContent, ProjectImage } from "./";
 
 interface ProjectItemCardProps {
 	project: ProjectItem;
 	index: number;
-	scrollYProgress: MotionValue<number>; // Pass scroll progress from parent
+	scrollYProgress: MotionValue<number>;
 	isExpanded: boolean;
 	onExpand: () => void;
 	layoutId: string;
@@ -95,7 +95,7 @@ export function ProjectItemCard({
 			whileHover={{ scale: 1.03 }}
 			layout
 		>
-			<div className={`flex flex-col md:flex-row h-full`}>
+			<div className="flex flex-col md:flex-row h-full">
 				{/* Project Image */}
 				<ProjectImage
 					project={project}

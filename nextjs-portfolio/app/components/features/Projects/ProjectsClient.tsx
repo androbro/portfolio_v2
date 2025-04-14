@@ -4,7 +4,7 @@ import type { ProjectItem } from "@/app/sanity/lib/transforms";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
 import { SectionTitle } from "../common/SectionTitle";
-import { ProjectItemCard } from "./ProjectItemCard";
+import { ProjectItemCard } from "./components";
 
 interface ProjectsClientProps {
 	projects: ProjectItem[];
