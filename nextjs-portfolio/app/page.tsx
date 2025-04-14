@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
 	return (
-		<main className="min-h-screen">
+		<main className="min-h-screen m-6">
 			{/* Hero Section */}
 			<Hero />
 

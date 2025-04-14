@@ -29,7 +29,7 @@ export function HeroClient({
 			className="min-h-screen flex items-start md:items-center justify-center pt-[20vh] md:pt-10 relative"
 		>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-				<div className="flex flex-col items-start md:items-start m-4">
+				<div className="flex flex-col items-start md:items-start">
 					<Heading />
 					<Bio />
 					<ContactButton />
