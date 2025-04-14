@@ -66,7 +66,7 @@ export function ProjectMobileCard({
 							<span className="text-white/40 font-light">No image</span>
 						</div>
 					)}
-					<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10 z-10" />
+					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 z-10" />
 				</div>
 
 				{/* Content overlay */}
@@ -80,7 +80,7 @@ export function ProjectMobileCard({
 						</span>
 					</div>
 
-					<p className="text-sm text-white/70 line-clamp-2 mb-3">
+					<p className="text-sm text-white/80 line-clamp-2 mb-3">
 						{project.description}
 					</p>
 
