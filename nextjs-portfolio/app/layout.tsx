@@ -35,9 +35,7 @@ export default function RootLayout({
 					<Cursor />
 					<SmoothScroller>
 						<Navbar />
-						<Suspense fallback={<RootLoading />}>
-							{children}
-						</Suspense>
+						<Suspense fallback={<RootLoading />}>{children}</Suspense>
 					</SmoothScroller>
 				</CursorContextProvider>
 				<LoadingScreen />

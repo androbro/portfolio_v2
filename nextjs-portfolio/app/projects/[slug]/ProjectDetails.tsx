@@ -8,9 +8,9 @@ export default function ProjectDetails({ project }: { project: ProjectItem }) {
 	return (
 		<main className="min-h-screen">
 			{/* Project Header Section */}
-			<section
+			<div
 				id="project-header"
-				className="flex items-center justify-center pt-20"
+				className="flex items-center justify-center md:pt-20"
 			>
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 					<motion.div
@@ -22,12 +22,12 @@ export default function ProjectDetails({ project }: { project: ProjectItem }) {
 						<ProjectHeader project={project} />
 					</motion.div>
 				</div>
-			</section>
+			</div>
 
 			{/* Project Content Section */}
-			<section
+			<div
 				id="project-content"
-				className="flex items-center justify-center mt-2"
+				className="flex items-center justify-center m-6 mt-2 "
 			>
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 					<motion.div
@@ -38,7 +38,7 @@ export default function ProjectDetails({ project }: { project: ProjectItem }) {
 						<ProjectContent project={project} />
 					</motion.div>
 				</div>
-			</section>
+			</div>
 		</main>
 	);
 }
