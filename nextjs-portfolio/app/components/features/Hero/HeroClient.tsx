@@ -1,12 +1,13 @@
 "use client";
 
+import posthog from "posthog-js";
+import { useEffect } from "react";
 import { ScrollArrow } from "../../ui/ScrollArrow";
 import { Bio } from "./components/Bio";
 import { ContactButton } from "./components/ContactButton";
 import { Heading } from "./components/Heading";
 import { Stats } from "./components/stats/Stats";
 import { useWorkingHours } from "./hooks/useWorkingHours";
-
 interface HeroClientProps {
 	projectsCount: number;
 	yearsExperience: number;
@@ -24,6 +25,12 @@ export function HeroClient({
 	backendMonths,
 }: HeroClientProps) {
 	const workHours = useWorkingHours();
+
+	useEffect(() => {
+		posthog.capture("hero_viewed", {
+			projects_count: projectsCount,
+		});
+	}, [projectsCount]);
 
 	return (
 		<div

@@ -9,6 +9,7 @@ import { LoadingScreen } from "./components/ui/LoadingScreen";
 import { SmoothScroller } from "./components/ui/SmoothScroller";
 import "./globals.css";
 import RootLoading from "./loading";
+import { PostHogProvider } from "./components/PostHogProvider";
 
 const roboto = Roboto({
 	weight: ["100", "300", "400", "500", "700"],
@@ -18,27 +19,26 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
 	title: "Koen De Vulder | Frontend Developer",
-	description:
-		"Frontend Developer specializing in building high-performance, scalable web applications",
+	description: "Frontend Developer specializing in building high-performance, scalable web applications",
 };
 
 export default function RootLayout({
 	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en">
 			<body className={`${roboto.className} antialiased`}>
-				<BackgroundStars />
-				<CursorContextProvider>
-					<Cursor />
-					<SmoothScroller>
-						<Navbar />
-						<Suspense fallback={<RootLoading />}>{children}</Suspense>
-					</SmoothScroller>
-				</CursorContextProvider>
-				<LoadingScreen />
+				<PostHogProvider>
+					<BackgroundStars />
+					<CursorContextProvider>
+						<Cursor />
+						<SmoothScroller>
+							<Navbar />
+							<Suspense fallback={<RootLoading />}>{children}</Suspense>
+						</SmoothScroller>
+					</CursorContextProvider>
+					<LoadingScreen />
+				</PostHogProvider>
 			</body>
 		</html>
 	);

@@ -18,6 +18,8 @@
 		"motion": "^12.6.2",
 		"next": "15.2.4",
 		"next-sanity": "^9.9.9",
+		"posthog-js": "^1.236.0",
+		"posthog-node": "^4.11.5",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	},
