@@ -1,7 +1,7 @@
 "use client";
 
 import type { ProjectItem } from "@/app/sanity/lib/transforms";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll } from "motion/react";
 import { useRef, useState } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { SectionTitle } from "../common/SectionTitle";
@@ -14,16 +14,12 @@ interface ProjectsClientProps {
 export function ProjectsClient({ projects }: ProjectsClientProps) {
 	const sectionRef = useRef<HTMLElement>(null);
 	const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-	const isMediumScreen = useMediaQuery("(min-width: 768px)");
+	const isMediumScreen = useMediaQuery("(min-width: 1024px)");
 
 	const { scrollYProgress } = useScroll({
 		target: sectionRef,
 		offset: ["start end", "end start"],
 	});
-
-	// Create scroll-linked animations for the section title
-	const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]); // Simplified range
-	const titleY = useTransform(scrollYProgress, [0, 0.1], [50, 0]); // Simplified range
 
 	const handleExpand = (index: number) => {
 		setExpandedIndex(index === expandedIndex ? null : index);
