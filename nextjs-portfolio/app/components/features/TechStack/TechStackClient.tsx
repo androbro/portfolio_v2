@@ -96,7 +96,7 @@ export function TechStackClient({
 
 	return (
 		<div
-			id="skills"
+			id="tech-stack"
 			ref={sectionRef}
 			className="flex flex-col items-center justify-center py-20 w-full overflow-hidden"
 		>
