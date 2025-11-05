@@ -2,6 +2,15 @@
 
 This guide provides step-by-step instructions for adding the Certifisc project, new tech stacks, and work experience to your Sanity CMS.
 
+## Recent Improvements
+
+✅ **Rich Text Support:** The portfolio now properly renders rich text (Portable Text) from Sanity CMS:
+- Project descriptions support headings, lists, bold, italic, and code formatting
+- Work experience descriptions now display formatted content with proper styling
+- All markup from Sanity will render correctly on the website
+
+✅ **Improved Project Links:** The "Visit Website" link has been moved to the top of project detail pages for better visibility and clarity.
+
 ## Prerequisites
 
 1. Start Sanity Studio:
@@ -61,6 +70,10 @@ You need to add these new technologies to Sanity:
 - **End Date:** Leave empty (current position)
 
 ### Description / Responsibilities:
+
+**Note:** The description field supports rich text formatting. You can use headings, lists, bold, italic, and other formatting options in Sanity Studio. The content will be properly displayed on the website.
+
+Suggested content:
 ```
 Developed and designed the complete Certifisc website from concept to production.
 
@@ -112,6 +125,10 @@ A fully custom-designed website for Certifisc with complete design, development,
 ```
 
 **Full Description (detailed page content):**
+
+**Note:** This field supports rich text formatting including headings (H2, H3, H4), bullet lists, numbered lists, bold text, italic text, and inline code. Use these formatting options in Sanity Studio to create a well-structured project description.
+
+Suggested content:
 ```
 Complete Website Design & Development for Certifisc
 
