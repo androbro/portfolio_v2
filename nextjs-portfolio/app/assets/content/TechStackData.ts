@@ -24,6 +24,7 @@ export const techStackData = {
 		{ name: "C#", iconUrl: "/icons/csharp.svg" },
 		{ name: "Node.js", iconUrl: "/icons/nodejs.svg" },
 		{ name: "WordPress", iconUrl: "/icons/wordpress.svg" },
+		{ name: "PayloadCMS", iconUrl: "/icons/payloadcms.svg" },
 	],
 	database: [
 		{ name: "SQL", iconUrl: "/icons/sql.svg" },
@@ -39,6 +40,9 @@ export const techStackData = {
 		{ name: "Atlassian", iconUrl: "/icons/atlassian.svg" },
 		{ name: "TeamCity", iconUrl: "/icons/teamcity.svg" },
 		{ name: "Sentry", iconUrl: "/icons/sentry.svg" },
+		{ name: "Asana", iconUrl: "/icons/asana.svg" },
+		{ name: "Google Analytics", iconUrl: "/icons/googleanalytics.svg" },
+		{ name: "PostHog", iconUrl: "/icons/posthog.svg" },
 	],
 	testing: [
 		{ name: "Vitest", iconUrl: "/icons/vitest.svg" },
