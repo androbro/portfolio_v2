@@ -43,8 +43,7 @@ const calculateWorkingHours = (): number => {
 	const remainingDaysInYear = totalDays % 365;
 
 	// Prorated vacation days
-	const vacationDays =
-		yearsWorked * 32 + Math.floor((remainingDaysInYear / 365) * 32);
+	const vacationDays = yearsWorked * 32 + Math.floor((remainingDaysInYear / 365) * 32);
 
 	// Final working days
 	const workingDays = totalWeekdays - vacationDays;

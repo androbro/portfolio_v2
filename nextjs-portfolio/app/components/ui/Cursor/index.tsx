@@ -6,8 +6,7 @@ import { useCursorContext } from "./CursorContext";
 import "./cursor.css";
 
 export function Cursor() {
-	const { initialCursorVariant, animateCursorVariant, animateCursor } =
-		useCursorContext();
+	const { initialCursorVariant, animateCursorVariant, animateCursor } = useCursorContext();
 	const cursorX = useMotionValue(-100);
 	const cursorY = useMotionValue(-100);
 
@@ -78,9 +77,7 @@ export function Cursor() {
 
 		// Set up button hover effects
 		const setupButtonHoverEffects = () => {
-			const buttons = document.querySelectorAll(
-				'a, button, [role="button"], input[type="submit"]',
-			);
+			const buttons = document.querySelectorAll('a, button, [role="button"], input[type="submit"]');
 
 			for (const button of buttons) {
 				button.addEventListener("mouseenter", () => {
@@ -95,9 +92,7 @@ export function Cursor() {
 
 		// Set up text hover effects
 		const setupTextHoverEffects = () => {
-			const textElements = document.querySelectorAll(
-				"p, h1, h2, h3, h4, h5, h6, span",
-			);
+			const textElements = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, span");
 
 			for (const element of textElements) {
 				element.addEventListener("mouseenter", () => {

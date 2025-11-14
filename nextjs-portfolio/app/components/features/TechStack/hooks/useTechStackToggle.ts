@@ -26,10 +26,7 @@ interface UseTechStackToggleProps {
 	techStackData: TechStackDataType;
 }
 
-export function useTechStackToggle({
-	defaultCategories,
-	techStackData,
-}: UseTechStackToggleProps) {
+export function useTechStackToggle({ defaultCategories, techStackData }: UseTechStackToggleProps) {
 	const [showAll, setShowAll] = useState(false);
 
 	// Toggle between showing all or default categories
@@ -46,25 +43,22 @@ export function useTechStackToggle({
 	}, [defaultCategories, techStackData]);
 
 	// Compare categories based on preferred order
-	const compareCategories = useCallback(
-		(catA: string, catB: string): number => {
-			const indexA = PREFERRED_CATEGORY_ORDER.indexOf(catA);
-			const indexB = PREFERRED_CATEGORY_ORDER.indexOf(catB);
+	const compareCategories = useCallback((catA: string, catB: string): number => {
+		const indexA = PREFERRED_CATEGORY_ORDER.indexOf(catA);
+		const indexB = PREFERRED_CATEGORY_ORDER.indexOf(catB);
 
-			// If both categories are in preferred order, sort by position
-			if (indexA !== -1 && indexB !== -1) {
-				return indexA - indexB;
-			}
+		// If both categories are in preferred order, sort by position
+		if (indexA !== -1 && indexB !== -1) {
+			return indexA - indexB;
+		}
 
-			// If only one category is in preferred order, it comes first
-			if (indexA !== -1) return -1;
-			if (indexB !== -1) return 1;
+		// If only one category is in preferred order, it comes first
+		if (indexA !== -1) return -1;
+		if (indexB !== -1) return 1;
 
-			// Otherwise, sort alphabetically
-			return catA.localeCompare(catB);
-		},
-		[],
-	);
+		// Otherwise, sort alphabetically
+		return catA.localeCompare(catB);
+	}, []);
 
 	// Get all categories as sorted entries
 	const getAllCategories = useCallback((): CategoryEntry[] => {

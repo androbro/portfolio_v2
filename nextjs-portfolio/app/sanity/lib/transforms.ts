@@ -105,9 +105,7 @@ export function transformSanityProjects(
 			descriptionText = item.description
 				.map((block: PortableTextBlock) => {
 					if (block._type === "block" && Array.isArray(block.children)) {
-						return block.children
-							.map((child: PortableTextSpan) => child.text || "")
-							.join("");
+						return block.children.map((child: PortableTextSpan) => child.text || "").join("");
 					}
 					return "";
 				})
@@ -154,9 +152,7 @@ export function transformSanityTechStack(
 		// Add the tech item to the appropriate category
 		transformedTechStack[item.category].push({
 			name: item.name,
-			iconUrl: item.icon
-				? urlForImage(item.icon).url()
-				: `/icons/${item.name.toLowerCase()}.svg`,
+			iconUrl: item.icon ? urlForImage(item.icon).url() : `/icons/${item.name.toLowerCase()}.svg`,
 		});
 	}
 

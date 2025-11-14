@@ -10,26 +10,16 @@ const portableTextComponents: PortableTextComponents = {
 		normal: ({ children }) => (
 			<p className="text-lg text-white/80 mb-4 leading-relaxed">{children}</p>
 		),
-		h2: ({ children }) => (
-			<h2 className="text-3xl font-light text-white mt-8 mb-4">{children}</h2>
-		),
-		h3: ({ children }) => (
-			<h3 className="text-2xl font-light text-white mt-6 mb-3">{children}</h3>
-		),
-		h4: ({ children }) => (
-			<h4 className="text-xl font-light text-white mt-4 mb-2">{children}</h4>
-		),
+		h2: ({ children }) => <h2 className="text-3xl font-light text-white mt-8 mb-4">{children}</h2>,
+		h3: ({ children }) => <h3 className="text-2xl font-light text-white mt-6 mb-3">{children}</h3>,
+		h4: ({ children }) => <h4 className="text-xl font-light text-white mt-4 mb-2">{children}</h4>,
 	},
 	list: {
 		bullet: ({ children }) => (
-			<ul className="list-disc list-inside text-lg text-white/80 mb-4 space-y-2">
-				{children}
-			</ul>
+			<ul className="list-disc list-inside text-lg text-white/80 mb-4 space-y-2">{children}</ul>
 		),
 		number: ({ children }) => (
-			<ol className="list-decimal list-inside text-lg text-white/80 mb-4 space-y-2">
-				{children}
-			</ol>
+			<ol className="list-decimal list-inside text-lg text-white/80 mb-4 space-y-2">{children}</ol>
 		),
 	},
 	listItem: {
@@ -37,9 +27,7 @@ const portableTextComponents: PortableTextComponents = {
 		number: ({ children }) => <li className="ml-4">{children}</li>,
 	},
 	marks: {
-		strong: ({ children }) => (
-			<strong className="font-semibold text-white">{children}</strong>
-		),
+		strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
 		em: ({ children }) => <em className="italic">{children}</em>,
 		code: ({ children }) => (
 			<code className="bg-white/10 px-2 py-1 rounded text-accent font-mono text-sm">
@@ -61,10 +49,7 @@ export function ProjectContent({ project }: { project: ProjectItem }) {
 				<p className="text-lg text-white/80">{project.fullDescription}</p>
 			) : (
 				<div className="text-lg text-white/80">
-					<PortableText
-						value={project.fullDescription}
-						components={portableTextComponents}
-					/>
+					<PortableText value={project.fullDescription} components={portableTextComponents} />
 				</div>
 			)}
 			<Challenges challenges={project.challenges} />

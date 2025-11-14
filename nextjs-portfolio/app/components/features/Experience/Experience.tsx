@@ -24,24 +24,17 @@ interface PortableTextBlock {
 
 export async function Experience() {
 	// Fetch data from Sanity
-	const experienceItems = await client.fetch<SanityDocument[]>(
-		allExperienceQuery,
-		{},
-		options,
-	);
+	const experienceItems = await client.fetch<SanityDocument[]>(allExperienceQuery, {}, options);
 
 	// Transform Sanity data to match the expected format
-	const transformedExperiences: ExperienceItem[] = experienceItems.map(
-		(item) => {
-			return {
-				company: item.company,
-				role: item.role,
-				period:
-					item.period || `${item.startDate} - ${item.endDate || "Present"}`,
-				description: item.description || "",
-			};
-		},
-	);
+	const transformedExperiences: ExperienceItem[] = experienceItems.map((item) => {
+		return {
+			company: item.company,
+			role: item.role,
+			period: item.period || `${item.startDate} - ${item.endDate || "Present"}`,
+			description: item.description || "",
+		};
+	});
 
 	// Return the client component with the fetched data
 	return <ExperienceClient experiences={transformedExperiences} />;

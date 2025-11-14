@@ -26,10 +26,7 @@ export function ProjectsClient({ projects }: ProjectsClientProps) {
 	};
 
 	return (
-		<div
-			id="projects"
-			className="flex items-center justify-center py-10 sm:py-20"
-		>
+		<div id="projects" className="flex items-center justify-center py-10 sm:py-20">
 			<div className="content-container w-full md:w-4xl lg:w-6xl xl:w-7xl px-4 sm:px-6 md:px-8">
 				<div className="relative">
 					<SectionTitle title="My Projects" />

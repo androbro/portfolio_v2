@@ -2,9 +2,7 @@ import { SectionTitle } from "@/app/components/features/common/SectionTitle";
 import type { ProjectItem } from "@/app/sanity/lib/transforms";
 import { motion } from "motion/react";
 
-export function Challenges({
-	challenges,
-}: { challenges: ProjectItem["challenges"] }) {
+export function Challenges({ challenges }: { challenges: ProjectItem["challenges"] }) {
 	if (!challenges || challenges.length === 0) return null;
 
 	return (
@@ -20,9 +18,7 @@ export function Challenges({
 						transition={{ duration: 0.5, delay: index * 0.1 }}
 						viewport={{ once: true }}
 					>
-						<h3 className="text-xl font-medium text-accent mb-3">
-							{item.challenge}
-						</h3>
+						<h3 className="text-xl font-medium text-accent mb-3">{item.challenge}</h3>
 						<p className="text-white/80">{item.solution}</p>
 					</motion.div>
 				))}

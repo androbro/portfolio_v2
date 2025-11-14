@@ -1,15 +1,15 @@
 "use client";
 
+import { motion } from "motion/react";
 import posthog from "posthog-js";
 import { useEffect } from "react";
-import { motion } from "motion/react";
+import { DownloadResumeButton } from "../../ui/DownloadResumeButton";
 import { ScrollArrow } from "../../ui/ScrollArrow";
 import { Bio } from "./components/Bio";
 import { ContactButton } from "./components/ContactButton";
 import { Heading } from "./components/Heading";
 import { Stats } from "./components/stats/Stats";
 import { useWorkingHours } from "./hooks/useWorkingHours";
-import { DownloadResumeButton } from "../../ui/DownloadResumeButton";
 interface HeroClientProps {
 	projectsCount: number;
 	yearsExperience: number;

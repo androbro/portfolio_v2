@@ -29,19 +29,14 @@ export function Stats({
 						<p className="font-light">Experience Breakdown:</p>
 						<ul className="text-left list-disc pl-4 mt-1 space-y-1">
 							<li>
-								Frontend: {frontendYears}{" "}
-								{frontendYears === 1 ? "year" : "years"}{" "}
+								Frontend: {frontendYears} {frontendYears === 1 ? "year" : "years"}{" "}
 								{frontendMonths > 0 &&
-									`and ${frontendMonths} ${
-										frontendMonths === 1 ? "month" : "months"
-									}`}
+									`and ${frontendMonths} ${frontendMonths === 1 ? "month" : "months"}`}
 							</li>
 							<li>
 								Backend: {backendYears} {backendYears === 1 ? "year" : "years"}{" "}
 								{backendMonths > 0 &&
-									`and ${backendMonths} ${
-										backendMonths === 1 ? "month" : "months"
-									}`}
+									`and ${backendMonths} ${backendMonths === 1 ? "month" : "months"}`}
 							</li>
 						</ul>
 					</>
