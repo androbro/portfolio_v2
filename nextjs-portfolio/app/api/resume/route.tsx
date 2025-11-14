@@ -36,6 +36,10 @@ async function translateToDutch(data: any): Promise<any> {
 			title: proj.title,
 			description: proj.description,
 		})),
+		education: data.education?.map((edu: any) => ({
+			degree: edu.degree,
+			institution: edu.institution,
+		})),
 	});
 
 	const message = await anthropic.messages.create({
@@ -89,6 +93,11 @@ Here's the resume content to translate:\n\n${contentToTranslate}`,
 			title: translatedContent.projects[idx]?.title || proj.title,
 			description: translatedContent.projects[idx]?.description || proj.description,
 		})),
+		education: data.education?.map((edu: any, idx: number) => ({
+			...edu,
+			degree: translatedContent.education?.[idx]?.degree || edu.degree,
+			institution: translatedContent.education?.[idx]?.institution || edu.institution,
+		})),
 	};
 }
 
@@ -136,14 +145,51 @@ export async function GET(request: Request) {
 		}
 
 		// Resume data
+		const bioWithSkills = `Passionate frontend developer with expertise in React, React Native, and Angular. I specialize in creating responsive, user-friendly web and mobile applications with a focus on modern design principles and best practices.
+
+I am able to work independently and build & maintain fullstack projects with a focus on frontend development. I have strong analytical and design skills, covering both visual and structural aspects of projects.
+
+I am team-oriented and prefer collaborative environments for continuous learning and knowledge sharing. I actively leverage AI tools daily to optimize workflow and increase productivity. I have experience in client communication, conducting demos, and providing on-site technical support.`;
+
 		let resumeData = {
 			name: "Koen De Vulder",
 			title: "Frontend Developer",
 			email: "devulderk@gmail.com",
-			bio: "Passionate frontend developer with expertise in React, React Native, and Angular. I specialize in creating responsive, user-friendly web and mobile applications with a focus on modern design principles and best practices. Always eager to learn and expand my skill set while delivering high-quality solutions.",
+			phone: "+32 488 40 31 89",
+			location: "Ghent, Belgium",
+			linkedin: "https://www.linkedin.com/in/koendevulder",
+			github: "https://github.com/androbro",
+			website: "https://www.devulderk.com",
+			bio: bioWithSkills,
 			workExperiences: sortedExperiences,
 			techStacks: techStacks,
 			projects: sortedProjects,
+			education: [
+				{
+					degree: ".NET Development Bootcamp",
+					institution: "Multimedi",
+					location: "Heverlee, Belgium",
+					startDate: "2020-03-01",
+					endDate: "2020-12-01",
+				},
+				{
+					degree: "Industrial Electricity",
+					institution: "High School",
+					location: "Belgium",
+					startDate: "",
+					endDate: "",
+				},
+			],
+			languages: [
+				{
+					language: "Dutch",
+					proficiency: "Native",
+				},
+				{
+					language: "English",
+					proficiency: "Proficient",
+				},
+			],
 			profileImage: profileImageBase64 || undefined,
 		};
 
