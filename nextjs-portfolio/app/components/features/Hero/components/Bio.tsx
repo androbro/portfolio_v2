@@ -8,8 +8,8 @@ export function Bio() {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.8, delay: 0.5 }}
 		>
-			Hi! I'm Koen De Vulder. Aspiring Frontend Composer | Crafting Harmony with
-			React | Fueling Curiosity with Coffee.
+			Hi! I'm Koen De Vulder. Aspiring Frontend Composer | Crafting Harmony with React | Fueling
+			Curiosity with Coffee.
 		</motion.p>
 	);
 }

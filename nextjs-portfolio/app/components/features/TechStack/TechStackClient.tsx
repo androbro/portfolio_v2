@@ -10,31 +10,24 @@ import { useTechStackToggle } from "./hooks/useTechStackToggle";
 const DEFAULT_VISIBLE_CATEGORIES = ["frontend", "backend", "database"];
 
 // Type for the tech stack data
-export type TechStackDataType = Record<
-	string,
-	{ name: string; iconUrl: string }[]
->;
+export type TechStackDataType = Record<string, { name: string; iconUrl: string }[]>;
 
 interface TechStackClientProps {
 	techStackData: TechStackDataType;
 	allCategories: string[];
 }
 
-export function TechStackClient({
-	techStackData,
-	allCategories,
-}: TechStackClientProps) {
+export function TechStackClient({ techStackData, allCategories }: TechStackClientProps) {
 	const sectionRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const [showExitAnimation, setShowExitAnimation] = useState(false);
 
-	const { showAll, handleShowToggle, getVisibleCategories } =
-		useTechStackToggle({
-			sectionElement: null, // Removed sectionElement since we don't use scroll behavior
-			defaultCategories: DEFAULT_VISIBLE_CATEGORIES,
-			allCategories,
-			techStackData,
-		});
+	const { showAll, handleShowToggle, getVisibleCategories } = useTechStackToggle({
+		sectionElement: null, // Removed sectionElement since we don't use scroll behavior
+		defaultCategories: DEFAULT_VISIBLE_CATEGORIES,
+		allCategories,
+		techStackData,
+	});
 
 	// Get current visible categories - memoize to avoid recalculation on every render
 	const visibleCategories = getVisibleCategories();
@@ -111,10 +104,7 @@ export function TechStackClient({
 							category={category}
 							techs={techs}
 							isAnimated={false}
-							exitAnimation={
-								showExitAnimation &&
-								!DEFAULT_VISIBLE_CATEGORIES.includes(category)
-							}
+							exitAnimation={showExitAnimation && !DEFAULT_VISIBLE_CATEGORIES.includes(category)}
 						/>
 					))}
 
@@ -141,11 +131,7 @@ export function TechStackClient({
 									},
 								}}
 							>
-								<CategorySection
-									category={category}
-									techs={techs}
-									isAnimated={true}
-								/>
+								<CategorySection category={category} techs={techs} isAnimated={true} />
 							</motion.div>
 						))}
 					</AnimatePresence>

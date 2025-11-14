@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { DownloadResumeButton } from "../../ui/DownloadResumeButton";
 import { SectionTitle } from "../common/SectionTitle";
 export function Contact() {
 	return (
@@ -20,26 +21,36 @@ export function Contact() {
 						Let's connect.
 					</h3>
 					<p className="text-white/60 max-w-2xl font-light">
-						I'm always open to discussing new projects, creative ideas, or
-						opportunities to be part of your vision. Feel free to reach out if
-						you're looking for a developer who can bring your ideas to life.
+						I'm always open to discussing new projects, creative ideas, or opportunities to be part
+						of your vision. Feel free to reach out if you're looking for a developer who can bring
+						your ideas to life.
 					</p>
 				</motion.div>
 
-				<motion.a
-					href="mailto:devulderk@gmail.com"
-					className="inline-block bg-accent text-black px-8 py-3 font-light"
-					initial={{ y: 30, opacity: 0 }}
-					whileInView={{ y: 0, opacity: 1 }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-					viewport={{ once: false }}
-					whileHover={{
-						backgroundColor: "rgba(220, 220, 220, 1)",
-						scale: 1.05,
-					}}
-				>
-					devulderk@gmail.com
-				</motion.a>
+				<div className="flex flex-wrap gap-4">
+					<motion.a
+						href="mailto:devulderk@gmail.com"
+						className="inline-block bg-accent text-black px-8 py-3 font-light"
+						initial={{ y: 30, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: false }}
+						whileHover={{
+							backgroundColor: "rgba(220, 220, 220, 1)",
+							scale: 1.05,
+						}}
+					>
+						devulderk@gmail.com
+					</motion.a>
+					<motion.div
+						initial={{ y: 30, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.8, delay: 0.3 }}
+						viewport={{ once: false }}
+					>
+						<DownloadResumeButton variant="secondary" />
+					</motion.div>
+				</div>
 			</div>
 		</div>
 	);

@@ -11,18 +11,11 @@ export function Content({ scrollYProgress }: ContentProps) {
 	const textContainerRef = useRef<HTMLDivElement>(null);
 
 	// Create scroll-linked animations with useTransform
-	const textOpacity = useTransform(
-		scrollYProgress,
-		[0.05, 0.15, 0.3],
-		[0, 0.5, 1],
-	);
+	const textOpacity = useTransform(scrollYProgress, [0.05, 0.15, 0.3], [0, 0.5, 1]);
 	const textY = useTransform(scrollYProgress, [0.05, 0.15, 0.3], [50, 25, 0]);
 
 	return (
-		<div
-			ref={textContainerRef}
-			className="grid grid-cols-1 gap-8 text-lg text-white/80"
-		>
+		<div ref={textContainerRef} className="grid grid-cols-1 gap-8 text-lg text-white/80">
 			<motion.p
 				className="pb-3 border-b text-muted-foreground"
 				style={{
