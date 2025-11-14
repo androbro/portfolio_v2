@@ -125,34 +125,47 @@ const styles = StyleSheet.create({
 		fontSize: 9,
 		color: "#d0d0d0",
 	},
+	projectsGrid: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		gap: 8,
+	},
 	projectItem: {
-		marginBottom: 6,
+		width: "31%",
+		marginBottom: 8,
 	},
 	projectTitle: {
-		fontSize: 10,
+		fontSize: 9,
 		fontWeight: "bold",
 		color: "#ededed",
-		marginBottom: 1,
+		marginBottom: 2,
 	},
 	projectDescription: {
-		fontSize: 8,
+		fontSize: 7,
 		color: "#d0d0d0",
 		lineHeight: 1.3,
-		marginBottom: 2,
+		marginBottom: 3,
 	},
 	projectTags: {
 		flexDirection: "row",
 		flexWrap: "wrap",
-		marginTop: 1,
+		marginTop: 2,
 	},
 	projectTag: {
-		fontSize: 7,
+		fontSize: 6,
 		color: "#00ff7f",
 		backgroundColor: "#1a3a2a",
-		padding: "1 4",
-		marginRight: 3,
+		padding: "1 3",
+		marginRight: 2,
 		marginBottom: 2,
 		borderRadius: 2,
+	},
+	twoColumnContainer: {
+		flexDirection: "row",
+		gap: 15,
+	},
+	column: {
+		flex: 1,
 	},
 	educationItem: {
 		marginBottom: 10,
@@ -167,6 +180,16 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		color: "#00ff7f",
 		marginBottom: 2,
+	},
+	interestItem: {
+		fontSize: 9,
+		color: "#d0d0d0",
+		lineHeight: 1.5,
+		marginBottom: 4,
+	},
+	interestBullet: {
+		color: "#00ff7f",
+		marginRight: 5,
 	},
 	footer: {
 		position: "absolute",
@@ -205,6 +228,7 @@ interface ResumeData {
 		language: string;
 		proficiency: string;
 	}>;
+	interests?: string[];
 	profileImage?: string;
 }
 
@@ -243,6 +267,7 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 		projects,
 		education,
 		languages,
+		interests,
 		profileImage,
 	} = data;
 
@@ -299,9 +324,10 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 									linkedin.com/in/koendevulder
 								</Link>
 							)}
+							{linkedin && github && <Text style={styles.contactItem}> • </Text>}
 							{github && (
 								<Link src={github} style={styles.contactLink}>
-									• github.com/androbro
+									github.com/androbro
 								</Link>
 							)}
 						</View>
@@ -352,30 +378,71 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 				{/* Projects Section */}
 				<View style={styles.section}>
 					<Text style={styles.sectionTitle}>Projects</Text>
-					{projects.map((project, index) => (
-						<View key={index} style={styles.projectItem}>
-							{project.slug?.current ? (
-								<Link
-									src={`https://www.devulderk.com/projects/${project.slug.current}`}
-									style={styles.projectTitle}
-								>
-									{project.title}
-								</Link>
-							) : (
-								<Text style={styles.projectTitle}>{project.title}</Text>
-							)}
-							<Text style={styles.projectDescription}>{project.description}</Text>
-							{project.tags && project.tags.length > 0 && (
-								<View style={styles.projectTags}>
-									{project.tags.map((tag: any, tagIndex: number) => (
-										<Text key={tagIndex} style={styles.projectTag}>
-											{tag.name}
+					<View style={styles.projectsGrid}>
+						{projects.map((project, index) => (
+							<View key={index} style={styles.projectItem}>
+								{project.slug?.current ? (
+									<Link
+										src={`https://www.devulderk.com/projects/${project.slug.current}`}
+										style={styles.projectTitle}
+									>
+										{project.title}
+									</Link>
+								) : (
+									<Text style={styles.projectTitle}>{project.title}</Text>
+								)}
+								<Text style={styles.projectDescription}>{project.description}</Text>
+								{project.tags && project.tags.length > 0 && (
+									<View style={styles.projectTags}>
+										{project.tags.map((tag: any, tagIndex: number) => (
+											<Text key={tagIndex} style={styles.projectTag}>
+												{tag.name}
+											</Text>
+										))}
+									</View>
+								)}
+							</View>
+						))}
+					</View>
+				</View>
+
+				{/* Education and Interests - Two Column Layout */}
+				<View style={styles.section}>
+					<View style={styles.twoColumnContainer}>
+
+						{/* Interests Column */}
+						{interests && interests.length > 0 && (
+							<View style={styles.column}>
+								<Text style={styles.sectionTitle}>When I'm Not Coding</Text>
+								{interests.map((interest, index) => (
+									<Text key={index} style={styles.interestItem}>
+										<Text style={styles.interestBullet}>•</Text>
+										{interest}
+									</Text>
+								))}
+							</View>
+						)}
+						
+						{/* Education Column */}
+						{education && education.length > 0 && (
+							<View style={styles.column}>
+								<Text style={styles.sectionTitle}>Education</Text>
+								{education.map((edu, index) => (
+									<View key={index} style={styles.educationItem}>
+										<Text style={styles.degree}>{edu.degree}</Text>
+										<Text style={styles.institution}>
+											{edu.institution} • {edu.location}
 										</Text>
-									))}
-								</View>
-							)}
-						</View>
-					))}
+										{edu.startDate && (
+											<Text style={styles.date}>
+												{formatDate(edu.startDate)} - {edu.endDate ? formatDate(edu.endDate) : "Present"}
+											</Text>
+										)}
+									</View>
+								))}
+							</View>
+						)}
+					</View>
 				</View>
 
 				{/* Footer */}
@@ -383,33 +450,6 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 					<Text>Generated from portfolio website • {new Date().toLocaleDateString()}</Text>
 				</View>
 			</Page>
-
-			{/* Page 3 - Education */}
-			{education && education.length > 0 && (
-				<Page size="A4" style={styles.page}>
-					<View style={styles.section}>
-						<Text style={styles.sectionTitle}>Education</Text>
-						{education.map((edu, index) => (
-							<View key={index} style={styles.educationItem}>
-								<Text style={styles.degree}>{edu.degree}</Text>
-								<Text style={styles.institution}>
-									{edu.institution} • {edu.location}
-								</Text>
-								{edu.startDate && (
-									<Text style={styles.date}>
-										{formatDate(edu.startDate)} - {edu.endDate ? formatDate(edu.endDate) : "Present"}
-									</Text>
-								)}
-							</View>
-						))}
-					</View>
-
-					{/* Footer */}
-					<View style={styles.footer}>
-						<Text>Generated from portfolio website • {new Date().toLocaleDateString()}</Text>
-					</View>
-				</Page>
-			)}
 		</Document>
 	);
 };

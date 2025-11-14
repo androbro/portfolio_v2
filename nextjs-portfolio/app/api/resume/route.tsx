@@ -7,7 +7,6 @@ import {
 } from "@/app/sanity/lib/queries";
 import Anthropic from "@anthropic-ai/sdk";
 import { renderToBuffer } from "@react-pdf/renderer";
-import type { SanityDocument } from "next-sanity";
 import { NextResponse } from "next/server";
 
 const options = { next: { revalidate: 30 } };
@@ -40,6 +39,7 @@ async function translateToDutch(data: any): Promise<any> {
 			degree: edu.degree,
 			institution: edu.institution,
 		})),
+		interests: data.interests,
 	});
 
 	const message = await anthropic.messages.create({
@@ -98,6 +98,7 @@ Here's the resume content to translate:\n\n${contentToTranslate}`,
 			degree: translatedContent.education?.[idx]?.degree || edu.degree,
 			institution: translatedContent.education?.[idx]?.institution || edu.institution,
 		})),
+		interests: translatedContent.interests || data.interests,
 	};
 }
 
@@ -156,7 +157,7 @@ I am team-oriented and prefer collaborative environments for continuous learning
 			title: "Frontend Developer",
 			email: "devulderk@gmail.com",
 			phone: "+32 488 40 31 89",
-			location: "Ghent, Belgium",
+			location: "Wetteren, Belgium",
 			linkedin: "https://www.linkedin.com/in/koendevulder",
 			github: "https://github.com/androbro",
 			website: "https://www.devulderk.com",
@@ -189,6 +190,15 @@ I am team-oriented and prefer collaborative environments for continuous learning
 					language: "English",
 					proficiency: "Proficient",
 				},
+			],
+			interests: [
+				"Staring at my IDE for 12+ hours a day (side projects don't build themselves)",
+				"3D printing practical things that definitely won't break after one use",
+				"Diving deep into electronics because regular hobbies are overrated",
+				"Playing piano for 6 years - may disappear for a few days to rehearse for plays",
+				"Cooking elaborate meals, then forgetting where I found the recipe (building an app to fix this... and yes, I cry about it)",
+				"Traveling in a camper because hotels are too mainstream",
+				"Planning roadtrips is hard, so naturally I'm building an app for that too",
 			],
 			profileImage: profileImageBase64 || undefined,
 		};
