@@ -8,6 +8,7 @@ import { ContactButton } from "./components/ContactButton";
 import { Heading } from "./components/Heading";
 import { Stats } from "./components/stats/Stats";
 import { useWorkingHours } from "./hooks/useWorkingHours";
+import { DownloadResumeButton } from "../../ui/DownloadResumeButton";
 interface HeroClientProps {
 	projectsCount: number;
 	yearsExperience: number;
@@ -43,7 +44,10 @@ export function HeroClient({
 				<div className="flex flex-col items-start md:items-start">
 					<Heading />
 					<Bio />
-					<ContactButton />
+					<div className="flex flex-wrap gap-4 mt-6">
+						<ContactButton />
+						<DownloadResumeButton variant="secondary" />
+					</div>
 					<Stats
 						yearsExperience={yearsExperience}
 						frontendYears={frontendYears}
