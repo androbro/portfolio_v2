@@ -25,10 +25,6 @@ export function TechIcon({ tech, urlFor }: TechIconProps) {
 			: "/icons/default-tech-icon.svg"; // Fallback icon
 
 	return (
-		<img
-			src={sourceUrl}
-			alt={`${tech.name} logo`}
-			className="w-16 h-16 object-contain shrink-0"
-		/>
+		<img src={sourceUrl} alt={`${tech.name} logo`} className="w-16 h-16 object-contain shrink-0" />
 	);
 }

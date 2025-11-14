@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { SectionTitle } from "../common/SectionTitle";
 import { DownloadResumeButton } from "../../ui/DownloadResumeButton";
+import { SectionTitle } from "../common/SectionTitle";
 export function Contact() {
 	return (
 		<div id="contact" className="flex items-center justify-center py-20">
@@ -21,9 +21,9 @@ export function Contact() {
 						Let's connect.
 					</h3>
 					<p className="text-white/60 max-w-2xl font-light">
-						I'm always open to discussing new projects, creative ideas, or
-						opportunities to be part of your vision. Feel free to reach out if
-						you're looking for a developer who can bring your ideas to life.
+						I'm always open to discussing new projects, creative ideas, or opportunities to be part
+						of your vision. Feel free to reach out if you're looking for a developer who can bring
+						your ideas to life.
 					</p>
 				</motion.div>
 

@@ -31,13 +31,7 @@ export function ScrollArrow({
 			y: [0, 0, 0, 100, 100],
 			transition: {
 				duration,
-				times: [
-					0,
-					timelineKeys.fadeIn,
-					timelineKeys.stayVisible,
-					timelineKeys.moveDown,
-					1,
-				],
+				times: [0, timelineKeys.fadeIn, timelineKeys.stayVisible, timelineKeys.moveDown, 1],
 				ease: ["easeIn", "linear", "linear", "easeOut", "linear"],
 				repeat: Number.POSITIVE_INFINITY,
 			},
@@ -52,13 +46,7 @@ export function ScrollArrow({
 			fillOpacity: [0, 0, 0.9, 0.9, 0],
 			transition: {
 				duration,
-				times: [
-					0,
-					timelineKeys.drawOutline,
-					timelineKeys.stayVisible,
-					timelineKeys.moveDown,
-					1,
-				],
+				times: [0, timelineKeys.drawOutline, timelineKeys.stayVisible, timelineKeys.moveDown, 1],
 				ease: "easeInOut",
 				repeat: Number.POSITIVE_INFINITY,
 			},

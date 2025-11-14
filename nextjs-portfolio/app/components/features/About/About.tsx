@@ -14,11 +14,7 @@ export function About() {
 	});
 
 	return (
-		<div
-			id="about"
-			className="flex items-center justify-center py-20"
-			ref={sectionRef}
-		>
+		<div id="about" className="flex items-center justify-center py-20" ref={sectionRef}>
 			<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 				<div className="relative">
 					<Header scrollYProgress={scrollYProgress} />

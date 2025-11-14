@@ -16,9 +16,7 @@ const CursorContext = createContext<CursorContextType | undefined>(undefined);
 export const useCursorContext = () => {
 	const context = useContext(CursorContext);
 	if (context === undefined) {
-		throw new Error(
-			"useCursorContext must be used within a CursorContextProvider",
-		);
+		throw new Error("useCursorContext must be used within a CursorContextProvider");
 	}
 	return context;
 };
@@ -27,9 +25,7 @@ interface CursorContextProviderProps {
 	children: ReactNode;
 }
 
-export const CursorContextProvider = ({
-	children,
-}: CursorContextProviderProps) => {
+export const CursorContextProvider = ({ children }: CursorContextProviderProps) => {
 	const [initialCursorVariant, setInitialCursorVariant] = useState("");
 	const [animateCursorVariant, setAnimateCursorVariant] = useState("");
 

@@ -29,9 +29,7 @@ export function CategoryItem({ category, techs }: CategoryItemProps) {
 			<div className="flex flex-col md:flex-row">
 				{/* Category heading */}
 				<div className="md:w-1/3 mb-8 md:mb-0">
-					<h3 className="text-5xl font-bold text-gray-400 uppercase sticky">
-						{category}
-					</h3>
+					<h3 className="text-5xl font-bold text-gray-400 uppercase sticky">{category}</h3>
 				</div>
 
 				{/* Technologies grid */}

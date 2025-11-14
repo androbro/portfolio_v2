@@ -10,18 +10,10 @@ interface AnimationRefs {
 /**
  * Custom hook for handling Hero section animations using GSAP
  */
-export function useHeroAnimations({
-	headingRef,
-	paragraphRef,
-	statsRefs,
-}: AnimationRefs) {
+export function useHeroAnimations({ headingRef, paragraphRef, statsRefs }: AnimationRefs) {
 	// Initialize and run animations on component mount
 	useEffect(() => {
-		if (
-			!headingRef.current ||
-			!paragraphRef.current ||
-			statsRefs.some((ref) => !ref.current)
-		) {
+		if (!headingRef.current || !paragraphRef.current || statsRefs.some((ref) => !ref.current)) {
 			return; // Don't run animations if refs aren't available
 		}
 
@@ -29,11 +21,7 @@ export function useHeroAnimations({
 		const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
 		// Animate heading
-		tl.fromTo(
-			headingRef.current,
-			{ y: 50, opacity: 0 },
-			{ y: 0, opacity: 1, duration: 1 },
-		);
+		tl.fromTo(headingRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 });
 
 		// Animate paragraph with slight delay
 		tl.fromTo(
