@@ -2,6 +2,7 @@
 
 import posthog from "posthog-js";
 import { useEffect } from "react";
+import { motion } from "motion/react";
 import { ScrollArrow } from "../../ui/ScrollArrow";
 import { Bio } from "./components/Bio";
 import { ContactButton } from "./components/ContactButton";
@@ -46,7 +47,13 @@ export function HeroClient({
 					<Bio />
 					<div className="flex flex-wrap gap-4 mt-6">
 						<ContactButton />
-						<DownloadResumeButton variant="secondary" />
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6, delay: 0.9 }}
+						>
+							<DownloadResumeButton variant="secondary" />
+						</motion.div>
 					</div>
 					<Stats
 						yearsExperience={yearsExperience}
