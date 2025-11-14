@@ -9,8 +9,6 @@ import Anthropic from "@anthropic-ai/sdk";
 import { renderToBuffer } from "@react-pdf/renderer";
 import type { SanityDocument } from "next-sanity";
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
 
 const options = { next: { revalidate: 30 } };
 
@@ -117,10 +115,25 @@ export async function GET(request: Request) {
 				return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 			});
 
-		// Read profile image and convert to base64
-		const profileImagePath = path.join(process.cwd(), "public", "profile.jpg");
-		const profileImageBuffer = fs.readFileSync(profileImagePath);
-		const profileImageBase64 = `data:image/jpeg;base64,${profileImageBuffer.toString("base64")}`;
+		// Fetch profile image and convert to base64
+		let profileImageBase64 = "";
+		try {
+			// Get the origin from the request to build the full URL
+			const url = new URL(request.url);
+			const imageUrl = `${url.origin}/profile.jpg`;
+
+			const imageResponse = await fetch(imageUrl);
+			if (imageResponse.ok) {
+				const imageBuffer = await imageResponse.arrayBuffer();
+				const base64 = Buffer.from(imageBuffer).toString("base64");
+				profileImageBase64 = `data:image/jpeg;base64,${base64}`;
+			} else {
+				console.error("Failed to fetch profile image:", imageResponse.status);
+			}
+		} catch (error) {
+			console.error("Error loading profile image:", error);
+			// Continue without image if it fails
+		}
 
 		// Resume data
 		let resumeData = {
@@ -131,7 +144,7 @@ export async function GET(request: Request) {
 			workExperiences: sortedExperiences,
 			techStacks: techStacks,
 			projects: sortedProjects,
-			profileImage: profileImageBase64,
+			profileImage: profileImageBase64 || undefined,
 		};
 
 		// Translate to Dutch if requested
