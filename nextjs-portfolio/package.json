@@ -10,6 +10,7 @@
 		"format": "biome format --write"
 	},
 	"dependencies": {
+		"@anthropic-ai/sdk": "^0.68.0",
 		"@motion-canvas/2d": "^3.17.2",
 		"@motion-canvas/core": "^3.17.2",
 		"@react-pdf/renderer": "^4.3.1",

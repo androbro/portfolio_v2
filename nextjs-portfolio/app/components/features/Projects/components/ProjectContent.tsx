@@ -32,8 +32,7 @@ export function ProjectContent({
 	useEffect(() => {
 		const checkTruncation = () => {
 			if (textRef.current && !isExpanded) {
-				const isOverflowing =
-					textRef.current.scrollHeight > textRef.current.clientHeight;
+				const isOverflowing = textRef.current.scrollHeight > textRef.current.clientHeight;
 				setIsTextTruncated(isOverflowing);
 			} else {
 				setIsTextTruncated(false);
@@ -90,9 +89,7 @@ export function ProjectContent({
 					transition={smoothTransition}
 				>
 					{project.description}
-					{!isExpanded && isTextTruncated && (
-						<span className="text-accent">...</span>
-					)}
+					{!isExpanded && isTextTruncated && <span className="text-accent">...</span>}
 				</motion.p>
 			</motion.div>
 

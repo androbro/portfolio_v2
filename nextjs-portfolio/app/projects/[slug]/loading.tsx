@@ -4,17 +4,12 @@ export default function Loading() {
 			{/* Back Link Section */}
 			<section className="flex items-center justify-center py-10">
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
-					<div className="inline-flex items-center text-accent/70">
-						← Back to Projects
-					</div>
+					<div className="inline-flex items-center text-accent/70">← Back to Projects</div>
 				</div>
 			</section>
 
 			{/* Project Header Section */}
-			<section
-				id="project-header"
-				className="flex items-center justify-center py-20"
-			>
+			<section id="project-header" className="flex items-center justify-center py-20">
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 					<header className="mb-12">
 						<div className="h-12 w-3/4 bg-white/10 rounded-md mb-4 animate-pulse" />
@@ -33,10 +28,7 @@ export default function Loading() {
 			</section>
 
 			{/* Project Content Section */}
-			<section
-				id="project-content"
-				className="flex items-center justify-center py-20"
-			>
+			<section id="project-content" className="flex items-center justify-center py-20">
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 					<div className="prose prose-invert max-w-none">
 						<div className="h-6 w-full bg-white/10 rounded-md mb-4 animate-pulse" />

@@ -1,8 +1,5 @@
 import { client } from "@/app/sanity/client";
-import {
-	allExperienceQuery,
-	allProjectsQuerySimple,
-} from "@/app/sanity/lib/queries"; // Import queries
+import { allExperienceQuery, allProjectsQuerySimple } from "@/app/sanity/lib/queries"; // Import queries
 import type { SanityDocument } from "next-sanity";
 import { HeroClient } from "./HeroClient";
 
@@ -68,17 +65,14 @@ export async function Hero() {
 
 			// Calculate years difference (approximate)
 			totalYearsExperience = Math.floor(
-				(currentDate.getTime() - earliestDate.getTime()) /
-					(1000 * 60 * 60 * 24 * 365),
+				(currentDate.getTime() - earliestDate.getTime()) / (1000 * 60 * 60 * 24 * 365),
 			);
 
 			// Calculate frontend/backend years based on job role
 			for (const exp of experienceItems) {
 				const startDate = new Date(exp.startDate);
 				const endDate = exp.endDate ? new Date(exp.endDate) : new Date();
-				const yearsInJob =
-					(endDate.getTime() - startDate.getTime()) /
-					(1000 * 60 * 60 * 24 * 365);
+				const yearsInJob = (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 365);
 
 				// Check if job role indicates frontend/backend work
 				const role = exp.role || "";

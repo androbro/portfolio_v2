@@ -1,9 +1,9 @@
 "use client";
 
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { SectionTitle } from "../common/SectionTitle";
-import { PortableText, type PortableTextComponents } from "@portabletext/react";
 
 // Type definition for portable text blocks
 type PortableTextBlock = {
@@ -35,26 +35,16 @@ const experiencePortableTextComponents: PortableTextComponents = {
 		normal: ({ children }) => (
 			<p className="text-white/70 mb-3 font-light leading-relaxed">{children}</p>
 		),
-		h2: ({ children }) => (
-			<h4 className="text-xl text-white mt-4 mb-2 font-light">{children}</h4>
-		),
-		h3: ({ children }) => (
-			<h5 className="text-lg text-white mt-3 mb-2 font-light">{children}</h5>
-		),
-		h4: ({ children }) => (
-			<h6 className="text-base text-white mt-2 mb-1 font-light">{children}</h6>
-		),
+		h2: ({ children }) => <h4 className="text-xl text-white mt-4 mb-2 font-light">{children}</h4>,
+		h3: ({ children }) => <h5 className="text-lg text-white mt-3 mb-2 font-light">{children}</h5>,
+		h4: ({ children }) => <h6 className="text-base text-white mt-2 mb-1 font-light">{children}</h6>,
 	},
 	list: {
 		bullet: ({ children }) => (
-			<ul className="list-disc list-inside text-white/70 mb-3 space-y-1 ml-4">
-				{children}
-			</ul>
+			<ul className="list-disc list-inside text-white/70 mb-3 space-y-1 ml-4">{children}</ul>
 		),
 		number: ({ children }) => (
-			<ol className="list-decimal list-inside text-white/70 mb-3 space-y-1 ml-4">
-				{children}
-			</ol>
+			<ol className="list-decimal list-inside text-white/70 mb-3 space-y-1 ml-4">{children}</ol>
 		),
 	},
 	listItem: {
@@ -62,9 +52,7 @@ const experiencePortableTextComponents: PortableTextComponents = {
 		number: ({ children }) => <li className="ml-2">{children}</li>,
 	},
 	marks: {
-		strong: ({ children }) => (
-			<strong className="font-semibold text-white">{children}</strong>
-		),
+		strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
 		em: ({ children }) => <em className="italic">{children}</em>,
 		code: ({ children }) => (
 			<code className="bg-white/10 px-1.5 py-0.5 rounded text-accent font-mono text-sm">
@@ -149,13 +137,9 @@ export function ExperienceClient({ experiences }: ExperienceClientProps) {
 										<h3 className="text-4xl md:text-5xl font-light group-hover:text-accent transition-colors">
 											{exp.role}
 										</h3>
-										<span className="text-white/60">
-											{formatPeriod(exp.period)}
-										</span>
+										<span className="text-white/60">{formatPeriod(exp.period)}</span>
 									</div>
-									<span className="text-xl text-white/80 mb-4 block">
-										{exp.company}
-									</span>
+									<span className="text-xl text-white/80 mb-4 block">{exp.company}</span>
 									<div className="text-white/70 max-w-3xl font-light">
 										{typeof exp.description === "string" ? (
 											<p className="text-white/70 font-light">{exp.description}</p>

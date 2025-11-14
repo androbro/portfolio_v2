@@ -8,10 +8,7 @@ export default function ProjectDetails({ project }: { project: ProjectItem }) {
 	return (
 		<main className="min-h-screen">
 			{/* Project Header Section */}
-			<div
-				id="project-header"
-				className="flex items-center justify-center md:pt-20"
-			>
+			<div id="project-header" className="flex items-center justify-center md:pt-20">
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
@@ -25,10 +22,7 @@ export default function ProjectDetails({ project }: { project: ProjectItem }) {
 			</div>
 
 			{/* Project Content Section */}
-			<div
-				id="project-content"
-				className="flex items-center justify-center m-6 mt-2 "
-			>
+			<div id="project-content" className="flex items-center justify-center m-6 mt-2 ">
 				<div className="content-container md:w-4xl lg:w-6xl xl:w-7xl">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}

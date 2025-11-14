@@ -62,9 +62,7 @@ export default async function ProjectPage({ params }: Props) {
 	}
 
 	return (
-		<Suspense
-			fallback={<div className="animate-pulse h-96 bg-white/5 rounded-lg" />}
-		>
+		<Suspense fallback={<div className="animate-pulse h-96 bg-white/5 rounded-lg" />}>
 			<ProjectDetails project={project} />
 		</Suspense>
 	);

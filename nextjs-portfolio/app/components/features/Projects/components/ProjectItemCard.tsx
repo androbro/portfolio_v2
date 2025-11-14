@@ -32,11 +32,7 @@ export function ProjectItemCard({
 		[0.1 + index * 0.05, 0.2 + index * 0.05],
 		[0, 1],
 	);
-	const itemY = useTransform(
-		scrollYProgress,
-		[0.1 + index * 0.05, 0.2 + index * 0.05],
-		[50, 0],
-	);
+	const itemY = useTransform(scrollYProgress, [0.1 + index * 0.05, 0.2 + index * 0.05], [50, 0]);
 
 	// Generate slug from project data
 	const slug = project.slug || project.title.toLowerCase().replace(/\s+/g, "-");

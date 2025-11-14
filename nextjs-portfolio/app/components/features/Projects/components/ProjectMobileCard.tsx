@@ -12,11 +12,7 @@ interface ProjectMobileCardProps {
 	scrollYProgress: MotionValue<number>;
 }
 
-export function ProjectMobileCard({
-	project,
-	index,
-	scrollYProgress,
-}: ProjectMobileCardProps) {
+export function ProjectMobileCard({ project, index, scrollYProgress }: ProjectMobileCardProps) {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -26,11 +22,7 @@ export function ProjectMobileCard({
 		[0.1 + index * 0.05, 0.2 + index * 0.05],
 		[0, 1],
 	);
-	const itemY = useTransform(
-		scrollYProgress,
-		[0.1 + index * 0.05, 0.2 + index * 0.05],
-		[50, 0],
-	);
+	const itemY = useTransform(scrollYProgress, [0.1 + index * 0.05, 0.2 + index * 0.05], [50, 0]);
 
 	// Generate slug from project data
 	const slug = project.slug || project.title.toLowerCase().replace(/\s+/g, "-");
@@ -53,9 +45,7 @@ export function ProjectMobileCard({
 			whileTap={{ scale: 0.97 }}
 			animate={{
 				scale: isLoading ? 0.98 : 1,
-				borderColor: isLoading
-					? "rgba(74, 222, 128, 0.5)"
-					: "rgba(255, 255, 255, 0.1)",
+				borderColor: isLoading ? "rgba(74, 222, 128, 0.5)" : "rgba(255, 255, 255, 0.1)",
 			}}
 			transition={{ type: "tween", duration: 0.3 }}
 		>
@@ -102,9 +92,7 @@ export function ProjectMobileCard({
 						</span>
 					</div>
 
-					<p className="text-sm text-white/80 line-clamp-2 mb-3">
-						{project.description}
-					</p>
+					<p className="text-sm text-white/80 line-clamp-2 mb-3">{project.description}</p>
 
 					{/* Display tags if available */}
 					{project.tags && project.tags.length > 0 && (

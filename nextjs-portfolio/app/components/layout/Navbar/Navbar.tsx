@@ -123,9 +123,7 @@ export function Navbar() {
 					>
 						{/* Social Links */}
 						<div className="flex flex-col gap-4">
-							<span className="text-white/60 text-sm uppercase tracking-wider">
-								Social
-							</span>
+							<span className="text-white/60 text-sm uppercase tracking-wider">Social</span>
 							<div className="flex flex-col gap-3">
 								<Link
 									href="https://github.com/androbro"
@@ -146,9 +144,7 @@ export function Navbar() {
 
 						{/* Menu Links */}
 						<div className="flex flex-col gap-4 mt-8">
-							<span className="text-white/60 text-sm uppercase tracking-wider">
-								Menu
-							</span>
+							<span className="text-white/60 text-sm uppercase tracking-wider">Menu</span>
 							<div className="flex flex-col gap-3">
 								<Link
 									href="/#hero"
@@ -190,9 +186,7 @@ export function Navbar() {
 
 						{/* Contact Info */}
 						<div className="flex flex-col gap-4 mt-auto">
-							<span className="text-white/60 text-sm uppercase tracking-wider">
-								Get in touch
-							</span>
+							<span className="text-white/60 text-sm uppercase tracking-wider">Get in touch</span>
 							<a
 								href="mailto:devulderk@gmail.com"
 								className="text-white hover:text-accent transition-colors"
