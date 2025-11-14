@@ -1,13 +1,12 @@
-import React from 'react';
 import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Font,
+	Document,
+	Image,
+	Page,
+	StyleSheet,
+	Text,
+	View
 } from '@react-pdf/renderer';
-import type { SanityDocument } from 'next-sanity';
+import React from 'react';
 
 // Register fonts if needed (optional - PDF will use default fonts)
 // Font.register({ family: 'Roboto', src: 'path-to-roboto.ttf' });
@@ -22,9 +21,23 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   header: {
+    flexDirection: 'row',
     marginBottom: 20,
     borderBottom: '2 solid #00ff7f', // Green accent matching --accent (approximation)
     paddingBottom: 15,
+    alignItems: 'center',
+  },
+  headerContent: {
+    flex: 1,
+  },
+  profileImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginRight: 15,
+    borderWidth: 8,
+    borderStyle: 'solid',
+    borderColor: '#00ff7f',
   },
   name: {
     fontSize: 28,
@@ -86,60 +99,51 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 9,
     color: '#d0d0d0',
-    lineHeight: 1.4,
-    marginTop: 3,
+    lineHeight: 1.3,
+    marginTop: 2,
   },
   skillsContainer: {
-    marginBottom: 8,
-  },
-  skillCategory: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    color: '#00ff7f',
-    marginBottom: 4,
-    marginTop: 6,
-  },
-  skillsList: {
     flexDirection: 'row',
+    marginBottom: 4,
     flexWrap: 'wrap',
   },
-  skillItem: {
+  skillCategory: {
     fontSize: 9,
-    color: '#ededed',
-    backgroundColor: '#2a2a2a',
-    padding: '4 8',
-    marginRight: 6,
-    marginBottom: 6,
-    borderRadius: 3,
-    border: '1 solid #3a3a3a',
-  },
-  projectItem: {
-    marginBottom: 10,
-  },
-  projectTitle: {
-    fontSize: 11,
     fontWeight: 'bold',
-    color: '#ededed',
-    marginBottom: 3,
+    color: '#00ff7f',
+    marginRight: 6,
   },
-  projectDescription: {
+  skillsList: {
     fontSize: 9,
     color: '#d0d0d0',
-    lineHeight: 1.4,
-    marginBottom: 3,
+  },
+  projectItem: {
+    marginBottom: 6,
+  },
+  projectTitle: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: '#ededed',
+    marginBottom: 1,
+  },
+  projectDescription: {
+    fontSize: 8,
+    color: '#d0d0d0',
+    lineHeight: 1.3,
+    marginBottom: 2,
   },
   projectTags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 3,
+    marginTop: 1,
   },
   projectTag: {
-    fontSize: 8,
+    fontSize: 7,
     color: '#00ff7f',
     backgroundColor: '#1a3a2a',
-    padding: '2 6',
-    marginRight: 4,
-    marginBottom: 4,
+    padding: '1 4',
+    marginRight: 3,
+    marginBottom: 2,
     borderRadius: 2,
   },
   footer: {
@@ -174,7 +178,7 @@ const portableTextToPlain = (blocks: any[]): string => {
       if (block._type !== 'block' || !block.children) return '';
       return block.children.map((child: any) => child.text).join('');
     })
-    .join('\n\n');
+    .join(' ');
 };
 
 // Helper function to format date
@@ -212,9 +216,15 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header Section */}
         <View style={styles.header}>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.contactInfo}>Email: {email}</Text>
+          <Image
+            src="./public/profile.jpg"
+            style={styles.profileImage}
+          />
+          <View style={styles.headerContent}>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.contactInfo}>Email: {email}</Text>
+          </View>
         </View>
 
         {/* About Section */}
@@ -250,23 +260,19 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
           {Object.entries(groupedTechStacks).map(([category, techs]) => (
             <View key={category} style={styles.skillsContainer}>
               <Text style={styles.skillCategory}>
-                {categoryNames[category] || category}
+                {categoryNames[category] || category}:
               </Text>
-              <View style={styles.skillsList}>
-                {(techs as any[]).map((tech: any, index: number) => (
-                  <Text key={index} style={styles.skillItem}>
-                    {tech.name}
-                  </Text>
-                ))}
-              </View>
+              <Text style={styles.skillsList}>
+                {(techs as any[]).map((tech: any) => tech.name).join(', ')}
+              </Text>
             </View>
           ))}
         </View>
 
         {/* Projects Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Featured Projects</Text>
-          {projects.slice(0, 3).map((project, index) => (
+          <Text style={styles.sectionTitle}>Projects</Text>
+          {projects.map((project, index) => (
             <View key={index} style={styles.projectItem}>
               <Text style={styles.projectTitle}>{project.title}</Text>
               <Text style={styles.projectDescription}>{project.description}</Text>
