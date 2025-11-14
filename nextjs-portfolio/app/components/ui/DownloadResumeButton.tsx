@@ -14,8 +14,19 @@ export const DownloadResumeButton: React.FC<DownloadResumeButtonProps> = ({
 	const [isDownloading, setIsDownloading] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const [showFrenchCat, setShowFrenchCat] = useState(false);
+	const [loadingMessage, setLoadingMessage] = useState("Generating...");
+	const [isTranslating, setIsTranslating] = useState(false);
 	const audioRef = useRef<HTMLAudioElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement>(null);
+
+	const translationMessages = [
+		"Using AI to translate to Dutch... 🤖",
+		"Claude is working on your translation... 🧠",
+		"Converting to Nederlands... 🇳🇱",
+		"AI magic in progress... ✨",
+		"Almost there... 📄",
+		"Polishing the Dutch translation... 🎨",
+	];
 
 	const handleMute = useCallback(() => {
 		if (audioRef.current) {
@@ -46,6 +57,19 @@ export const DownloadResumeButton: React.FC<DownloadResumeButtonProps> = ({
 		};
 	}, [showFrenchCat, handleMute]);
 
+	// Rotate loading messages when translating
+	useEffect(() => {
+		if (!isTranslating) return;
+
+		let messageIndex = 0;
+		const interval = setInterval(() => {
+			messageIndex = (messageIndex + 1) % translationMessages.length;
+			setLoadingMessage(translationMessages[messageIndex]);
+		}, 3000); // Change message every 3 seconds
+
+		return () => clearInterval(interval);
+	}, [isTranslating, translationMessages]);
+
 	const handleDownload = async (language: string) => {
 		setIsDropdownOpen(false);
 
@@ -61,6 +85,14 @@ export const DownloadResumeButton: React.FC<DownloadResumeButtonProps> = ({
 
 		if (isDownloading) return;
 		setIsDownloading(true);
+
+		// Set translation state for Dutch
+		if (language === "dutch") {
+			setIsTranslating(true);
+			setLoadingMessage(translationMessages[0]);
+		} else {
+			setLoadingMessage("Generating...");
+		}
 
 		try {
 			const response = await fetch(`/api/resume?lang=${language}`);
@@ -90,6 +122,8 @@ export const DownloadResumeButton: React.FC<DownloadResumeButtonProps> = ({
 			alert("Failed to download resume. Please try again.");
 		} finally {
 			setIsDownloading(false);
+			setIsTranslating(false);
+			setLoadingMessage("Generating...");
 		}
 	};
 
@@ -134,7 +168,7 @@ export const DownloadResumeButton: React.FC<DownloadResumeButtonProps> = ({
 									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 								></path>
 							</svg>
-							<span>Generating...</span>
+							<span className="transition-all duration-300">{loadingMessage}</span>
 						</>
 					) : (
 						<>
