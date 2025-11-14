@@ -9,14 +9,20 @@ import Anthropic from "@anthropic-ai/sdk";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { NextResponse } from "next/server";
 
+// Increase serverless function timeout to 60 seconds for translation
+export const maxDuration = 60;
+
 const options = { next: { revalidate: 30 } };
 
 async function translateToDutch(data: any): Promise<any> {
 	const apiKey = process.env.ANTHROPIC_API_KEY || process.env.Claude_key;
 
 	if (!apiKey) {
+		console.error('ANTHROPIC_API_KEY not found in environment variables');
 		throw new Error('ANTHROPIC_API_KEY environment variable is not set');
 	}
+
+	console.log('Starting Dutch translation...');
 
 	const anthropic = new Anthropic({
 		apiKey: apiKey,
@@ -42,13 +48,14 @@ async function translateToDutch(data: any): Promise<any> {
 		interests: data.interests,
 	});
 
-	const message = await anthropic.messages.create({
-		model: "claude-haiku-4-5-20251001",
-		max_tokens: 4096,
-		messages: [
-			{
-				role: "user",
-				content: `You are a professional Dutch copywriter translating a resume from English to Dutch. Your goal is to create natural, human-sounding Dutch text that reads as if it was originally written in Dutch by a native speaker.
+	try {
+		const message = await anthropic.messages.create({
+			model: "claude-haiku-4-5-20251001",
+			max_tokens: 3000,
+			messages: [
+				{
+					role: "user",
+					content: `You are a professional Dutch copywriter translating a resume from English to Dutch. Your goal is to create natural, human-sounding Dutch text that reads as if it was originally written in Dutch by a native speaker.
 
 TRANSLATION GUIDELINES:
 1. DO NOT translate technical terms: Keep programming languages, frameworks, tools, and technologies in English (React, TypeScript, Next.js, Angular, JavaScript, CSS, Node.js, Git, Docker, AWS, etc.)
@@ -64,42 +71,48 @@ TECHNICAL REQUIREMENTS:
 - Maintain exact JSON structure
 
 Here's the resume content to translate:\n\n${contentToTranslate}`,
-			},
-		],
-	});
+				},
+			],
+		});
 
-	// Extract text and strip markdown code blocks if present
-	let responseText = message.content[0].type === "text" ? message.content[0].text : "{}";
+		console.log('Translation completed successfully');
 
-	// Remove markdown code blocks (```json ... ``` or ``` ... ```)
-	responseText = responseText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+		// Extract text and strip markdown code blocks if present
+		let responseText = message.content[0].type === "text" ? message.content[0].text : "{}";
 
-	const translatedContent = JSON.parse(responseText);
+		// Remove markdown code blocks (```json ... ``` or ``` ... ```)
+		responseText = responseText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
 
-	return {
-		...data,
-		title: translatedContent.title,
-		bio: translatedContent.bio,
-		workExperiences: data.workExperiences.map((exp: any, idx: number) => ({
-			...exp,
-			role: translatedContent.workExperiences[idx]?.role || exp.role,
-			company: translatedContent.workExperiences[idx]?.company || exp.company,
-			description: translatedContent.workExperiences[idx]?.description || exp.description,
-			responsibilities:
-				translatedContent.workExperiences[idx]?.responsibilities || exp.responsibilities,
-		})),
-		projects: data.projects.map((proj: any, idx: number) => ({
-			...proj,
-			title: translatedContent.projects[idx]?.title || proj.title,
-			description: translatedContent.projects[idx]?.description || proj.description,
-		})),
-		education: data.education?.map((edu: any, idx: number) => ({
-			...edu,
-			degree: translatedContent.education?.[idx]?.degree || edu.degree,
-			institution: translatedContent.education?.[idx]?.institution || edu.institution,
-		})),
-		interests: translatedContent.interests || data.interests,
-	};
+		const translatedContent = JSON.parse(responseText);
+
+		return {
+			...data,
+			title: translatedContent.title,
+			bio: translatedContent.bio,
+			workExperiences: data.workExperiences.map((exp: any, idx: number) => ({
+				...exp,
+				role: translatedContent.workExperiences[idx]?.role || exp.role,
+				company: translatedContent.workExperiences[idx]?.company || exp.company,
+				description: translatedContent.workExperiences[idx]?.description || exp.description,
+				responsibilities:
+					translatedContent.workExperiences[idx]?.responsibilities || exp.responsibilities,
+			})),
+			projects: data.projects.map((proj: any, idx: number) => ({
+				...proj,
+				title: translatedContent.projects[idx]?.title || proj.title,
+				description: translatedContent.projects[idx]?.description || proj.description,
+			})),
+			education: data.education?.map((edu: any, idx: number) => ({
+				...edu,
+				degree: translatedContent.education?.[idx]?.degree || edu.degree,
+				institution: translatedContent.education?.[idx]?.institution || edu.institution,
+			})),
+			interests: translatedContent.interests || data.interests,
+		};
+	} catch (error) {
+		console.error('Translation error:', error);
+		throw new Error(`Translation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+	}
 }
 
 export async function GET(request: Request) {
@@ -205,11 +218,14 @@ I am team-oriented and prefer collaborative environments for continuous learning
 
 		// Translate to Dutch if requested
 		if (lang === "dutch") {
+			console.log('Dutch translation requested, starting translation...');
 			resumeData = await translateToDutch(resumeData);
+			console.log('Translation completed, generating PDF...');
 		}
 
 		// Generate PDF
 		const pdfBuffer = await renderToBuffer(<ResumeTemplate data={resumeData} />);
+		console.log('PDF generated successfully');
 
 		// Return PDF as downloadable file
 		return new NextResponse(pdfBuffer, {
@@ -222,6 +238,10 @@ I am team-oriented and prefer collaborative environments for continuous learning
 		});
 	} catch (error) {
 		console.error("Error generating PDF:", error);
-		return NextResponse.json({ error: "Failed to generate resume PDF" }, { status: 500 });
+		const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+		return NextResponse.json({
+			error: "Failed to generate resume PDF",
+			details: errorMessage
+		}, { status: 500 });
 	}
 }
