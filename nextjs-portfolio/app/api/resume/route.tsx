@@ -15,6 +15,10 @@ export const maxDuration = 60;
 const options = { next: { revalidate: 30 } };
 
 async function translateToDutch(data: any): Promise<any> {
+	// Hardcoded Dutch bio (no translation needed)
+	const dutchBio = `Ik ben een frontend engineer gespecialiseerd in het bouwen van moderne, robuuste web- en mobiele applicaties met React, React Native en Angular. Mijn focus ligt op het leveren van snelle, intuïtieve interfaces die aansluiten bij echte gebruikersnoden en bedrijfsdoelstellingen.
+Momenteel verdiep ik me verder in React en TypeScript om te groeien naar full-stack React development en om anderen beter te kunnen begeleiden en ondersteunen.`;
+
 	const apiKey = process.env.ANTHROPIC_API_KEY || process.env.Claude_key;
 
 	if (!apiKey) {
@@ -30,7 +34,6 @@ async function translateToDutch(data: any): Promise<any> {
 
 	const contentToTranslate = JSON.stringify({
 		title: data.title,
-		bio: data.bio,
 		workExperiences: data.workExperiences.map((exp: any) => ({
 			role: exp.role,
 			company: exp.company,
@@ -88,7 +91,7 @@ Here's the resume content to translate:\n\n${contentToTranslate}`,
 		return {
 			...data,
 			title: translatedContent.title,
-			bio: translatedContent.bio,
+			bio: dutchBio, // Use hardcoded Dutch bio
 			workExperiences: data.workExperiences.map((exp: any, idx: number) => ({
 				...exp,
 				role: translatedContent.workExperiences[idx]?.role || exp.role,
@@ -161,9 +164,9 @@ export async function GET(request: Request) {
 		// Resume data
 		const bioWithSkills = `Passionate frontend developer with expertise in React, React Native, and Angular. I specialize in creating responsive, user-friendly web and mobile applications with a focus on modern design principles and best practices.
 
-I am able to work independently and build & maintain fullstack projects with a focus on frontend development. I have strong analytical and design skills, covering both visual and structural aspects of projects.
+I thrive in collaborative team environments where I can learn from others and share knowledge. While I'm fully capable of working independently and building & maintaining fullstack projects with a frontend focus, I prefer working with a team as it accelerates my learning and growth. I have strong analytical and design skills, covering both visual and structural aspects of projects.
 
-I am team-oriented and prefer collaborative environments for continuous learning and knowledge sharing. I actively leverage AI tools daily to optimize workflow and increase productivity. I have experience in client communication, conducting demos, and providing on-site technical support.`;
+I actively leverage AI tools daily to optimize workflow and increase productivity. I have experience in client communication, conducting demos, and providing on-site technical support.`;
 
 		let resumeData = {
 			name: "Koen De Vulder",

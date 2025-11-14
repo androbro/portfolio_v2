@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		flexDirection: "row",
-		marginBottom: 12,
+		marginBottom: 10,
 		borderBottom: "2 solid #00ff7f", // Green accent matching --accent (approximation)
-		paddingBottom: 10,
+		paddingBottom: 8,
 		alignItems: "center",
 	},
 	headerContent: {
@@ -65,30 +65,30 @@ const styles = StyleSheet.create({
 		color: "#00ff7f",
 	},
 	section: {
-		marginTop: 10,
-		marginBottom: 10,
+		marginTop: 8,
+		marginBottom: 8,
 	},
 	sectionTitle: {
 		fontSize: 14,
 		fontWeight: "bold",
 		color: "#00ff7f", // Green accent
-		marginBottom: 8,
+		marginBottom: 6,
 		textTransform: "uppercase",
 		letterSpacing: 1,
 	},
 	aboutText: {
 		fontSize: 9,
-		lineHeight: 1.4,
+		lineHeight: 1.3,
 		color: "#ededed",
 		textAlign: "justify",
 	},
 	experienceItem: {
-		marginBottom: 10,
+		marginBottom: 8,
 	},
 	experienceHeader: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		marginBottom: 4,
+		marginBottom: 3,
 	},
 	companyName: {
 		fontSize: 12,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 	role: {
 		fontSize: 11,
 		color: "#00ff7f",
-		marginBottom: 2,
+		marginBottom: 1,
 	},
 	date: {
 		fontSize: 9,
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
 	description: {
 		fontSize: 9,
 		color: "#d0d0d0",
-		lineHeight: 1.3,
-		marginTop: 2,
+		lineHeight: 1.2,
+		marginTop: 1,
 	},
 	skillsContainer: {
 		flexDirection: "row",
@@ -360,7 +360,7 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 				</View>
 			</Page>
 
-			{/* Page 2 - Technical Skills and Projects */}
+			{/* Page 2 - Technical Skills, Education, Interests, and Projects */}
 			<Page size="A4" style={styles.page}>
 				{/* Technical Skills Section */}
 				<View style={styles.section}>
@@ -406,6 +406,8 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 					</View>
 				</View>
 
+				
+
 				{/* Education and Interests - Two Column Layout */}
 				<View style={styles.section}>
 					<View style={styles.twoColumnContainer}>
@@ -422,7 +424,7 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 								))}
 							</View>
 						)}
-						
+
 						{/* Education Column */}
 						{education && education.length > 0 && (
 							<View style={styles.column}>
