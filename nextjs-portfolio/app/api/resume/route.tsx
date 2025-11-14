@@ -9,6 +9,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import { renderToBuffer } from "@react-pdf/renderer";
 import type { SanityDocument } from "next-sanity";
 import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 const options = { next: { revalidate: 30 } };
 
@@ -115,6 +117,11 @@ export async function GET(request: Request) {
 				return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 			});
 
+		// Read profile image and convert to base64
+		const profileImagePath = path.join(process.cwd(), "public", "profile.jpg");
+		const profileImageBuffer = fs.readFileSync(profileImagePath);
+		const profileImageBase64 = `data:image/jpeg;base64,${profileImageBuffer.toString("base64")}`;
+
 		// Resume data
 		let resumeData = {
 			name: "Koen De Vulder",
@@ -124,6 +131,7 @@ export async function GET(request: Request) {
 			workExperiences: sortedExperiences,
 			techStacks: techStacks,
 			projects: sortedProjects,
+			profileImage: profileImageBase64,
 		};
 
 		// Translate to Dutch if requested

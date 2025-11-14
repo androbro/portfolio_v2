@@ -160,6 +160,7 @@ interface ResumeData {
 	workExperiences: any[];
 	techStacks: any[];
 	projects: any[];
+	profileImage?: string;
 }
 
 // Helper function to convert Portable Text to plain text
@@ -182,7 +183,7 @@ const formatDate = (dateString: string): string => {
 };
 
 export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
-	const { name, title, email, bio, workExperiences, techStacks, projects } = data;
+	const { name, title, email, bio, workExperiences, techStacks, projects, profileImage } = data;
 
 	// Group tech stacks by category
 	const groupedTechStacks = techStacks.reduce(
@@ -212,7 +213,7 @@ export const ResumeTemplate: React.FC<{ data: ResumeData }> = ({ data }) => {
 			<Page size="A4" style={styles.page}>
 				{/* Header Section */}
 				<View style={styles.header}>
-					<Image src="./public/profile.jpg" style={styles.profileImage} />
+					{profileImage && <Image src={profileImage} style={styles.profileImage} />}
 					<View style={styles.headerContent}>
 						<Text style={styles.name}>{name}</Text>
 						<Text style={styles.title}>{title}</Text>
