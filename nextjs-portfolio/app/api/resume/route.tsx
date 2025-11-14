@@ -13,8 +13,14 @@ import { NextResponse } from "next/server";
 const options = { next: { revalidate: 30 } };
 
 async function translateToDutch(data: any): Promise<any> {
+	const apiKey = process.env.ANTHROPIC_API_KEY || process.env.Claude_key;
+
+	if (!apiKey) {
+		throw new Error('ANTHROPIC_API_KEY environment variable is not set');
+	}
+
 	const anthropic = new Anthropic({
-		apiKey: process.env.Claude_key,
+		apiKey: apiKey,
 	});
 
 	const contentToTranslate = JSON.stringify({

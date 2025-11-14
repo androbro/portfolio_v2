@@ -197,39 +197,40 @@ export const DownloadResumeButton: React.FC<DownloadResumeButtonProps> = ({
 
 			{/* FRENCH CAT EASTER EGG 🐱🇫🇷 */}
 			{showFrenchCat && (
-				<div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 animate-in fade-in duration-300 cursor-default">
-					<div className="relative flex flex-col items-center gap-8 p-8 cursor-default">
+				<div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 animate-in fade-in duration-300 cursor-default px-4 py-8 overflow-y-auto">
+					<div className="relative flex flex-col items-center gap-4 md:gap-8 p-4 md:p-8 cursor-default max-w-full">
 						{/* GIANT MUTE BUTTON */}
 						<button
 							onClick={handleMute}
-							className="absolute top-0 right-0 bg-red-600 hover:bg-red-700 text-white font-bold px-12 py-6 text-3xl animate-pulse border-4 border-red-400 shadow-2xl shadow-red-500/50 transition-all hover:scale-110 cursor-pointer"
+							className="absolute top-2 right-2 md:top-0 md:right-0 bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 md:px-12 md:py-6 text-lg md:text-3xl animate-pulse border-2 md:border-4 border-red-400 shadow-2xl shadow-red-500/50 transition-all hover:scale-110 cursor-pointer"
 							aria-label="STOP THE MUSIC"
 						>
-							🔇 MUTE THIS CHAOS!
+							<span className="hidden md:inline">🔇 MUTE THIS CHAOS!</span>
+							<span className="md:hidden">🔇 MUTE!</span>
 						</button>
 
 						{/* French Cat Image */}
-						<div className="mt-20 animate-in zoom-in duration-700">
+						<div className="mt-12 md:mt-20 animate-in zoom-in duration-700 w-full flex justify-center">
 							<img
 								src="/frenchCat.png"
 								alt="Le Chat Français"
-								className="max-w-2xl max-h-[70vh] object-contain border-8 border-accent shadow-2xl shadow-accent/50"
+								className="w-full max-w-xs md:max-w-2xl max-h-[40vh] md:max-h-[70vh] object-contain border-4 md:border-8 border-accent shadow-2xl shadow-accent/50"
 							/>
 						</div>
 
 						{/* Funny Message */}
-						<div className="text-center animate-in slide-in-from-bottom duration-700">
-							<h2 className="text-5xl font-bold text-accent mb-4 animate-pulse">Ooh là là! 🥐</h2>
-							<p className="text-2xl text-white/90 font-light">
+						<div className="text-center animate-in slide-in-from-bottom duration-700 px-4">
+							<h2 className="text-3xl md:text-5xl font-bold text-accent mb-2 md:mb-4 animate-pulse">Ooh là là! 🥐</h2>
+							<p className="text-base md:text-2xl text-white/90 font-light">
 								I failed French class so hard, they made me retake English!
 							</p>
-							<p className="text-xl text-white/70 mt-2">
+							<p className="text-sm md:text-xl text-white/70 mt-1 md:mt-2">
 								My entire French vocabulary: Bonjour, Croissant, and this song 😅
 							</p>
 						</div>
 
 						{/* Click anywhere to close */}
-						<p className="text-sm text-white/50 absolute bottom-4">
+						<p className="text-xs md:text-sm text-white/50 mt-4 md:absolute md:bottom-4 text-center">
 							Click the mute button or press Escape to save your ears
 						</p>
 					</div>
