@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { SectionTitle } from "../common/SectionTitle";
+import { DownloadResumeButton } from "../../ui/DownloadResumeButton";
 export function Contact() {
 	return (
 		<div id="contact" className="flex items-center justify-center py-20">
@@ -26,20 +27,30 @@ export function Contact() {
 					</p>
 				</motion.div>
 
-				<motion.a
-					href="mailto:devulderk@gmail.com"
-					className="inline-block bg-accent text-black px-8 py-3 font-light"
-					initial={{ y: 30, opacity: 0 }}
-					whileInView={{ y: 0, opacity: 1 }}
-					transition={{ duration: 0.8, delay: 0.2 }}
-					viewport={{ once: false }}
-					whileHover={{
-						backgroundColor: "rgba(220, 220, 220, 1)",
-						scale: 1.05,
-					}}
-				>
-					devulderk@gmail.com
-				</motion.a>
+				<div className="flex flex-wrap gap-4">
+					<motion.a
+						href="mailto:devulderk@gmail.com"
+						className="inline-block bg-accent text-black px-8 py-3 font-light"
+						initial={{ y: 30, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.8, delay: 0.2 }}
+						viewport={{ once: false }}
+						whileHover={{
+							backgroundColor: "rgba(220, 220, 220, 1)",
+							scale: 1.05,
+						}}
+					>
+						devulderk@gmail.com
+					</motion.a>
+					<motion.div
+						initial={{ y: 30, opacity: 0 }}
+						whileInView={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.8, delay: 0.3 }}
+						viewport={{ once: false }}
+					>
+						<DownloadResumeButton variant="secondary" />
+					</motion.div>
+				</div>
 			</div>
 		</div>
 	);
