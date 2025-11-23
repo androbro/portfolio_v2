@@ -12,6 +12,35 @@
 	--color-accent: var(--accent);
 }
 
+[data-theme="retro"] {
+	--background: #000080; /* Navy Blue */
+	--foreground: #ffff00; /* Yellow */
+	--accent: #ff00ff; /* Magenta */
+}
+
+[data-theme="retro"] * {
+	font-family: "Times New Roman", Times, serif !important;
+	border-radius: 0 !important;
+	cursor: auto !important;
+}
+
+[data-theme="retro"] button,
+[data-theme="retro"] .card {
+	border: 2px outset #cccccc !important;
+	background-color: #c0c0c0 !important;
+	color: black !important;
+	box-shadow: 2px 2px 0px 0px #000000;
+}
+
+[data-theme="retro"] a {
+	text-decoration: underline;
+	color: #0000ff;
+}
+
+[data-theme="retro"] a:visited {
+	color: #800080;
+}
+
 html {
 	background: var(--background); /* Keep the background color here */
 	min-height: 100%;
@@ -29,6 +58,7 @@ body {
 	min-height: 100vh;
 	letter-spacing: 0.02em;
 	width: 100%; /* Ensure body takes exactly 100% width */
+	position: relative;
 }
 
 /* All clickable elements should have no default cursor */
@@ -92,4 +122,34 @@ section {
 /* Container styles for consistent layout */
 .content-container {
 	max-width: 100%;
+}
+
+@keyframes marquee {
+	0% { transform: translateX(100%); }
+	100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-reverse {
+	0% { transform: translateX(-100%); }
+	100% { transform: translateX(100%); }
+}
+
+.animate-marquee {
+	animation: marquee 15s linear infinite;
+}
+
+.animate-marquee-reverse {
+	animation: marquee-reverse 15s linear infinite;
+}
+
+.blink {
+	animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+	50% { opacity: 0; }
+}
+
+[data-theme="retro"] .modern-only {
+	display: none !important;
 }
