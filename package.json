@@ -1,21 +1,21 @@
 {
-	"name": "portfolio_v2",
-	"version": "1.0.0",
-	"private": true,
-	"scripts": {
-		"dev:next": "cd nextjs-portfolio && npm run dev",
-		"dev:sanity": "cd studio-portfolio && npm run dev",
-		"dev:all": "concurrently \"npm run dev:next\" \"npm run dev:sanity\"",
-		"build:next": "cd nextjs-portfolio && npm run build",
-		"build:sanity": "cd studio-portfolio && npm run build",
-		"build:all": "npm run build:next && npm run build:sanity",
-		"deploy:sanity": "cd studio-portfolio && npm run deploy"
-	},
-	"devDependencies": {
-		"concurrently": "^8.2.2"
-	},
-	"dependencies": {
-		"@next/third-parties": "^15.2.5",
-		"next": "^15.2.5"
-	}
+  "name": "portfolio_v2",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:next": "cd nextjs-portfolio && npm run dev",
+    "dev:sanity": "cd studio-portfolio && npm run dev",
+    "dev:all": "concurrently \"npm run dev:next\" \"npm run dev:sanity\"",
+    "build:next": "cd nextjs-portfolio && npm run build",
+    "build:sanity": "cd studio-portfolio && npm run build",
+    "build:all": "npm run build:next && npm run build:sanity",
+    "deploy:sanity": "cd studio-portfolio && npm run deploy"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@next/third-parties": "^15.2.5",
+    "next": "15.2.6"
+  }
 }
